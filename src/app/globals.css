@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+:root {
+  --red: #C8102E;
+  --red-light: #e8193a;
+  --red-dark: #9b0d24;
+  --gold: #D4A017;
+  --bg: #faf9f7;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --muted: #6b6b6b;
+  --border: #e8e4df;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.chinese-char {
+  font-family: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', serif;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out;
+}
+
+/* Safe area support for mobile */
+.pb-safe {
+  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
+}
+
+.pt-safe {
+  padding-top: max(1rem, env(safe-area-inset-top));
+}
+
+/* Subtle Chinese-inspired background pattern */
+.bg-pattern {
+  background-image: radial-gradient(circle at 20px 20px, rgba(200, 16, 46, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-color: #faf9f7;
+}
+
+/* Score colour classes */
+.score-great { color: #16a34a; }
+.score-ok { color: #d97706; }
+.score-low { color: #dc2626; }
