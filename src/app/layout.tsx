@@ -15,9 +15,20 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className="h-full">
-      <body className="min-h-screen bg-pattern">
-        <div className="mx-auto max-w-lg min-h-screen flex flex-col">
+    <html lang="en">
+      <body
+        className="bg-pattern"
+        style={{ minHeight: '100vh', overflowY: 'auto', color: '#1a1a1a' }}
+      >
+        <div
+          style={{
+            maxWidth: '512px',
+            margin: '0 auto',
+            minHeight: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
           {children}
         </div>
       </body>

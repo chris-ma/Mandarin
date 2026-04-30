@@ -38,58 +38,87 @@ const levels = [
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 px-4 py-8 pt-safe">
+    <div style={{ padding: '2rem 1rem 1.5rem', display: 'flex', flexDirection: 'column', gap: '0' }}>
       {/* Header */}
-      <div className="text-center mb-8">
-        <div className="text-5xl mb-3">🀄</div>
-        <h1 className="text-3xl font-bold tracking-tight" style={{ color: 'var(--red)' }}>
+      <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        <div style={{ fontSize: '3rem', marginBottom: '0.5rem' }}>🀄</div>
+        <h1
+          className="chinese-char"
+          style={{ fontSize: '2rem', fontWeight: 700, color: '#C8102E', margin: 0, letterSpacing: '-0.02em' }}
+        >
           普通话
         </h1>
-        <p className="text-lg font-medium text-gray-600 mt-1">Learn Mandarin by Speaking</p>
-        <p className="text-sm text-gray-400 mt-2 max-w-xs mx-auto">
+        <p style={{ fontSize: '1.1rem', fontWeight: 600, color: '#4a5565', marginTop: '0.25rem' }}>
+          Learn Mandarin by Speaking
+        </p>
+        <p style={{ fontSize: '0.875rem', color: '#99a1af', marginTop: '0.5rem', maxWidth: '280px', margin: '0.5rem auto 0' }}>
           Talk to an AI tutor. Get real-time feedback. Learn like a local.
         </p>
       </div>
 
       {/* How it works */}
-      <div className="flex justify-center gap-6 mb-8 text-center">
+      <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginBottom: '2rem', textAlign: 'center' }}>
         {[
           { icon: '📖', label: 'Learn words' },
           { icon: '💬', label: 'Practice phrases' },
           { icon: '🎙️', label: 'Have a conversation' },
         ].map((step) => (
-          <div key={step.label} className="flex flex-col items-center gap-1">
-            <span className="text-2xl">{step.icon}</span>
-            <span className="text-xs text-gray-500 font-medium">{step.label}</span>
+          <div key={step.label} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+            <span style={{ fontSize: '1.5rem' }}>{step.icon}</span>
+            <span style={{ fontSize: '0.75rem', color: '#6a7282', fontWeight: 500 }}>{step.label}</span>
           </div>
         ))}
       </div>
 
       {/* Level cards */}
-      <div className="flex flex-col gap-4 flex-1">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {levels.map((level) => (
           <Link
             key={level.id}
             href={`/learn/${level.id}`}
-            className="block rounded-2xl border-2 p-5 transition-all active:scale-95 hover:shadow-md"
-            style={{ background: level.bg, borderColor: level.border }}
+            style={{
+              display: 'block',
+              borderRadius: '1rem',
+              border: `2px solid ${level.border}`,
+              padding: '1.25rem',
+              background: level.bg,
+              textDecoration: 'none',
+              color: 'inherit',
+              WebkitTapHighlightColor: 'transparent',
+            }}
           >
-            <div className="flex items-start gap-4">
+            <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem' }}>
               <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0"
-                style={{ background: level.color + '20' }}
+                style={{
+                  width: '3.5rem',
+                  height: '3.5rem',
+                  borderRadius: '0.75rem',
+                  background: level.color + '20',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '1.5rem',
+                  flexShrink: 0,
+                }}
               >
                 {level.emoji}
               </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl font-bold chinese-char" style={{ color: level.color }}>
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
+                  <span
+                    className="chinese-char"
+                    style={{ fontSize: '1.5rem', fontWeight: 700, color: level.color }}
+                  >
                     {level.title}
                   </span>
-                  <span className="text-sm font-semibold text-gray-600">{level.subtitle}</span>
+                  <span style={{ fontSize: '0.875rem', fontWeight: 600, color: '#4a5565' }}>
+                    {level.subtitle}
+                  </span>
                 </div>
-                <p className="text-sm text-gray-600 mt-1 leading-relaxed">{level.description}</p>
-                <div className="mt-2 text-xs font-medium" style={{ color: level.color }}>
+                <p style={{ fontSize: '0.875rem', color: '#4a5565', margin: '0.25rem 0', lineHeight: 1.5 }}>
+                  {level.description}
+                </p>
+                <div style={{ fontSize: '0.75rem', fontWeight: 600, color: level.color, marginTop: '0.25rem' }}>
                   {level.units} units →
                 </div>
               </div>
@@ -98,7 +127,7 @@ export default function HomePage() {
         ))}
       </div>
 
-      <p className="text-center text-xs text-gray-400 mt-6">
+      <p style={{ textAlign: 'center', fontSize: '0.75rem', color: '#99a1af', marginTop: '1.5rem' }}>
         Powered by AI · Progress saved locally
       </p>
     </div>
