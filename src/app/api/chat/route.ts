@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { qwen } from '@/lib/claude'
+import { getQwenClient } from '@/lib/claude'
 import { getUnit } from '@/lib/curriculum'
 import { ChatMessage } from '@/lib/types'
 
@@ -113,7 +113,7 @@ export async function POST(req: NextRequest) {
       messages.push({ role: 'user', content: 'Please continue.' })
     }
 
-    const response = await qwen.chat.completions.create({
+    const response = await getQwenClient().chat.completions.create({
       model: 'qwen-mt-turbo',
       max_tokens: 1024,
       messages: [{ role: 'system', content: systemPrompt }, ...messages],
