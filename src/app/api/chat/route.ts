@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import type { MessageParam } from '@anthropic-ai/sdk/resources/messages'
-import { anthropic } from '@/lib/claude'
+import { qwen } from '@/lib/claude'
 import { getUnit } from '@/lib/curriculum'
 import { ChatMessage } from '@/lib/types'
 
@@ -73,7 +72,7 @@ export async function POST(req: NextRequest) {
       cluster.phrase.meaning
     )
 
-    const messages: MessageParam[] = []
+    const messages: { role: 'user' | 'assistant'; content: string }[] = []
 
     if (phase === 'start') {
       messages.push({
@@ -114,14 +113,13 @@ export async function POST(req: NextRequest) {
       messages.push({ role: 'user', content: 'Please continue.' })
     }
 
-    const response = await anthropic.messages.create({
-      model: 'claude-sonnet-4-6',
+    const response = await qwen.chat.completions.create({
+      model: 'qwen-mt-turbo',
       max_tokens: 1024,
-      system: systemPrompt,
-      messages,
+      messages: [{ role: 'system', content: systemPrompt }, ...messages],
     })
 
-    const text = response.content[0].type === 'text' ? response.content[0].text : ''
+    const text = response.choices[0]?.message?.content ?? ''
 
     // Extract JSON from response (Claude sometimes wraps in ```json blocks)
     const jsonMatch = text.match(/\{[\s\S]*\}/)

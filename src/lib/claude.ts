@@ -1,5 +1,6 @@
-import Anthropic from '@anthropic-ai/sdk'
+import OpenAI from 'openai'
 
-export const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY,
+export const qwen = new OpenAI({
+  apiKey: process.env.DASHSCOPE_API_KEY,
+  baseURL: 'https://dashscope.aliyuncs.com/compatible-mode/v1',
 })
