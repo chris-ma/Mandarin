@@ -40,7 +40,8 @@ ALWAYS respond with valid JSON only, no extra text:
     "score": 0-100,
     "correct": "what they said correctly",
     "correction": "what to improve (optional)",
-    "phoneticTip": "sound-alike hint (optional)"
+    "phoneticTip": "sound-alike hint (optional)",
+    "spokenTranslation": "English meaning of exactly what the learner said (not the target phrase)"
   } | null,
   "isComplete": false
 }`

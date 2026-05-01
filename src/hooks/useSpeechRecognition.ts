@@ -4,6 +4,7 @@ import { useState, useRef, useCallback, useEffect } from 'react'
 
 interface UseSpeechRecognitionReturn {
   transcript: string
+  interimTranscript: string
   isListening: boolean
   isSupported: boolean
   start: () => void
@@ -22,6 +23,7 @@ function getSpeechRecognitionCtor() {
 
 export function useSpeechRecognition(lang = 'zh-CN'): UseSpeechRecognitionReturn {
   const [transcript, setTranscript] = useState('')
+  const [interimTranscript, setInterimTranscript] = useState('')
   const [isListening, setIsListening] = useState(false)
   const [isSupported, setIsSupported] = useState(false)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -37,23 +39,37 @@ export function useSpeechRecognition(lang = 'zh-CN'): UseSpeechRecognitionReturn
 
     const recognition = new SR()
     recognition.lang = lang
-    recognition.interimResults = false
+    recognition.interimResults = true
     recognition.maxAlternatives = 1
     recognition.continuous = false
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     recognition.onresult = (event: any) => {
-      const result = event.results[0][0].transcript
-      setTranscript(result)
+      let interim = ''
+      let final = ''
+      for (let i = event.resultIndex; i < event.results.length; i++) {
+        const r = event.results[i]
+        if (r.isFinal) final += r[0].transcript
+        else interim += r[0].transcript
+      }
+      if (final) setTranscript(final)
+      setInterimTranscript(interim)
     }
 
-    recognition.onend = () => setIsListening(false)
-    recognition.onerror = () => setIsListening(false)
+    recognition.onend = () => {
+      setIsListening(false)
+      setInterimTranscript('')
+    }
+    recognition.onerror = () => {
+      setIsListening(false)
+      setInterimTranscript('')
+    }
 
     recognitionRef.current = recognition
     recognition.start()
     setIsListening(true)
     setTranscript('')
+    setInterimTranscript('')
   }, [lang])
 
   const stop = useCallback(() => {
@@ -61,7 +77,10 @@ export function useSpeechRecognition(lang = 'zh-CN'): UseSpeechRecognitionReturn
     setIsListening(false)
   }, [])
 
-  const reset = useCallback(() => setTranscript(''), [])
+  const reset = useCallback(() => {
+    setTranscript('')
+    setInterimTranscript('')
+  }, [])
 
-  return { transcript, isListening, isSupported, start, stop, reset }
+  return { transcript, interimTranscript, isListening, isSupported, start, stop, reset }
 }

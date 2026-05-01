@@ -45,6 +45,7 @@ export interface Assessment {
   correct: string
   correction?: string
   phoneticTip?: string
+  spokenTranslation?: string  // English meaning of what the learner actually said
 }
 
 export interface ChatMessage {
