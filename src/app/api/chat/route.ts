@@ -114,7 +114,7 @@ export async function POST(req: NextRequest) {
     }
 
     const response = await getQwenClient().chat.completions.create({
-      model: 'qwen-mt-turbo',
+      model: 'gemini-2.0-flash',
       max_tokens: 1024,
       messages: [{ role: 'system', content: systemPrompt }, ...messages],
     })
