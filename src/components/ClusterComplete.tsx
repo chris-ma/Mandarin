@@ -11,61 +11,130 @@ interface ClusterCompleteProps {
 
 export default function ClusterComplete({ cluster, isLastCluster, onNext, onBack }: ClusterCompleteProps) {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center px-6 py-8 animate-fade-in">
-      <div className="text-6xl mb-4">🎊</div>
-      <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">
-        Cluster Complete!
-      </h2>
-      <p className="text-gray-500 text-center mb-6">
-        You practiced <span className="font-semibold text-gray-800">{cluster.title}</span>
-      </p>
+    <div
+      className="animate-fade-in"
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        flex: 1,
+        alignItems: 'center',
+        padding: '2rem 1.25rem',
+        position: 'relative',
+        overflowX: 'hidden',
+      }}
+    >
+      {/* Background watermark */}
+      <div
+        className="cny-watermark"
+        style={{ fontSize: '16rem', top: '-2rem', right: '-3rem', opacity: 0.06, color: 'rgba(139,26,26,0.1)' }}
+        aria-hidden
+      >
+        完
+      </div>
 
-      {/* Words summary */}
-      <div className="w-full bg-white rounded-2xl border border-gray-100 shadow-sm p-4 mb-6">
-        <div className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-3">
-          Words you learned
+      {/* Header */}
+      <div style={{ textAlign: 'center', marginBottom: '1.5rem', position: 'relative', zIndex: 1 }}>
+        <div className="chinese-char" style={{ fontSize: '2.5rem', fontWeight: 900, color: 'var(--crimson)', lineHeight: 1 }}>
+          完成！
         </div>
-        <div className="flex flex-col gap-2">
+        <div style={{ fontSize: '1rem', fontWeight: 600, color: 'var(--ink)', marginTop: '0.4rem' }}>
+          Cluster Complete
+        </div>
+        <p style={{ fontSize: '0.8rem', color: 'var(--ink-mid)', marginTop: '0.3rem' }}>
+          You practiced <span style={{ fontWeight: 700, color: 'var(--ink)' }}>{cluster.title}</span>
+        </p>
+
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', marginTop: '0.875rem' }}>
+          <div style={{ width: '2rem', height: '1px', background: 'rgba(139,26,26,0.2)' }} />
+          <div style={{ width: '5px', height: '5px', background: 'rgba(139,26,26,0.3)', transform: 'rotate(45deg)' }} />
+          <div style={{ width: '2rem', height: '1px', background: 'rgba(139,26,26,0.2)' }} />
+        </div>
+      </div>
+
+      {/* Words learned */}
+      <div className="cny-panel" style={{ width: '100%', padding: '1rem', marginBottom: '0.875rem', position: 'relative', zIndex: 1 }}>
+        <div style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--crimson-mid)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.75rem', position: 'relative', zIndex: 1 }}>
+          學到的字詞 · Words you learned
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', position: 'relative', zIndex: 1 }}>
           {cluster.words.map((word) => (
-            <div key={word.character} className="flex items-center gap-3">
-              <span
-                className="text-xl font-bold chinese-char"
-                style={{ color: 'var(--red)' }}
-              >
+            <div
+              key={word.character}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.75rem',
+                paddingBottom: '0.6rem',
+                borderBottom: '1px solid rgba(139,26,26,0.1)',
+              }}
+            >
+              <span className="chinese-char" style={{ fontSize: '1.5rem', fontWeight: 900, color: 'var(--crimson)', minWidth: '2rem', textAlign: 'center' }}>
                 {word.character}
               </span>
-              <span className="text-sm text-gray-500 font-mono">{word.pinyin}</span>
-              <span className="text-sm text-gray-700 ml-auto">{word.meaning}</span>
+              <span style={{ fontSize: '0.78rem', color: 'var(--ink-mid)', fontFamily: 'monospace', minWidth: '4rem' }}>
+                {word.pinyin}
+              </span>
+              <span style={{ fontSize: '0.85rem', color: 'var(--ink)', fontWeight: 600, marginLeft: 'auto' }}>
+                {word.meaning}
+              </span>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Phrase summary */}
-      <div className="w-full bg-amber-50 border border-amber-100 rounded-2xl p-4 mb-8">
-        <div className="text-xs font-semibold uppercase tracking-wide text-amber-600 mb-2">
-          Phrase you practiced
+      {/* Phrase practiced */}
+      <div
+        className="cny-panel"
+        style={{ width: '100%', padding: '1rem', marginBottom: '1.5rem', position: 'relative', zIndex: 1, background: 'rgba(139,26,26,0.06)' }}
+      >
+        <div style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--crimson-mid)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.5rem', position: 'relative', zIndex: 1 }}>
+          練習的句型 · Phrase practiced
         </div>
-        <div className="text-lg font-bold chinese-char" style={{ color: 'var(--red)' }}>
+        <div className="chinese-char" style={{ fontSize: '1.25rem', fontWeight: 900, color: 'var(--crimson)', position: 'relative', zIndex: 1 }}>
           {cluster.phrase.chinese}
         </div>
-        <div className="text-sm text-amber-700 mt-1">{cluster.phrase.meaning}</div>
+        <div style={{ fontSize: '0.8rem', color: 'var(--ink-mid)', marginTop: '0.3rem', position: 'relative', zIndex: 1 }}>
+          {cluster.phrase.meaning}
+        </div>
       </div>
 
       {/* Actions */}
-      <div className="w-full flex flex-col gap-3 pb-safe">
+      <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '0.6rem', marginTop: 'auto', paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))', position: 'relative', zIndex: 1 }}>
         <button
           onClick={onNext}
-          className="w-full py-4 rounded-xl text-white font-bold text-lg transition-all active:scale-95 shadow-lg"
-          style={{ background: 'var(--red)' }}
+          style={{
+            width: '100%',
+            padding: '0.9rem',
+            background: 'var(--crimson)',
+            color: '#fff',
+            fontWeight: 700,
+            fontSize: '1rem',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            letterSpacing: '0.05em',
+          }}
         >
-          {isLastCluster ? '🏆 Finish Unit' : '→ Next Cluster'}
+          {isLastCluster
+            ? <><span className="chinese-char">完成單元</span> · Finish Unit 🏆</>
+            : <><span className="chinese-char">下一組</span> · Next Cluster →</>}
         </button>
         <button
           onClick={onBack}
-          className="w-full py-3 rounded-xl border-2 border-gray-200 text-gray-600 font-semibold transition-all active:scale-95"
+          className="cny-pill"
+          style={{
+            width: '100%',
+            padding: '0.75rem',
+            background: 'transparent',
+            color: 'var(--crimson)',
+            fontWeight: 700,
+            fontSize: '0.875rem',
+            border: 'none',
+            cursor: 'pointer',
+            letterSpacing: '0.04em',
+          }}
         >
-          Back to Units
+          <span className="chinese-char">返回</span> · Back to Units
         </button>
       </div>
     </div>

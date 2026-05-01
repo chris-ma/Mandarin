@@ -25,9 +25,7 @@ export default function PhrasePhase({ cluster, unitId, onComplete }: PhrasePhase
   function handleMicClick() {
     if (isListening) {
       stop()
-      if (transcript) {
-        submitAttempt(transcript)
-      }
+      if (transcript) submitAttempt(transcript)
     } else {
       reset()
       setAssessment(null)
@@ -42,22 +40,15 @@ export default function PhrasePhase({ cluster, unitId, onComplete }: PhrasePhase
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          history: [],
-          userTranscript: spokenText,
-          clusterId: cluster.id,
-          unitId,
-          phase: 'respond',
-        }),
+        body: JSON.stringify({ history: [], userTranscript: spokenText, clusterId: cluster.id, unitId, phase: 'respond' }),
       })
       const data = await res.json()
       if (data.assessment) {
         setAssessment(data.assessment)
       } else {
-        // If Claude didn't return an assessment, make a simple one
-        const matched = spokenText
-          .replace(/\s/g, '')
-          .includes(cluster.phrase.chinese.replace(/[！。？，]/g, '').replace(/\s/g, '').slice(0, 3))
+        const matched = spokenText.replace(/\s/g, '').includes(
+          cluster.phrase.chinese.replace(/[！。？，]/g, '').replace(/\s/g, '').slice(0, 3)
+        )
         setAssessment({
           score: matched ? 75 : 40,
           correct: matched ? 'Good effort! You got the key sounds.' : 'Keep trying!',
@@ -75,43 +66,56 @@ export default function PhrasePhase({ cluster, unitId, onComplete }: PhrasePhase
   const canProceed = assessment && (assessment.score >= 60 || attempts >= 3)
 
   return (
-    <div className="flex flex-col flex-1 px-4 py-4">
+    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '1rem' }}>
       {/* Phase label */}
-      <div className="flex items-center gap-2 mb-4">
-        <span className="text-xs font-semibold uppercase tracking-widest text-gray-400">
-          Phase 2 of 3
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.875rem' }}>
+        <span className="chinese-char" style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--crimson)', letterSpacing: '0.1em' }}>
+          第二階段
         </span>
-        <span className="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded-full font-medium">
-          Phrase Practice
+        <div style={{ width: '4px', height: '4px', background: 'rgba(139,26,26,0.3)', transform: 'rotate(45deg)' }} />
+        <span style={{ fontSize: '0.7rem', color: 'var(--ink-mid)', letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 600 }}>
+          Phase 2 of 3 · Phrase Practice
         </span>
       </div>
 
-      {/* Phrase display */}
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 mb-4">
-        <div className="text-center mb-4">
+      {/* Phrase panel */}
+      <div className="cny-panel" style={{ padding: '1.1rem', marginBottom: '0.875rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '1rem', position: 'relative', zIndex: 1 }}>
           <div
-            className="text-3xl font-bold chinese-char leading-tight mb-2"
-            style={{ color: 'var(--red)' }}
+            className="chinese-char"
+            style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--crimson)', lineHeight: 1.2, marginBottom: '0.4rem' }}
           >
             {cluster.phrase.chinese}
           </div>
-          <div className="text-sm text-gray-500 font-mono mb-1">{cluster.phrase.pinyin}</div>
-          <div className="text-base text-gray-700 font-medium">{cluster.phrase.meaning}</div>
+          <div style={{ fontSize: '0.85rem', color: 'var(--ink-mid)', fontFamily: 'monospace', marginBottom: '0.3rem' }}>
+            {cluster.phrase.pinyin}
+          </div>
+          <div style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--ink)' }}>
+            {cluster.phrase.meaning}
+          </div>
         </div>
 
-        {/* Breakdown */}
-        <div className="border-t border-gray-100 pt-4">
-          <div className="text-xs text-gray-400 mb-2 font-semibold uppercase tracking-wide">
-            Word by word
+        {/* Word breakdown */}
+        <div style={{ borderTop: '1px solid rgba(139,26,26,0.15)', paddingTop: '0.875rem', position: 'relative', zIndex: 1 }}>
+          <div style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--crimson-mid)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: '0.6rem' }}>
+            逐字分析 · Word by word
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
             {cluster.phrase.breakdown.map((part, i) => (
-              <div key={i} className="bg-gray-50 rounded-lg px-2 py-1.5 text-center min-w-[60px]">
-                <div className="text-sm font-bold chinese-char" style={{ color: 'var(--red)' }}>
-                  {part.chinese}
-                </div>
-                <div className="text-xs text-gray-400 font-mono">{part.pinyin}</div>
-                <div className="text-xs text-gray-600">{part.meaning}</div>
+              <div
+                key={i}
+                style={{
+                  border: '1px solid rgba(139,26,26,0.25)',
+                  borderRadius: '2px',
+                  padding: '0.3rem 0.5rem',
+                  textAlign: 'center',
+                  minWidth: '3.5rem',
+                  background: 'rgba(139,26,26,0.04)',
+                }}
+              >
+                <div className="chinese-char" style={{ fontSize: '0.95rem', fontWeight: 900, color: 'var(--crimson)' }}>{part.chinese}</div>
+                <div style={{ fontSize: '0.65rem', color: 'var(--ink-mid)', fontFamily: 'monospace' }}>{part.pinyin}</div>
+                <div style={{ fontSize: '0.65rem', color: 'var(--ink)' }}>{part.meaning}</div>
               </div>
             ))}
           </div>
@@ -120,59 +124,92 @@ export default function PhrasePhase({ cluster, unitId, onComplete }: PhrasePhase
         {/* Listen button */}
         <button
           onClick={() => speak(cluster.phrase.chinese)}
-          className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-gray-200 text-gray-600 text-sm font-medium hover:bg-gray-50 transition-colors"
+          className="cny-pill"
+          style={{
+            marginTop: '0.875rem',
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '0.4rem',
+            padding: '0.5rem',
+            background: 'transparent',
+            color: 'var(--crimson)',
+            fontSize: '0.8rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            border: 'none',
+            position: 'relative',
+            zIndex: 1,
+          }}
         >
-          🔊 Hear the phrase
+          🔊 <span className="chinese-char">聆聽</span> · Hear phrase
         </button>
       </div>
 
-      {/* Transcript display */}
+      {/* Transcript */}
       {transcript && (
-        <div className="bg-gray-50 rounded-xl px-4 py-3 mb-4 text-sm text-gray-600">
-          You said: <span className="font-medium chinese-char">&ldquo;{transcript}&rdquo;</span>
+        <div
+          style={{
+            background: 'rgba(139,26,26,0.06)',
+            border: '1px solid rgba(139,26,26,0.2)',
+            borderRadius: '4px',
+            padding: '0.6rem 0.875rem',
+            marginBottom: '0.875rem',
+            fontSize: '0.85rem',
+            color: 'var(--ink-mid)',
+          }}
+        >
+          <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--crimson-mid)', letterSpacing: '0.05em' }}>你說了 · You said: </span>
+          <span className="chinese-char" style={{ fontWeight: 700, color: 'var(--ink)' }}>&ldquo;{transcript}&rdquo;</span>
         </div>
       )}
 
       {/* Assessment */}
-      {assessment && <div className="mb-4"><AssessmentCard assessment={assessment} /></div>}
+      {assessment && <div style={{ marginBottom: '0.875rem' }}><AssessmentCard assessment={assessment} /></div>}
 
       {/* Loading */}
       {isLoading && (
-        <div className="text-center text-sm text-gray-500 animate-pulse mb-4">
-          Assessing your pronunciation...
+        <div style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--crimson-mid)', marginBottom: '0.875rem' }}>
+          <span className="chinese-char">評估中</span> · Assessing...
         </div>
       )}
 
       {/* Actions */}
-      <div className="mt-auto pb-safe">
+      <div style={{ marginTop: 'auto', paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))' }}>
         {isListening && (
-          <div className="text-center text-sm text-gray-500 animate-pulse mb-3">
-            Listening... speak the phrase now
+          <div style={{ textAlign: 'center', fontSize: '0.8rem', color: 'var(--crimson-mid)', marginBottom: '0.75rem' }}>
+            <span className="chinese-char">聆聽中</span> · Listening... speak now
           </div>
         )}
 
-        <div className="flex items-center justify-center mb-4">
-          <MicButton
-            isListening={isListening}
-            isSupported={isSupported}
-            onClick={handleMicClick}
-            size={canProceed ? 'sm' : 'lg'}
-          />
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '0.875rem' }}>
+          <MicButton isListening={isListening} isSupported={isSupported} onClick={handleMicClick} size={canProceed ? 'sm' : 'lg'} />
         </div>
 
         {!canProceed && (
-          <p className="text-center text-xs text-gray-400">
-            {isListening ? 'Tap to stop recording' : 'Tap the mic and say the phrase'}
+          <p style={{ textAlign: 'center', fontSize: '0.75rem', color: 'var(--ink-mid)' }}>
+            {isListening ? '點擊停止 · Tap to stop' : '點擊麥克風說句子 · Tap mic to speak'}
           </p>
         )}
 
         {canProceed && (
           <button
             onClick={onComplete}
-            className="w-full py-4 rounded-xl text-white font-bold text-lg transition-all active:scale-95 shadow-lg"
-            style={{ background: 'var(--red)' }}
+            style={{
+              width: '100%',
+              padding: '0.875rem',
+              background: 'var(--crimson)',
+              color: '#fff',
+              fontWeight: 700,
+              fontSize: '1rem',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              letterSpacing: '0.05em',
+            }}
           >
-            Start Conversation →
+            <span className="chinese-char">開始對話</span> · Start Conversation →
           </button>
         )}
       </div>

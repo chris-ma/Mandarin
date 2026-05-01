@@ -1,38 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@700;900&display=swap');
 @import "tailwindcss";
 
-/* Explicit source scan to ensure all component classes are generated */
 @source "../components/**/*.{ts,tsx}";
 @source "../hooks/**/*.{ts,tsx}";
 @source "../app/**/*.{ts,tsx}";
 
 :root {
-  --red: #C8102E;
-  --red-light: #e8193a;
-  --red-dark: #9b0d24;
-  --gold: #D4A017;
-  --bg: #faf9f7;
-  --surface: #ffffff;
-  --text: #1a1a1a;
-  --muted: #6b6b6b;
-  --border: #e8e4df;
+  --salmon: #EF8172;
+  --crimson: #8B1A1A;
+  --crimson-mid: #B52525;
+  --cream: #FFF5F2;
+  --ink: #2D0808;
+  --ink-mid: #5C1A1A;
+  --white: #FFFFFF;
+  /* legacy compat */
+  --red: #8B1A1A;
+  --red-light: #B52525;
+  --red-dark: #5C0808;
 }
 
 html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
-  background-color: #faf9f7;
+  background-color: var(--salmon);
 }
 
 body {
-  background-color: #faf9f7;
-  color: #1a1a1a;
+  background-color: var(--salmon);
+  color: var(--ink);
   min-height: 100vh;
   overflow-y: auto;
 }
 
+/* Thick brush-stroke Chinese character look */
 .chinese-char {
-  font-family: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', serif;
+  font-family: 'Noto Serif SC', 'PingFang SC', 'Noto Serif CJK SC', 'Heiti SC', serif;
+}
+
+/* Traditional double-border CNY panel */
+.cny-panel {
+  position: relative;
+  border: 1.5px solid var(--crimson);
+  background: var(--cream);
+  border-radius: 4px;
+}
+.cny-panel::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(139, 26, 26, 0.28);
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Pill button with CNY double border */
+.cny-pill {
+  position: relative;
+  border: 1.5px solid var(--crimson);
+  border-radius: 999px;
+}
+.cny-pill::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border: 1px solid rgba(139, 26, 26, 0.25);
+  border-radius: 999px;
+  pointer-events: none;
+}
+
+/* Large decorative watermark character */
+.cny-watermark {
+  position: absolute;
+  font-family: 'Noto Serif SC', 'PingFang SC', serif;
+  font-weight: 900;
+  color: rgba(100, 10, 10, 0.08);
+  user-select: none;
+  pointer-events: none;
+  line-height: 1;
 }
 
 @keyframes pulse-ring {
@@ -50,31 +96,12 @@ body {
   to { opacity: 1; }
 }
 
-.animate-slide-up {
-  animation: slide-up 0.3s ease-out;
-}
+.animate-slide-up { animation: slide-up 0.3s ease-out; }
+.animate-fade-in  { animation: fade-in 0.4s ease-out; }
 
-.animate-fade-in {
-  animation: fade-in 0.4s ease-out;
-}
+.pb-safe { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
+.pt-safe { padding-top: max(1rem, env(safe-area-inset-top)); }
 
-/* Safe area support for mobile */
-.pb-safe {
-  padding-bottom: max(1.5rem, env(safe-area-inset-bottom));
-}
-
-.pt-safe {
-  padding-top: max(1rem, env(safe-area-inset-top));
-}
-
-/* Subtle Chinese-inspired background pattern */
-.bg-pattern {
-  background-color: #faf9f7;
-  background-image: radial-gradient(circle at 20px 20px, rgba(200, 16, 46, 0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-/* Score colour classes */
-.score-great { color: #16a34a; }
-.score-ok { color: #d97706; }
-.score-low { color: #dc2626; }
+.score-great { color: #15803d; }
+.score-ok    { color: #b45309; }
+.score-low   { color: #b91c1c; }

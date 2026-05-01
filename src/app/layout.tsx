@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: '普通话 — Learn Mandarin',
+  title: '普通話 — Learn Mandarin',
   description: 'Speak your way to Mandarin fluency. Conversational AI learning for all levels.',
 }
 
@@ -10,16 +10,13 @@ export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
-  themeColor: '#C8102E',
+  themeColor: '#EF8172',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body
-        className="bg-pattern"
-        style={{ minHeight: '100vh', overflowY: 'auto', color: '#1a1a1a' }}
-      >
+    <html lang="zh">
+      <body style={{ minHeight: '100vh', overflowY: 'auto', backgroundColor: '#EF8172' }}>
         <div
           style={{
             maxWidth: '512px',
@@ -27,6 +24,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             minHeight: '100vh',
             display: 'flex',
             flexDirection: 'column',
+            position: 'relative',
+            overflow: 'hidden',
           }}
         >
           {children}
