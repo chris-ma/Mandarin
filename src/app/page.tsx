@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import MicPermission from '@/components/MicPermission'
 
 const levels = [
   {
@@ -42,6 +43,7 @@ export default function HomePage() {
         overflowX: 'hidden',
       }}
     >
+      <MicPermission />
       {/* Background watermark */}
       <div
         className="cny-watermark"

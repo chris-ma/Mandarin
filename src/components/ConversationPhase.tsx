@@ -17,49 +17,45 @@ export default function ConversationPhase({ cluster, unitId, onComplete }: Conve
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
+  const [startError, setStartError] = useState(false)
   const scrollRef = useRef<HTMLDivElement>(null)
   const hasStarted = useRef(false)
 
   const { transcript, isListening, isSupported, start, stop, reset } = useSpeechRecognition('zh-CN')
   const { speak } = useSpeechSynthesis()
 
-  // Auto-scroll to bottom
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
   }, [messages])
 
-  // Start conversation on mount
   useEffect(() => {
     if (hasStarted.current) return
     hasStarted.current = true
     startConversation()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  // When transcript arrives after listening stops, submit it
   useEffect(() => {
     if (!isListening && transcript) {
       handleUserSpoke(transcript)
     }
   }, [isListening]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  async function callTutor(currentMessages: ChatMessage[], userTranscript: string | null, phase: 'start' | 'respond') {
+  async function callTutor(
+    currentMessages: ChatMessage[],
+    userTranscript: string | null,
+    phase: 'start' | 'respond'
+  ) {
     setIsLoading(true)
-
-    // Show typing indicator
     setMessages((prev) => [...prev, { role: 'ai', isTyping: true }])
 
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          history: currentMessages,
-          userTranscript,
-          clusterId: cluster.id,
-          unitId,
-          phase,
-        }),
+        body: JSON.stringify({ history: currentMessages, userTranscript, clusterId: cluster.id, unitId, phase }),
       })
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`)
 
       const data: TutorResponse = await res.json()
 
@@ -70,25 +66,33 @@ export default function ConversationPhase({ cluster, unitId, onComplete }: Conve
         english: data.yourLine.english,
       }
 
-      setMessages((prev) => [...prev.filter((m) => !m.isTyping), aiMessage])
+      setMessages((prev) => {
+        const withoutTyping = prev.filter((m) => !m.isTyping)
+        const result = [...withoutTyping, aiMessage]
 
-      // Auto-play AI speech
-      if (data.yourLine.chinese) {
-        speak(data.yourLine.chinese)
-      }
+        // Attach assessment to the last user message
+        if (data.assessment) {
+          const lastUserIdx = result.map((m) => m.role).lastIndexOf('user')
+          if (lastUserIdx !== -1) {
+            result[lastUserIdx] = { ...result[lastUserIdx], assessment: data.assessment }
+          }
+        }
+        return result
+      })
 
-      if (data.isComplete) {
-        setIsComplete(true)
-      }
+      if (data.yourLine.chinese) speak(data.yourLine.chinese)
+      if (data.isComplete) setIsComplete(true)
     } catch (err) {
-      console.error(err)
+      console.error('[ConversationPhase]', err)
       setMessages((prev) => prev.filter((m) => !m.isTyping))
+      if (phase === 'start') setStartError(true)
     } finally {
       setIsLoading(false)
     }
   }
 
   function startConversation() {
+    setStartError(false)
     callTutor([], null, 'start')
   }
 
@@ -102,79 +106,168 @@ export default function ConversationPhase({ cluster, unitId, onComplete }: Conve
   }
 
   function handleUserSpoke(spokenText: string) {
-    const userMessage: ChatMessage = {
-      role: 'user',
-      transcript: spokenText,
-    }
-
+    const userMessage: ChatMessage = { role: 'user', transcript: spokenText }
     setMessages((prev) => [...prev, userMessage])
     callTutor([...messages, userMessage], spokenText, 'respond')
   }
 
-  function handleSpeak(text: string) {
-    speak(text)
-  }
+  const showEmptyLoading = messages.length === 0 && isLoading
+  const showEmptyError = messages.length === 0 && !isLoading && startError
 
   return (
-    <div className="flex flex-col flex-1 overflow-hidden">
+    <div style={{ display: 'flex', flexDirection: 'column', flex: 1, overflow: 'hidden' }}>
       {/* Header */}
-      <div className="px-4 py-3 border-b border-gray-100 bg-white flex-shrink-0">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-xl">
-            🤖
+      <div
+        style={{
+          padding: '0.75rem 1rem',
+          borderBottom: '1.5px solid rgba(139,26,26,0.15)',
+          background: 'var(--cream)',
+          flexShrink: 0,
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.75rem',
+        }}
+      >
+        <div
+          style={{
+            width: '2.5rem',
+            height: '2.5rem',
+            borderRadius: '50%',
+            border: '1.5px solid rgba(139,26,26,0.3)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '1.25rem',
+            background: 'rgba(139,26,26,0.06)',
+            flexShrink: 0,
+          }}
+        >
+          🤖
+        </div>
+        <div style={{ flex: 1 }}>
+          <div className="chinese-char" style={{ fontWeight: 700, fontSize: '0.85rem', color: 'var(--ink)' }}>
+            AI 老師 · AI Tutor
           </div>
-          <div>
-            <div className="font-semibold text-sm text-gray-900">AI Tutor</div>
-            <div className="text-xs text-gray-500">{cluster.scenarioDescription}</div>
-          </div>
-          <div className="ml-auto">
-            <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full font-medium">
-              Phase 3 of 3 · Conversation
-            </span>
-          </div>
+          <div style={{ fontSize: '0.72rem', color: 'var(--ink-mid)' }}>{cluster.scenarioDescription}</div>
         </div>
       </div>
 
       {/* Target phrase reminder */}
-      <div className="px-4 py-2 bg-amber-50 border-b border-amber-100 flex-shrink-0">
-        <div className="text-xs text-amber-700">
-          <span className="font-semibold">Practice: </span>
-          <span className="chinese-char font-bold">{cluster.phrase.chinese}</span>
-          <span className="ml-2 text-amber-600">{cluster.phrase.meaning}</span>
+      <div
+        style={{
+          padding: '0.5rem 1rem',
+          background: 'rgba(139,26,26,0.06)',
+          borderBottom: '1px solid rgba(139,26,26,0.15)',
+          flexShrink: 0,
+        }}
+      >
+        <div style={{ fontSize: '0.72rem', color: 'var(--ink-mid)' }}>
+          <span style={{ fontWeight: 700, color: 'var(--crimson)' }}>練習 · Practice: </span>
+          <span className="chinese-char" style={{ fontWeight: 700, color: 'var(--ink)' }}>{cluster.phrase.chinese}</span>
+          <span style={{ marginLeft: '0.5rem', color: 'var(--ink-mid)', fontStyle: 'italic' }}>{cluster.phrase.meaning}</span>
         </div>
       </div>
 
       {/* Messages */}
-      <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-4">
+      <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', padding: '1rem', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+
+        {/* Loading first message */}
+        {showEmptyLoading && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', animation: 'fade-in 0.4s ease-out' }}>
+            <div style={{ width: '2rem', height: '2rem', borderRadius: '50%', background: 'rgba(139,26,26,0.08)', border: '1px solid rgba(139,26,26,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.9rem', flexShrink: 0 }}>🤖</div>
+            <div style={{ background: 'white', border: '1.5px solid rgba(139,26,26,0.2)', borderRadius: '0 12px 12px 12px', padding: '0.75rem 1rem' }}>
+              <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className="animate-bounce" style={{ width: '7px', height: '7px', borderRadius: '50%', background: 'rgba(139,26,26,0.35)', animationDelay: `${i * 0.15}s` }} />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Error — tutor failed to start */}
+        {showEmptyError && (
+          <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+            <div className="chinese-char" style={{ fontSize: '1rem', color: 'var(--crimson)', marginBottom: '0.5rem' }}>
+              連線失敗
+            </div>
+            <div style={{ fontSize: '0.8rem', color: 'var(--ink-mid)', marginBottom: '1rem' }}>
+              Could not connect to AI tutor. Check your internet connection.
+            </div>
+            <button
+              onClick={startConversation}
+              style={{ padding: '0.6rem 1.5rem', background: 'var(--crimson)', color: '#fff', fontWeight: 700, fontSize: '0.85rem', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
+            >
+              重試 · Retry
+            </button>
+          </div>
+        )}
+
         {messages.map((msg, i) => (
-          <ChatBubble key={i} message={msg} onSpeak={handleSpeak} />
+          <ChatBubble key={i} message={msg} onSpeak={(text) => speak(text)} />
         ))}
 
         {isComplete && (
-          <div className="text-center py-4 animate-fade-in">
-            <div className="text-3xl mb-2">🎉</div>
-            <div className="text-sm font-semibold text-gray-700">Conversation complete!</div>
+          <div style={{ textAlign: 'center', padding: '1rem', animation: 'fade-in 0.4s ease-out' }}>
+            <div style={{ fontSize: '2rem', marginBottom: '0.4rem' }}>🎉</div>
+            <div className="chinese-char" style={{ fontSize: '1rem', fontWeight: 700, color: 'var(--crimson)' }}>
+              對話完成！Conversation complete!
+            </div>
           </div>
         )}
       </div>
 
       {/* Input area */}
-      <div className="flex-shrink-0 border-t border-gray-100 bg-white px-4 py-4 pb-safe">
+      <div
+        style={{
+          flexShrink: 0,
+          borderTop: '1.5px solid rgba(139,26,26,0.15)',
+          background: 'var(--cream)',
+          padding: '0.875rem 1rem',
+          paddingBottom: 'max(0.875rem, env(safe-area-inset-bottom))',
+        }}
+      >
         {isComplete ? (
           <button
             onClick={onComplete}
-            className="w-full py-4 rounded-xl text-white font-bold text-lg transition-all active:scale-95 shadow-lg"
-            style={{ background: 'var(--red)' }}
+            style={{
+              width: '100%',
+              padding: '0.875rem',
+              background: 'var(--crimson)',
+              color: '#fff',
+              fontWeight: 700,
+              fontSize: '1rem',
+              border: 'none',
+              borderRadius: '4px',
+              cursor: 'pointer',
+              letterSpacing: '0.04em',
+            }}
           >
-            Complete Cluster 🎊
+            <span className="chinese-char">完成練習</span> · Complete Cluster 🎊
           </button>
         ) : (
-          <div className="flex flex-col items-center gap-2">
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
             {isListening && (
-              <div className="text-sm text-gray-500 animate-pulse">Listening... speak now</div>
+              <div style={{ fontSize: '0.78rem', color: 'var(--crimson-mid)' }} className="animate-pulse">
+                <span className="chinese-char">聆聽中</span> · Listening…
+              </div>
             )}
             {transcript && !isListening && (
-              <div className="text-sm text-gray-600 bg-gray-50 rounded-lg px-3 py-1.5 max-w-full truncate">
+              <div
+                className="chinese-char"
+                style={{
+                  fontSize: '0.85rem',
+                  color: 'var(--ink)',
+                  background: 'rgba(139,26,26,0.06)',
+                  border: '1px solid rgba(139,26,26,0.2)',
+                  borderRadius: '3px',
+                  padding: '0.3rem 0.75rem',
+                  maxWidth: '100%',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
+                }}
+              >
                 &ldquo;{transcript}&rdquo;
               </div>
             )}
@@ -184,8 +277,12 @@ export default function ConversationPhase({ cluster, unitId, onComplete }: Conve
               onClick={handleMicClick}
               size="lg"
             />
-            <div className="text-xs text-gray-400">
-              {isListening ? 'Tap to stop' : isLoading ? 'AI is responding...' : 'Tap to speak in Mandarin'}
+            <div style={{ fontSize: '0.72rem', color: 'var(--ink-mid)' }}>
+              {isListening
+                ? <><span className="chinese-char">點擊停止</span> · Tap to stop</>
+                : isLoading
+                  ? <><span className="chinese-char">老師回覆中</span> · AI is responding…</>
+                  : <><span className="chinese-char">點擊說普通話</span> · Tap to speak in Mandarin</>}
             </div>
           </div>
         )}
