@@ -54,7 +54,7 @@ export default function ConversationPhase({ cluster, unitId, dialect, onComplete
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ history: currentMessages, userTranscript, clusterId: cluster.id, unitId, dialect, phase }),
+        body: JSON.stringify({ history: currentMessages, userTranscript, clusterId: cluster.id, unitId, dialect, phase, mode: 'conversation' }),
       })
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
@@ -151,22 +151,6 @@ export default function ConversationPhase({ cluster, unitId, dialect, onComplete
             AI 老師 · AI Tutor
           </div>
           <div style={{ fontSize: '0.72rem', color: 'var(--ink-mid)' }}>{cluster.scenarioDescription}</div>
-        </div>
-      </div>
-
-      {/* Target phrase reminder */}
-      <div
-        style={{
-          padding: '0.5rem 1rem',
-          background: 'rgba(139,26,26,0.06)',
-          borderBottom: '1px solid rgba(139,26,26,0.15)',
-          flexShrink: 0,
-        }}
-      >
-        <div style={{ fontSize: '0.72rem', color: 'var(--ink-mid)' }}>
-          <span style={{ fontWeight: 700, color: 'var(--crimson)' }}>練習 · Practice: </span>
-          <span className="chinese-char" style={{ fontWeight: 700, color: 'var(--ink)' }}>{cluster.phrase.chinese}</span>
-          <span style={{ marginLeft: '0.5rem', color: 'var(--ink-mid)', fontStyle: 'italic' }}>{cluster.phrase.meaning}</span>
         </div>
       </div>
 

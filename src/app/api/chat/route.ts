@@ -3,9 +3,7 @@ import { getQwenClient } from '@/lib/claude'
 import { getUnit } from '@/lib/curriculum'
 import { ChatMessage } from '@/lib/types'
 
-function buildSystemPrompt(
-  scenarioDescription: string,
-  conversationContext: string,
+function buildPhrasePrompt(
   targetPhrase: string,
   targetPinyin: string,
   targetMeaning: string,
@@ -13,15 +11,11 @@ function buildSystemPrompt(
 ): string {
   const isCant = dialect === 'cantonese'
   const romanization = isCant ? 'Jyutping' : 'Pinyin'
-  const languageName = isCant ? 'Cantonese (廣東話)' : 'Mandarin'
   const tutorIntro = isCant
-    ? 'You are a warm, encouraging Cantonese tutor running a live conversation practice session. Speak and respond in Cantonese (廣東話), not Mandarin.'
-    : 'You are a warm, encouraging Mandarin tutor running a live conversation practice session.'
+    ? 'You are a warm, encouraging Cantonese tutor assessing a learner\'s phrase attempt.'
+    : 'You are a warm, encouraging Mandarin tutor assessing a learner\'s phrase attempt.'
 
   return `${tutorIntro}
-
-Scenario: ${scenarioDescription}
-Your role: ${conversationContext}
 
 The learner is practicing this phrase:
 Chinese: ${targetPhrase}
@@ -29,10 +23,47 @@ ${romanization}: ${targetPinyin}
 Meaning: ${targetMeaning}
 
 Rules:
-- Your dialogue turns should be IN ${languageName.toUpperCase()} with ${romanization} on the line below and English translation below that
-- When given the learner's transcribed speech, assess how close it was to the target phrase (0-100 score)
+- Assess how close the learner's spoken attempt was to the target phrase (0-100 score)
 - Celebrate what they got right, gently correct mistakes
 - Use the "sounds like English words" style for phonetic tips (e.g. "think 'knee HOW' for 你好")
+- Be warm and encouraging
+
+ALWAYS respond with valid JSON only, no extra text:
+{
+  "yourLine": { "chinese": "", "pinyin": "", "english": "" },
+  "assessment": {
+    "score": 0-100,
+    "correct": "what they said correctly",
+    "correction": "what to improve (optional)",
+    "phoneticTip": "sound-alike hint (optional)",
+    "spokenTranslation": "English meaning of exactly what the learner said"
+  },
+  "isComplete": false
+}`
+}
+
+function buildConversationPrompt(
+  scenarioDescription: string,
+  conversationContext: string,
+  dialect: 'cantonese' | 'putonghua'
+): string {
+  const isCant = dialect === 'cantonese'
+  const romanization = isCant ? 'Jyutping' : 'Pinyin'
+  const languageName = isCant ? 'Cantonese (廣東話)' : 'Mandarin'
+  const tutorIntro = isCant
+    ? 'You are a warm, encouraging Cantonese tutor running a free-form conversation practice session. Speak and respond in Cantonese (廣東話), not Mandarin.'
+    : 'You are a warm, encouraging Mandarin tutor running a free-form conversation practice session.'
+
+  return `${tutorIntro}
+
+Scenario: ${scenarioDescription}
+Your role: ${conversationContext}
+
+Rules:
+- Have a natural, realistic conversation — don't drill a specific phrase, just talk
+- Your dialogue turns should be IN ${languageName.toUpperCase()} with ${romanization} on the line below and English translation below that
+- When the learner speaks, assess their Chinese naturally (0-100 score) and gently correct any mistakes
+- Use the "sounds like English words" style for phonetic tips
 - Keep exchanges brief and natural — this is voice-first
 - Run 3-4 back-and-forth exchanges then mark complete
 - Be warm, encouraging, and patient
@@ -49,7 +80,7 @@ ALWAYS respond with valid JSON only, no extra text:
     "correct": "what they said correctly",
     "correction": "what to improve (optional)",
     "phoneticTip": "sound-alike hint (optional)",
-    "spokenTranslation": "English meaning of exactly what the learner said (not the target phrase)"
+    "spokenTranslation": "English meaning of exactly what the learner said"
   } | null,
   "isComplete": false
 }`
@@ -58,13 +89,14 @@ ALWAYS respond with valid JSON only, no extra text:
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { history, userTranscript, clusterId, unitId, phase, dialect = 'putonghua' } = body as {
+    const { history, userTranscript, clusterId, unitId, phase, dialect = 'putonghua', mode = 'conversation' } = body as {
       history: ChatMessage[]
       userTranscript: string | null
       clusterId: string
       unitId: string
       phase: 'start' | 'respond'
       dialect?: 'cantonese' | 'putonghua'
+      mode?: 'phrase' | 'conversation'
     }
 
     const unit = getUnit(unitId)
@@ -74,14 +106,9 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Cluster not found' }, { status: 404 })
     }
 
-    const systemPrompt = buildSystemPrompt(
-      cluster.scenarioDescription,
-      cluster.conversationContext,
-      cluster.phrase.chinese,
-      cluster.phrase.pinyin,
-      cluster.phrase.meaning,
-      dialect
-    )
+    const systemPrompt = mode === 'phrase'
+      ? buildPhrasePrompt(cluster.phrase.chinese, cluster.phrase.pinyin, cluster.phrase.meaning, dialect)
+      : buildConversationPrompt(cluster.scenarioDescription, cluster.conversationContext, dialect)
 
     const messages: { role: 'user' | 'assistant'; content: string }[] = []
 
@@ -93,7 +120,6 @@ export async function POST(req: NextRequest) {
           : 'Please start the conversation. Set the scene briefly and say your first line in Mandarin.',
       })
     } else {
-      // Build history as alternating user/assistant messages
       const filtered = history.filter((m) => !m.isTyping)
       for (const msg of filtered) {
         if (msg.role === 'ai' && msg.chinese) {
@@ -121,7 +147,6 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Ensure messages alternate properly; if last is assistant, add a user prompt
     if (messages.length > 0 && messages[messages.length - 1].role === 'assistant') {
       messages.push({ role: 'user', content: 'Please continue.' })
     }
@@ -134,7 +159,6 @@ export async function POST(req: NextRequest) {
 
     const text = response.choices[0]?.message?.content ?? ''
 
-    // Extract JSON from response (Claude sometimes wraps in ```json blocks)
     const jsonMatch = text.match(/\{[\s\S]*\}/)
     if (!jsonMatch) {
       return NextResponse.json({ error: 'Invalid response from AI' }, { status: 500 })

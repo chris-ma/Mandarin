@@ -2753,6 +2753,629 @@ export const units: Unit[] = [
       },
     ],
   },
+  // ─── PUTONGHUA: NEW UNITS ─────────────────────────────────────────────────
+  {
+    id: 'basics-family',
+    level: 'basics',
+    dialect: 'putonghua',
+    title: 'Family',
+    description: 'Talk about your family members',
+    imageQuery: 'chinese family portrait',
+    clusters: [
+      {
+        id: 'basics-family-1',
+        title: 'Core Family Words',
+        scenarioDescription: 'Showing a friend photos of your family',
+        conversationContext: 'You are a curious Chinese friend asking the learner about their family. Ask warmly about parents and siblings.',
+        words: [
+          { character: '妈妈', pinyin: 'māma', meaning: 'Mum', phoneticGuide: 'mah mah', toneNote: 'both flat tones', imageQuery: 'mother daughter portrait' },
+          { character: '爸爸', pinyin: 'bàba', meaning: 'Dad', phoneticGuide: 'bah bah', toneNote: 'both falling then neutral', imageQuery: 'father son portrait' },
+          { character: '兄弟姐妹', pinyin: 'xiōngdì jiěmèi', meaning: 'Siblings', phoneticGuide: 'shyong-dee jyeh-may', toneNote: 'flat, falling, falling-rising, falling', imageQuery: 'siblings brothers sisters' },
+        ],
+        phrase: {
+          chinese: '我有一个哥哥和一个妹妹。',
+          pinyin: 'Wǒ yǒu yí gè gēge hé yí gè mèimei.',
+          meaning: 'I have one older brother and one younger sister.',
+          breakdown: [
+            { chinese: '我有', pinyin: 'wǒ yǒu', meaning: 'I have' },
+            { chinese: '哥哥', pinyin: 'gēge', meaning: 'older brother' },
+            { chinese: '妹妹', pinyin: 'mèimei', meaning: 'younger sister' },
+          ],
+        },
+      },
+      {
+        id: 'basics-family-2',
+        title: 'Describing Family',
+        scenarioDescription: 'A new colleague asks about your family over lunch',
+        conversationContext: 'You are a friendly Chinese colleague having lunch with the learner. Ask about their family size and where their parents live.',
+        words: [
+          { character: '几口人', pinyin: 'jǐ kǒu rén', meaning: 'How many people (in family)', phoneticGuide: 'jee koh run', toneNote: '"ji" falls-rises, "kou" falls-rises, "ren" rising', imageQuery: 'family group dinner' },
+          { character: '住在', pinyin: 'zhù zài', meaning: 'Live in / reside in', phoneticGuide: 'joo dzai', toneNote: 'both falling', imageQuery: 'home house living' },
+          { character: '独生子女', pinyin: 'dúshēng zǐnǚ', meaning: 'Only child', phoneticGuide: 'doo-shung dze-nyew', toneNote: 'rising, flat, falls-rises, falls-rises', imageQuery: 'only child portrait' },
+        ],
+        phrase: {
+          chinese: '我家有三口人，我们住在上海。',
+          pinyin: 'Wǒ jiā yǒu sān kǒu rén, wǒmen zhù zài Shànghǎi.',
+          meaning: 'There are three people in my family, we live in Shanghai.',
+          breakdown: [
+            { chinese: '我家', pinyin: 'wǒ jiā', meaning: 'my family' },
+            { chinese: '三口人', pinyin: 'sān kǒu rén', meaning: 'three people' },
+            { chinese: '住在', pinyin: 'zhù zài', meaning: 'live in' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'travel-airport',
+    level: 'travel',
+    dialect: 'putonghua',
+    title: 'At the Airport',
+    description: 'Navigate check-in, boarding and arrivals',
+    imageQuery: 'beijing airport terminal',
+    clusters: [
+      {
+        id: 'travel-airport-1',
+        title: 'Check-in & Boarding',
+        scenarioDescription: 'Checking in for your flight at the airport',
+        conversationContext: 'You are an airline check-in agent at a Chinese airport. The learner needs to check in their luggage and find their gate.',
+        words: [
+          { character: '登机', pinyin: 'dēng jī', meaning: 'Board / boarding', phoneticGuide: 'dung jee', toneNote: 'flat, flat', imageQuery: 'airplane boarding gate' },
+          { character: '行李', pinyin: 'xíngli', meaning: 'Luggage', phoneticGuide: 'shing lee', toneNote: 'rising, neutral', imageQuery: 'airport luggage suitcase' },
+          { character: '登机口', pinyin: 'dēng jī kǒu', meaning: 'Gate', phoneticGuide: 'dung jee koh', toneNote: 'flat, flat, falls-rises', imageQuery: 'airport boarding gate sign' },
+        ],
+        phrase: {
+          chinese: '我要托运这个行李，登机口在哪里？',
+          pinyin: 'Wǒ yào tuōyùn zhège xíngli, dēng jī kǒu zài nǎlǐ?',
+          meaning: 'I want to check this luggage, where is the boarding gate?',
+          breakdown: [
+            { chinese: '托运', pinyin: 'tuōyùn', meaning: 'check (luggage)' },
+            { chinese: '行李', pinyin: 'xíngli', meaning: 'luggage' },
+            { chinese: '登机口', pinyin: 'dēng jī kǒu', meaning: 'boarding gate' },
+          ],
+        },
+      },
+      {
+        id: 'travel-airport-2',
+        title: 'Customs & Arrivals',
+        scenarioDescription: 'Going through passport control after landing',
+        conversationContext: 'You are a passport control officer at a Chinese border. The learner is arriving as a tourist. Ask about their visit purpose and length of stay.',
+        words: [
+          { character: '海关', pinyin: 'hǎiguān', meaning: 'Customs', phoneticGuide: 'high gwahn', toneNote: 'falls-rises, flat', imageQuery: 'customs border control' },
+          { character: '入境', pinyin: 'rùjìng', meaning: 'Enter the country', phoneticGuide: 'roo jing', toneNote: 'falling, falling', imageQuery: 'passport stamp entry' },
+          { character: '旅游签证', pinyin: 'lǚyóu qiānzhèng', meaning: 'Tourist visa', phoneticGuide: 'lyew-yo chyen-jung', toneNote: 'falls-rises, rising, flat, falling', imageQuery: 'visa passport tourist' },
+        ],
+        phrase: {
+          chinese: '我是旅游签证，我打算在这里待两周。',
+          pinyin: 'Wǒ shì lǚyóu qiānzhèng, wǒ dǎsuàn zài zhèlǐ dāi liǎng zhōu.',
+          meaning: 'I have a tourist visa, I plan to stay here for two weeks.',
+          breakdown: [
+            { chinese: '旅游签证', pinyin: 'lǚyóu qiānzhèng', meaning: 'tourist visa' },
+            { chinese: '打算', pinyin: 'dǎsuàn', meaning: 'plan to' },
+            { chinese: '两周', pinyin: 'liǎng zhōu', meaning: 'two weeks' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'travel-emergency',
+    level: 'travel',
+    dialect: 'putonghua',
+    title: 'Emergencies',
+    description: 'Get help and deal with unexpected situations',
+    imageQuery: 'emergency help urban china',
+    clusters: [
+      {
+        id: 'travel-emergency-1',
+        title: 'Calling for Help',
+        scenarioDescription: 'You need urgent help on the street',
+        conversationContext: 'You are a helpful bystander in a Chinese city. The learner needs assistance urgently. Help them and ask what happened.',
+        words: [
+          { character: '救命', pinyin: 'jiùmìng', meaning: 'Help! / Save me!', phoneticGuide: 'jyo ming', toneNote: 'falling, falling', imageQuery: 'emergency help rescue' },
+          { character: '警察', pinyin: 'jǐngchá', meaning: 'Police', phoneticGuide: 'jing-chah', toneNote: 'falls-rises, rising', imageQuery: 'police officer china' },
+          { character: '救护车', pinyin: 'jiùhùchē', meaning: 'Ambulance', phoneticGuide: 'jyo-hoo-chuh', toneNote: 'falling, falling, flat', imageQuery: 'ambulance emergency vehicle' },
+        ],
+        phrase: {
+          chinese: '请帮我叫救护车，我朋友不舒服！',
+          pinyin: 'Qǐng bāng wǒ jiào jiùhùchē, wǒ péngyou bù shūfu!',
+          meaning: 'Please help me call an ambulance, my friend is unwell!',
+          breakdown: [
+            { chinese: '请帮我', pinyin: 'qǐng bāng wǒ', meaning: 'please help me' },
+            { chinese: '叫救护车', pinyin: 'jiào jiùhùchē', meaning: 'call an ambulance' },
+            { chinese: '不舒服', pinyin: 'bù shūfu', meaning: 'unwell' },
+          ],
+        },
+      },
+      {
+        id: 'travel-emergency-2',
+        title: 'Lost & Found',
+        scenarioDescription: 'You have lost your wallet or phone',
+        conversationContext: 'You are a hotel receptionist helping a distressed tourist. The learner has lost something. Help them report it and suggest the next steps.',
+        words: [
+          { character: '丢了', pinyin: 'diū le', meaning: 'Lost (something)', phoneticGuide: 'dyoh luh', toneNote: 'flat, neutral', imageQuery: 'lost wallet found searching' },
+          { character: '大使馆', pinyin: 'dàshǐguǎn', meaning: 'Embassy', phoneticGuide: 'dah-shrr-gwahn', toneNote: 'falling, falls-rises, falls-rises', imageQuery: 'embassy building flag' },
+          { character: '挂失', pinyin: 'guàshī', meaning: 'Report loss / cancel card', phoneticGuide: 'gwah shrr', toneNote: 'falling, flat', imageQuery: 'cancel credit card phone call' },
+        ],
+        phrase: {
+          chinese: '我的护照丢了，我需要联系大使馆。',
+          pinyin: 'Wǒ de hùzhào diū le, wǒ xūyào liánxì dàshǐguǎn.',
+          meaning: 'I lost my passport, I need to contact the embassy.',
+          breakdown: [
+            { chinese: '护照', pinyin: 'hùzhào', meaning: 'passport' },
+            { chinese: '丢了', pinyin: 'diū le', meaning: 'lost' },
+            { chinese: '联系大使馆', pinyin: 'liánxì dàshǐguǎn', meaning: 'contact the embassy' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'advanced-entertainment',
+    level: 'advanced',
+    dialect: 'putonghua',
+    title: 'Entertainment',
+    description: 'Films, music, going out and hobbies',
+    imageQuery: 'cinema movie theater china',
+    clusters: [
+      {
+        id: 'advanced-entertainment-1',
+        title: 'Films & Music',
+        scenarioDescription: 'Chatting with a friend about favourite films and music',
+        conversationContext: 'You are a movie-loving Chinese friend. Ask the learner what kind of films and music they enjoy, and share your own favourites.',
+        words: [
+          { character: '电影', pinyin: 'diànyǐng', meaning: 'Film / movie', phoneticGuide: 'dyen-ying', toneNote: 'falling, falls-rises', imageQuery: 'cinema popcorn movie' },
+          { character: '好听', pinyin: 'hǎotīng', meaning: 'Nice-sounding / good music', phoneticGuide: 'how-ting', toneNote: 'falls-rises, flat', imageQuery: 'music headphones listening' },
+          { character: '类型', pinyin: 'lèixíng', meaning: 'Genre / type', phoneticGuide: 'lay-shing', toneNote: 'falling, rising', imageQuery: 'movie genres selection' },
+        ],
+        phrase: {
+          chinese: '你喜欢什么类型的电影？我最喜欢喜剧片。',
+          pinyin: 'Nǐ xǐhuān shénme lèixíng de diànyǐng? Wǒ zuì xǐhuān xǐjùpiàn.',
+          meaning: 'What kind of films do you like? I like comedy films the most.',
+          breakdown: [
+            { chinese: '什么类型', pinyin: 'shénme lèixíng', meaning: 'what kind/genre' },
+            { chinese: '最喜欢', pinyin: 'zuì xǐhuān', meaning: 'like the most' },
+            { chinese: '喜剧片', pinyin: 'xǐjùpiàn', meaning: 'comedy film' },
+          ],
+        },
+      },
+      {
+        id: 'advanced-entertainment-2',
+        title: 'Going Out',
+        scenarioDescription: 'Planning a night out with friends in the city',
+        conversationContext: 'You are a local friend suggesting fun activities for the evening. Ask the learner what they feel like doing and make plans together.',
+        words: [
+          { character: '酒吧', pinyin: 'jiǔbā', meaning: 'Bar', phoneticGuide: 'jyo bah', toneNote: 'falls-rises, flat', imageQuery: 'bar nightlife drinks' },
+          { character: '唱歌', pinyin: 'chànggē', meaning: 'Sing / karaoke', phoneticGuide: 'chahng-guh', toneNote: 'falling, flat', imageQuery: 'karaoke singing friends' },
+          { character: '聚会', pinyin: 'jùhuì', meaning: 'Party / get-together', phoneticGuide: 'jyew-hway', toneNote: 'falling, falling', imageQuery: 'party friends gathering' },
+        ],
+        phrase: {
+          chinese: '今晚我们去唱歌怎么样？之后可以去酒吧。',
+          pinyin: 'Jīnwǎn wǒmen qù chànggē zěnmeyàng? Zhīhòu kěyǐ qù jiǔbā.',
+          meaning: "How about we go karaoke tonight? We can go to a bar afterwards.",
+          breakdown: [
+            { chinese: '今晚', pinyin: 'jīnwǎn', meaning: 'tonight' },
+            { chinese: '唱歌', pinyin: 'chànggē', meaning: 'karaoke/singing' },
+            { chinese: '之后', pinyin: 'zhīhòu', meaning: 'afterwards' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'advanced-food-culture',
+    level: 'advanced',
+    dialect: 'putonghua',
+    title: 'Food & Culture',
+    description: 'Chinese cuisine, cooking and food culture',
+    imageQuery: 'chinese food cuisine dumplings',
+    clusters: [
+      {
+        id: 'advanced-food-1',
+        title: 'Talking About Food',
+        scenarioDescription: 'A Chinese host is cooking for you and asking about your tastes',
+        conversationContext: 'You are a proud Chinese home cook. Ask the learner about their food preferences and tell them about the dishes you are making.',
+        words: [
+          { character: '饺子', pinyin: 'jiǎozi', meaning: 'Dumplings', phoneticGuide: 'jyow-dzuh', toneNote: 'falls-rises, neutral', imageQuery: 'chinese dumplings jiaozi' },
+          { character: '味道', pinyin: 'wèidào', meaning: 'Taste / flavour', phoneticGuide: 'way-dow', toneNote: 'falling, falling', imageQuery: 'food taste flavour cooking' },
+          { character: '口味', pinyin: 'kǒuwèi', meaning: 'Palate / taste preference', phoneticGuide: 'koh-way', toneNote: 'falls-rises, falling', imageQuery: 'food preference taste' },
+        ],
+        phrase: {
+          chinese: '这个饺子味道怎么样？你喜欢什么口味？',
+          pinyin: 'Zhège jiǎozi wèidào zěnmeyàng? Nǐ xǐhuān shénme kǒuwèi?',
+          meaning: 'How do these dumplings taste? What flavours do you like?',
+          breakdown: [
+            { chinese: '饺子', pinyin: 'jiǎozi', meaning: 'dumplings' },
+            { chinese: '味道', pinyin: 'wèidào', meaning: 'taste/flavour' },
+            { chinese: '口味', pinyin: 'kǒuwèi', meaning: 'taste preference' },
+          ],
+        },
+      },
+      {
+        id: 'advanced-food-2',
+        title: 'Cooking & Recipes',
+        scenarioDescription: 'Learning to make a Chinese dish from a local friend',
+        conversationContext: 'You are teaching the learner how to cook a simple Chinese dish. Explain the steps and ask if they have cooked Chinese food before.',
+        words: [
+          { character: '炒', pinyin: 'chǎo', meaning: 'Stir-fry', phoneticGuide: 'chow', toneNote: 'falls-rises', imageQuery: 'stir fry wok cooking' },
+          { character: '材料', pinyin: 'cáiliào', meaning: 'Ingredients', phoneticGuide: 'tsai-lyow', toneNote: 'rising, falling', imageQuery: 'cooking ingredients preparation' },
+          { character: '食谱', pinyin: 'shípǔ', meaning: 'Recipe', phoneticGuide: 'shrr-poo', toneNote: 'rising, falls-rises', imageQuery: 'recipe book cooking' },
+        ],
+        phrase: {
+          chinese: '先把材料切好，然后用大火炒两分钟。',
+          pinyin: 'Xiān bǎ cáiliào qiē hǎo, ránhòu yòng dà huǒ chǎo liǎng fēnzhōng.',
+          meaning: 'First chop the ingredients, then stir-fry on high heat for two minutes.',
+          breakdown: [
+            { chinese: '先', pinyin: 'xiān', meaning: 'first' },
+            { chinese: '材料', pinyin: 'cáiliào', meaning: 'ingredients' },
+            { chinese: '大火炒', pinyin: 'dà huǒ chǎo', meaning: 'stir-fry on high heat' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'advanced-relationships',
+    level: 'advanced',
+    dialect: 'putonghua',
+    title: 'Social Life',
+    description: 'Making friends, compliments and small talk',
+    imageQuery: 'friends social gathering china',
+    clusters: [
+      {
+        id: 'advanced-social-1',
+        title: 'Giving Compliments',
+        scenarioDescription: 'Meeting someone impressive at a social gathering',
+        conversationContext: 'You are at a dinner party in China. The learner wants to compliment your Chinese and ask about your life. Be friendly and modest.',
+        words: [
+          { character: '厉害', pinyin: 'lìhai', meaning: 'Impressive / amazing', phoneticGuide: 'lee-hi', toneNote: 'falling, neutral', imageQuery: 'impressed amazed reaction' },
+          { character: '谦虚', pinyin: 'qiānxū', meaning: 'Modest / humble', phoneticGuide: 'chyen-shew', toneNote: 'flat, flat', imageQuery: 'humble modest gesture' },
+          { character: '夸奖', pinyin: 'kuājiǎng', meaning: 'To compliment / praise', phoneticGuide: 'kwah-jyahng', toneNote: 'flat, falls-rises', imageQuery: 'praise compliment appreciation' },
+        ],
+        phrase: {
+          chinese: '你的中文真厉害！你是在哪里学的？',
+          pinyin: 'Nǐ de zhōngwén zhēn lìhai! Nǐ shì zài nǎlǐ xué de?',
+          meaning: 'Your Chinese is really impressive! Where did you learn it?',
+          breakdown: [
+            { chinese: '真厉害', pinyin: 'zhēn lìhai', meaning: 'really impressive' },
+            { chinese: '在哪里', pinyin: 'zài nǎlǐ', meaning: 'where' },
+            { chinese: '学的', pinyin: 'xué de', meaning: 'learned it' },
+          ],
+        },
+      },
+      {
+        id: 'advanced-social-2',
+        title: 'Talking About the Future',
+        scenarioDescription: 'A friend asks about your plans and dreams for the future',
+        conversationContext: 'You are a curious Chinese friend. Ask the learner about their future plans — career goals, travel dreams, where they want to live.',
+        words: [
+          { character: '梦想', pinyin: 'mèngxiǎng', meaning: 'Dream / aspiration', phoneticGuide: 'mung-shyahng', toneNote: 'falling, falls-rises', imageQuery: 'dream future aspiration sky' },
+          { character: '打算', pinyin: 'dǎsuàn', meaning: 'Plan to / intend to', phoneticGuide: 'dah-swahn', toneNote: 'falls-rises, falling', imageQuery: 'planning future goals' },
+          { character: '将来', pinyin: 'jiānglái', meaning: 'In the future', phoneticGuide: 'jyahng-lie', toneNote: 'flat, rising', imageQuery: 'future horizon planning' },
+        ],
+        phrase: {
+          chinese: '你将来打算做什么？我梦想开自己的公司。',
+          pinyin: 'Nǐ jiānglái dǎsuàn zuò shénme? Wǒ mèngxiǎng kāi zìjǐ de gōngsī.',
+          meaning: 'What do you plan to do in the future? I dream of starting my own company.',
+          breakdown: [
+            { chinese: '将来打算', pinyin: 'jiānglái dǎsuàn', meaning: 'plan to in future' },
+            { chinese: '梦想', pinyin: 'mèngxiǎng', meaning: 'dream' },
+            { chinese: '自己的公司', pinyin: 'zìjǐ de gōngsī', meaning: 'own company' },
+          ],
+        },
+      },
+    ],
+  },
+
+  // ─── CANTONESE: NEW UNITS ─────────────────────────────────────────────────
+  {
+    id: 'cant-travel-hotel',
+    level: 'travel',
+    dialect: 'cantonese',
+    title: 'Hotel',
+    description: 'Check in and make room requests',
+    imageQuery: 'hong kong hotel lobby',
+    clusters: [
+      {
+        id: 'cant-hotel-1',
+        title: 'Checking In',
+        scenarioDescription: 'Checking into a hotel in Hong Kong',
+        conversationContext: 'You are a hotel receptionist in Hong Kong. The learner is checking in. Ask for their name, check the reservation and hand over the key.',
+        words: [
+          { character: '訂房', pinyin: 'deng6 fong4', meaning: 'Room reservation', phoneticGuide: 'ding FONG', toneNote: 'falling, rising', imageQuery: 'hotel reservation booking' },
+          { character: '護照', pinyin: 'wu6 ziu3', meaning: 'Passport', phoneticGuide: 'woo JEW', toneNote: 'low, mid-rising', imageQuery: 'passport document travel' },
+          { character: '房間', pinyin: 'fong4 gaan1', meaning: 'Room', phoneticGuide: 'fong GAHN', toneNote: 'rising, flat', imageQuery: 'hotel room interior' },
+        ],
+        phrase: {
+          chinese: '我有訂房，我叫___，呢個係我嘅護照。',
+          pinyin: 'ngo5 jau5 deng6 fong4, ngo5 giu3 ___, ni1 go3 hai6 ngo5 ge3 wu6 ziu3.',
+          meaning: 'I have a reservation, my name is ___, this is my passport.',
+          breakdown: [
+            { chinese: '我有訂房', pinyin: 'ngo5 jau5 deng6 fong4', meaning: 'I have a reservation' },
+            { chinese: '我叫', pinyin: 'ngo5 giu3', meaning: 'my name is' },
+            { chinese: '護照', pinyin: 'wu6 ziu3', meaning: 'passport' },
+          ],
+        },
+      },
+      {
+        id: 'cant-hotel-2',
+        title: 'Room Requests',
+        scenarioDescription: 'Calling hotel reception about a room issue',
+        conversationContext: 'You are the hotel receptionist taking a call from the learner\'s room. They need something or have a problem. Be helpful and professional.',
+        words: [
+          { character: '熱水', pinyin: 'jit6 seoi2', meaning: 'Hot water', phoneticGuide: 'yit SEOY', toneNote: 'low, low-rising', imageQuery: 'hot water shower hotel' },
+          { character: '毛巾', pinyin: 'mou4 gan1', meaning: 'Towel', phoneticGuide: 'moh GAHN', toneNote: 'rising, flat', imageQuery: 'towel hotel bathroom' },
+          { character: '冷氣', pinyin: 'laang5 hei3', meaning: 'Air conditioning', phoneticGuide: 'lahng HEY', toneNote: 'low-rising, mid-falling', imageQuery: 'air conditioning unit hotel' },
+        ],
+        phrase: {
+          chinese: '唔該送多條毛巾嚟，冷氣唔係好冷。',
+          pinyin: 'mm4 goi1 sung3 do1 tiu4 mou4 gan1 lai4, laang5 hei3 mm4 hai6 hou2 laang5.',
+          meaning: 'Please send more towels, the air conditioning is not very cold.',
+          breakdown: [
+            { chinese: '唔該', pinyin: 'mm4 goi1', meaning: 'please/excuse me' },
+            { chinese: '多條毛巾', pinyin: 'do1 tiu4 mou4 gan1', meaning: 'more towels' },
+            { chinese: '冷氣唔係好冷', pinyin: 'laang5 hei3 mm4 hai6 hou2 laang5', meaning: 'AC not very cold' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'cant-travel-sights',
+    level: 'travel',
+    dialect: 'cantonese',
+    title: 'Sightseeing',
+    description: 'Visit attractions and get local tips',
+    imageQuery: 'hong kong victoria peak skyline',
+    clusters: [
+      {
+        id: 'cant-sights-1',
+        title: 'Visiting Attractions',
+        scenarioDescription: 'Buying entry tickets at a Hong Kong attraction',
+        conversationContext: 'You are a ticketing staff at a popular Hong Kong tourist site. The learner wants to buy tickets and ask about opening hours.',
+        words: [
+          { character: '門票', pinyin: 'mun4 piu3', meaning: 'Entry ticket', phoneticGuide: 'mun PYOH', toneNote: 'rising, mid-falling', imageQuery: 'museum ticket entry' },
+          { character: '開放時間', pinyin: 'hoi1 fong3 si4 gaan3', meaning: 'Opening hours', phoneticGuide: 'hoy FONG see GAHN', toneNote: 'flat, mid-falling, rising, mid-falling', imageQuery: 'opening hours sign museum' },
+          { character: '影相', pinyin: 'jeng2 soeng2', meaning: 'Take a photo', phoneticGuide: 'ying SEUNG', toneNote: 'low-rising, low-rising', imageQuery: 'tourist photo taking selfie' },
+        ],
+        phrase: {
+          chinese: '門票幾多錢？呢度可以影相嗎？',
+          pinyin: 'mun4 piu3 gei2 do1 cin2? ni1 dou6 ho2 ji5 jeng2 soeng2 maa3?',
+          meaning: 'How much is the entry ticket? Can I take photos here?',
+          breakdown: [
+            { chinese: '門票幾多錢', pinyin: 'mun4 piu3 gei2 do1 cin2', meaning: 'how much is the ticket' },
+            { chinese: '可以影相', pinyin: 'ho2 ji5 jeng2 soeng2', meaning: 'can take photos' },
+          ],
+        },
+      },
+      {
+        id: 'cant-sights-2',
+        title: 'Local Recommendations',
+        scenarioDescription: 'Asking a local for tips on what to see in Hong Kong',
+        conversationContext: 'You are a proud Hong Kong local. The learner is visiting and asks for your favourite spots and recommendations. Share enthusiastically.',
+        words: [
+          { character: '好玩', pinyin: 'hou2 waan2', meaning: 'Fun / enjoyable', phoneticGuide: 'hoh WAHN', toneNote: 'low-rising, low-rising', imageQuery: 'fun tourist activity city' },
+          { character: '推介', pinyin: 'teoi1 gaai3', meaning: 'Recommend', phoneticGuide: 'toy GAI', toneNote: 'flat, mid-falling', imageQuery: 'recommendation guide tourist' },
+          { character: '附近', pinyin: 'fu6 gan6', meaning: 'Nearby', phoneticGuide: 'foo GUN', toneNote: 'low, low', imageQuery: 'nearby area map walking' },
+        ],
+        phrase: {
+          chinese: '你有冇好介紹？附近有冇好玩嘅地方？',
+          pinyin: 'nei5 jau5 mou5 hou2 gaai3 siu6? fu6 gan6 jau5 mou5 hou2 waan2 ge3 dei6 fong1?',
+          meaning: 'Do you have any recommendations? Are there fun places nearby?',
+          breakdown: [
+            { chinese: '好介紹', pinyin: 'hou2 gaai3 siu6', meaning: 'good recommendation' },
+            { chinese: '附近', pinyin: 'fu6 gan6', meaning: 'nearby' },
+            { chinese: '好玩嘅地方', pinyin: 'hou2 waan2 ge3 dei6 fong1', meaning: 'fun places' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'cant-advanced-work',
+    level: 'advanced',
+    dialect: 'cantonese',
+    title: 'Work & Tech',
+    description: 'Office life, studying and digital payments',
+    imageQuery: 'hong kong office business',
+    clusters: [
+      {
+        id: 'cant-work-1',
+        title: 'At the Office',
+        scenarioDescription: 'A Monday morning chat with colleagues in a Hong Kong office',
+        conversationContext: 'You are a Cantonese-speaking colleague in a Hong Kong office. Ask the learner about their weekend and what projects they are working on today.',
+        words: [
+          { character: '同事', pinyin: 'tung4 si6', meaning: 'Colleague', phoneticGuide: 'tong SEE', toneNote: 'rising, low', imageQuery: 'office colleagues work meeting' },
+          { character: '會議', pinyin: 'wui6 ji5', meaning: 'Meeting', phoneticGuide: 'wooi YEE', toneNote: 'low, low-rising', imageQuery: 'business meeting conference room' },
+          { character: '報告', pinyin: 'bou3 gou3', meaning: 'Report', phoneticGuide: 'boh GOH', toneNote: 'mid-falling, mid-falling', imageQuery: 'business report presentation' },
+        ],
+        phrase: {
+          chinese: '今日有冇會議？我要準備份報告。',
+          pinyin: 'gam1 jat6 jau5 mou5 wui6 ji5? ngo5 jiu3 zeon2 bei6 fan6 bou3 gou3.',
+          meaning: 'Is there a meeting today? I need to prepare a report.',
+          breakdown: [
+            { chinese: '今日', pinyin: 'gam1 jat6', meaning: 'today' },
+            { chinese: '有冇會議', pinyin: 'jau5 mou5 wui6 ji5', meaning: 'is there a meeting' },
+            { chinese: '準備份報告', pinyin: 'zeon2 bei6 fan6 bou3 gou3', meaning: 'prepare a report' },
+          ],
+        },
+      },
+      {
+        id: 'cant-work-2',
+        title: 'Mobile & Payments',
+        scenarioDescription: 'Asking about WiFi and paying with Octopus or mobile payment',
+        conversationContext: 'You are a shopkeeper in Hong Kong. The learner wants to connect to WiFi and pay with their phone. Help them out.',
+        words: [
+          { character: '八達通', pinyin: 'baat3 daat6 tung1', meaning: 'Octopus card', phoneticGuide: 'baht DAHT tong', toneNote: 'mid-falling, low, flat', imageQuery: 'octopus card hong kong transport' },
+          { character: 'Wi-Fi密碼', pinyin: 'wai4 fai1 mat6 maa5', meaning: 'WiFi password', phoneticGuide: 'why-fye mat MAH', toneNote: 'rising, flat, low, low-rising', imageQuery: 'wifi password sign coffee shop' },
+          { character: '掃碼', pinyin: 'sou3 maa5', meaning: 'Scan QR code', phoneticGuide: 'soh MAH', toneNote: 'mid-falling, low-rising', imageQuery: 'QR code scan payment mobile' },
+        ],
+        phrase: {
+          chinese: '請問Wi-Fi密碼係咩？我可以掃碼付款嗎？',
+          pinyin: 'cing2 man6 wai4 fai1 mat6 maa5 hai6 me1? ngo5 ho2 ji5 sou3 maa5 fu6 fun2 maa3?',
+          meaning: 'Excuse me, what is the WiFi password? Can I pay by QR code?',
+          breakdown: [
+            { chinese: 'Wi-Fi密碼', pinyin: 'wai4 fai1 mat6 maa5', meaning: 'WiFi password' },
+            { chinese: '掃碼付款', pinyin: 'sou3 maa5 fu6 fun2', meaning: 'pay by QR code' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'cant-advanced-health',
+    level: 'advanced',
+    dialect: 'cantonese',
+    title: 'Health',
+    description: 'Describe symptoms and find a pharmacy',
+    imageQuery: 'hong kong pharmacy medicine',
+    clusters: [
+      {
+        id: 'cant-health-1',
+        title: 'Common Ailments',
+        scenarioDescription: 'Telling a pharmacist or friend that you are feeling unwell',
+        conversationContext: 'You are a sympathetic pharmacist in Hong Kong. The learner is describing symptoms. Ask what is wrong and how long they have felt this way.',
+        words: [
+          { character: '頭痛', pinyin: 'tau4 tung3', meaning: 'Headache', phoneticGuide: 'tow TONG', toneNote: 'rising, mid-falling', imageQuery: 'headache pain head holding' },
+          { character: '肚痛', pinyin: 'tou5 tung3', meaning: 'Stomachache', phoneticGuide: 'toh TONG', toneNote: 'low-rising, mid-falling', imageQuery: 'stomach pain ache' },
+          { character: '發燒', pinyin: 'faat3 siu1', meaning: 'Fever', phoneticGuide: 'faht SEW', toneNote: 'mid-falling, flat', imageQuery: 'fever thermometer ill' },
+        ],
+        phrase: {
+          chinese: '我頭痛，我諗我有發燒，需要睇醫生嗎？',
+          pinyin: 'ngo5 tau4 tung3, ngo5 nam2 ngo5 jau5 faat3 siu1, seoi1 jiu3 tai2 ji1 sang1 maa3?',
+          meaning: 'I have a headache, I think I have a fever, do I need to see a doctor?',
+          breakdown: [
+            { chinese: '頭痛', pinyin: 'tau4 tung3', meaning: 'headache' },
+            { chinese: '我諗我有', pinyin: 'ngo5 nam2 ngo5 jau5', meaning: 'I think I have' },
+            { chinese: '睇醫生', pinyin: 'tai2 ji1 sang1', meaning: 'see a doctor' },
+          ],
+        },
+      },
+      {
+        id: 'cant-health-2',
+        title: 'At the Pharmacy',
+        scenarioDescription: 'Buying medicine at a Hong Kong pharmacy',
+        conversationContext: 'You are a pharmacist in Hong Kong. The learner is buying medicine. Ask about their symptoms and recommend the right product.',
+        words: [
+          { character: '藥', pinyin: 'joek6', meaning: 'Medicine', phoneticGuide: 'yok', toneNote: 'low', imageQuery: 'medicine pills pharmacy' },
+          { character: '藥房', pinyin: 'joek6 fong4', meaning: 'Pharmacy', phoneticGuide: 'yok FONG', toneNote: 'low, rising', imageQuery: 'pharmacy drug store HK' },
+          { character: '食藥', pinyin: 'sik6 joek6', meaning: 'Take medicine', phoneticGuide: 'sik YOK', toneNote: 'low, low', imageQuery: 'taking medicine pills water' },
+        ],
+        phrase: {
+          chinese: '請問附近有冇藥房？我需要頭痛藥。',
+          pinyin: 'cing2 man6 fu6 gan6 jau5 mou5 joek6 fong4? ngo5 seoi1 jiu3 tau4 tung3 joek6.',
+          meaning: 'Excuse me, is there a pharmacy nearby? I need headache medicine.',
+          breakdown: [
+            { chinese: '附近有冇藥房', pinyin: 'fu6 gan6 jau5 mou5 joek6 fong4', meaning: 'is there a pharmacy nearby' },
+            { chinese: '頭痛藥', pinyin: 'tau4 tung3 joek6', meaning: 'headache medicine' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'cant-basics-food',
+    level: 'basics',
+    dialect: 'cantonese',
+    title: 'Dim Sum & Tea',
+    description: 'Order dim sum and tea like a local',
+    imageQuery: 'dim sum yum cha hong kong',
+    clusters: [
+      {
+        id: 'cant-dimsum-1',
+        title: 'Ordering Dim Sum',
+        scenarioDescription: 'Sunday yum cha with the family at a dim sum restaurant',
+        conversationContext: 'You are a trolley auntie at a traditional Hong Kong dim sum restaurant. The learner wants to order various dishes. Be lively and a little impatient.',
+        words: [
+          { character: '點心', pinyin: 'dim2 sam1', meaning: 'Dim sum', phoneticGuide: 'dim SUM', toneNote: 'low-rising, flat', imageQuery: 'dim sum bamboo steamer basket' },
+          { character: '蝦餃', pinyin: 'haa1 gaau2', meaning: 'Har gow (prawn dumpling)', phoneticGuide: 'hah GOW', toneNote: 'flat, low-rising', imageQuery: 'har gow prawn dumpling dim sum' },
+          { character: '叉燒包', pinyin: 'caa1 siu1 baau1', meaning: 'BBQ pork bun', phoneticGuide: 'chah SEW bao', toneNote: 'flat, flat, flat', imageQuery: 'char siu bao BBQ pork bun' },
+        ],
+        phrase: {
+          chinese: '唔該，我要兩籠蝦餃同一籠叉燒包。',
+          pinyin: 'mm4 goi1, ngo5 jiu3 loeng5 lung4 haa1 gaau2 tung4 jat1 lung4 caa1 siu1 baau1.',
+          meaning: 'Excuse me, I would like two baskets of har gow and one basket of BBQ pork buns.',
+          breakdown: [
+            { chinese: '我要', pinyin: 'ngo5 jiu3', meaning: 'I want' },
+            { chinese: '兩籠', pinyin: 'loeng5 lung4', meaning: 'two baskets' },
+            { chinese: '蝦餃', pinyin: 'haa1 gaau2', meaning: 'har gow' },
+          ],
+        },
+      },
+      {
+        id: 'cant-dimsum-2',
+        title: 'Tea & Drinks',
+        scenarioDescription: 'Ordering drinks at a Hong Kong cha chaan teng (milk tea cafe)',
+        conversationContext: 'You are a waiter at a classic Hong Kong cha chaan teng. The learner is ordering drinks. Be efficient and friendly.',
+        words: [
+          { character: '奶茶', pinyin: 'naai5 caa4', meaning: 'Milk tea', phoneticGuide: 'nigh CHA', toneNote: 'low-rising, rising', imageQuery: 'hong kong milk tea cha chaan teng' },
+          { character: '鴛鴦', pinyin: 'jyun1 joeng1', meaning: 'Coffee-tea mix', phoneticGuide: 'yun YONG', toneNote: 'flat, flat', imageQuery: 'yuanyang coffee tea hong kong drink' },
+          { character: '凍/熱', pinyin: 'dung3 / jit6', meaning: 'Iced / Hot', phoneticGuide: 'dong / yit', toneNote: 'mid-falling / low', imageQuery: 'iced hot drinks tea coffee' },
+        ],
+        phrase: {
+          chinese: '一杯凍奶茶同一杯熱鴛鴦，唔該。',
+          pinyin: 'jat1 bui1 dung3 naai5 caa4 tung4 jat1 bui1 jit6 jyun1 joeng1, mm4 goi1.',
+          meaning: 'One iced milk tea and one hot yuan yang, please.',
+          breakdown: [
+            { chinese: '凍奶茶', pinyin: 'dung3 naai5 caa4', meaning: 'iced milk tea' },
+            { chinese: '熱鴛鴦', pinyin: 'jit6 jyun1 joeng1', meaning: 'hot yuan yang' },
+            { chinese: '唔該', pinyin: 'mm4 goi1', meaning: 'please/thank you' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'cant-advanced-weather',
+    level: 'advanced',
+    dialect: 'cantonese',
+    title: 'Weather',
+    description: "Talk about HK's weather, typhoons and seasons",
+    imageQuery: 'hong kong typhoon rainy weather',
+    clusters: [
+      {
+        id: 'cant-weather-1',
+        title: 'Daily Weather',
+        scenarioDescription: 'Chatting about the weather with a colleague in Hong Kong',
+        conversationContext: 'You are a Hong Kong colleague making small talk about the humid weather. Ask if the learner is hot and discuss the forecast.',
+        words: [
+          { character: '天氣', pinyin: 'tin1 hei3', meaning: 'Weather', phoneticGuide: 'tin HEY', toneNote: 'flat, mid-falling', imageQuery: 'weather sky clouds' },
+          { character: '落雨', pinyin: 'lok6 jyu5', meaning: 'Raining', phoneticGuide: 'lok YEW', toneNote: 'low, low-rising', imageQuery: 'rain umbrella wet street' },
+          { character: '潮濕', pinyin: 'ciu4 sap1', meaning: 'Humid', phoneticGuide: 'chow SUP', toneNote: 'rising, flat', imageQuery: 'humid weather tropical city' },
+        ],
+        phrase: {
+          chinese: '今日天氣點呀？天氣預報話聽日會落雨。',
+          pinyin: 'gam1 jat6 tin1 hei3 dim2 aa3? tin1 hei3 jyu6 bou3 waa6 ting1 jat6 wui5 lok6 jyu5.',
+          meaning: 'How is the weather today? The forecast says it will rain tomorrow.',
+          breakdown: [
+            { chinese: '天氣點呀', pinyin: 'tin1 hei3 dim2 aa3', meaning: "how's the weather" },
+            { chinese: '天氣預報', pinyin: 'tin1 hei3 jyu6 bou3', meaning: 'weather forecast' },
+            { chinese: '聽日落雨', pinyin: 'ting1 jat6 lok6 jyu5', meaning: 'rain tomorrow' },
+          ],
+        },
+      },
+      {
+        id: 'cant-weather-2',
+        title: 'Typhoons',
+        scenarioDescription: 'A typhoon signal has been raised in Hong Kong',
+        conversationContext: 'You are a concerned Hong Kong local checking on the learner during typhoon season. Explain the signal system and what to do.',
+        words: [
+          { character: '颱風', pinyin: 'toi4 fung1', meaning: 'Typhoon', phoneticGuide: 'toy FONG', toneNote: 'rising, flat', imageQuery: 'typhoon storm hong kong' },
+          { character: '八號波', pinyin: 'baat3 hou6 bo1', meaning: 'Signal 8 (typhoon)', phoneticGuide: 'baht HOH boh', toneNote: 'mid-falling, low, flat', imageQuery: 'typhoon signal 8 hong kong warning' },
+          { character: '留喺屋企', pinyin: 'lau4 hai2 uk1 kei2', meaning: 'Stay at home', phoneticGuide: 'lao HI ook KAY', toneNote: 'rising, low-rising, flat, low-rising', imageQuery: 'staying home storm weather' },
+        ],
+        phrase: {
+          chinese: '掛咗八號波喇，大家要留喺屋企。',
+          pinyin: 'gwaa3 zo2 baat3 hou6 bo1 laa3, daai6 gaa1 jiu3 lau4 hai2 uk1 kei2.',
+          meaning: 'Signal 8 is up, everyone needs to stay at home.',
+          breakdown: [
+            { chinese: '掛咗八號波', pinyin: 'gwaa3 zo2 baat3 hou6 bo1', meaning: 'signal 8 has been raised' },
+            { chinese: '留喺屋企', pinyin: 'lau4 hai2 uk1 kei2', meaning: 'stay at home' },
+          ],
+        },
+      },
+    ],
+  },
 ]
 
 export function getUnitsByLevel(level: string, dialect: import('./types').Dialect = 'putonghua'): Unit[] {

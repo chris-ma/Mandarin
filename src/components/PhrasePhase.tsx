@@ -55,6 +55,7 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
           unitId,
           dialect,
           phase: 'respond',
+          mode: 'phrase',
         }),
       })
       const data = await res.json()
