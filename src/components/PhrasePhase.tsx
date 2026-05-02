@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { Cluster, Dialect, Assessment } from '@/lib/types'
+import { Cluster, Dialect, Phrase, Assessment } from '@/lib/types'
 import { useSpeechRecognition } from '@/hooks/useSpeechRecognition'
 import { useSpeechSynthesis } from '@/hooks/useSpeechSynthesis'
 import MicButton from './MicButton'
@@ -14,32 +14,51 @@ interface PhrasePhaseProps {
 }
 
 export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: PhrasePhaseProps) {
+  const allPhrases: Phrase[] = cluster.phrases ?? [cluster.phrase]
+
+  const [phraseIndex, setPhraseIndex] = useState(0)
   const [assessment, setAssessment] = useState<Assessment | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [attempts, setAttempts] = useState(0)
   const [nothingHeard, setNothingHeard] = useState(false)
+
+  const currentPhrase = allPhrases[phraseIndex]
+  const isLastPhrase = phraseIndex === allPhrases.length - 1
 
   const lang = dialect === 'cantonese' ? 'zh-HK' : 'zh-CN'
   const { transcript, interimTranscript, isListening, isSupported, start, stop, reset } =
     useSpeechRecognition(lang)
   const { speak } = useSpeechSynthesis()
 
-  // Auto-submit once a final transcript lands (triggered by releasing the button)
+  // Reset per-phrase state when moving to a new phrase
+  useEffect(() => {
+    setAssessment(null)
+    setAttempts(0)
+    setNothingHeard(false)
+    reset()
+  }, [phraseIndex]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Auto-submit once a final transcript lands
   useEffect(() => {
     if (transcript && !isListening && !isLoading && !assessment) {
       submitAttempt(transcript)
     }
-  // submitAttempt is stable (defined with useCallback below), but listing deps explicitly
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [transcript, isListening])
 
-  // Auto-advance 1.5 s after a passing assessment
+  // Auto-advance after a passing assessment
   useEffect(() => {
     if (assessment && assessment.score >= 60) {
-      const t = setTimeout(onComplete, 1500)
+      const t = setTimeout(() => {
+        if (isLastPhrase) {
+          onComplete()
+        } else {
+          setPhraseIndex((i) => i + 1)
+        }
+      }, 1400)
       return () => clearTimeout(t)
     }
-  }, [assessment, onComplete])
+  }, [assessment, isLastPhrase, onComplete])
 
   const submitAttempt = useCallback(async (spokenText: string) => {
     setIsLoading(true)
@@ -56,16 +75,19 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
           dialect,
           phase: 'respond',
           mode: 'phrase',
+          targetPhrase: currentPhrase.chinese,
+          targetPinyin: currentPhrase.pinyin,
+          targetMeaning: currentPhrase.meaning,
         }),
       })
       const data = await res.json()
       setAssessment(
         data.assessment ?? {
           score: spokenText.replace(/\s/g, '').includes(
-            cluster.phrase.chinese.replace(/[！。？，]/g, '').replace(/\s/g, '').slice(0, 3)
+            currentPhrase.chinese.replace(/[！。？，]/g, '').replace(/\s/g, '').slice(0, 3)
           ) ? 75 : 35,
           correct: 'Good effort!',
-          correction: `Try: ${cluster.phrase.chinese}`,
+          correction: `Try: ${currentPhrase.chinese}`,
           spokenTranslation: spokenText,
         }
       )
@@ -74,7 +96,7 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
     } finally {
       setIsLoading(false)
     }
-  }, [cluster, unitId])
+  }, [cluster, unitId, dialect, currentPhrase])
 
   function handlePressStart() {
     reset()
@@ -83,17 +105,11 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
     start()
   }
 
-  function handlePressEnd() {
-    stop()
-    // If nothing was captured at all, flag it
-    // (transcript + interimTranscript are both empty → nothing heard)
-  }
+  function handlePressEnd() { stop() }
 
-  // Detect "nothing heard" — happens when stop() fires but transcript stays empty
   useEffect(() => {
     if (!isListening && !isLoading && !transcript && !assessment && attempts === 0) return
     if (!isListening && !isLoading && !transcript && !assessment && !interimTranscript) {
-      // Only show "nothing heard" if we were just recording (prevent showing on initial mount)
       setNothingHeard(true)
     }
   }, [isListening, isLoading, transcript, assessment, interimTranscript, attempts])
@@ -107,37 +123,58 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
   const passed = assessment && assessment.score >= 60
   const failed = assessment && assessment.score < 60
   const canForceAdvance = failed && attempts >= 3
-
-  // Derive what the live display should show while recording
   const liveText = interimTranscript || transcript
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '1rem' }}>
-      {/* Phase label */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.875rem' }}>
-        <span className="chinese-char" style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--crimson)', letterSpacing: '0.1em' }}>
-          第二階段
-        </span>
-        <div style={{ width: '4px', height: '4px', background: 'rgba(139,26,26,0.3)', transform: 'rotate(45deg)' }} />
-        <span style={{ fontSize: '0.7rem', color: 'var(--ink-mid)', letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 600 }}>
-          Phase 2 · Phrase Practice
-        </span>
+      {/* Phase label + phrase counter */}
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '0.875rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <span className="chinese-char" style={{ fontSize: '0.7rem', fontWeight: 700, color: 'var(--crimson)', letterSpacing: '0.1em' }}>
+            第二階段
+          </span>
+          <div style={{ width: '4px', height: '4px', background: 'rgba(139,26,26,0.3)', transform: 'rotate(45deg)' }} />
+          <span style={{ fontSize: '0.7rem', color: 'var(--ink-mid)', letterSpacing: '0.08em', textTransform: 'uppercase', fontWeight: 600 }}>
+            Phase 2 · Phrase Practice
+          </span>
+        </div>
+        {allPhrases.length > 1 && (
+          <div style={{ display: 'flex', gap: '4px' }}>
+            {allPhrases.map((_, i) => (
+              <div
+                key={i}
+                style={{
+                  width: i === phraseIndex ? '16px' : '6px',
+                  height: '6px',
+                  borderRadius: '3px',
+                  background: i < phraseIndex ? 'var(--crimson)' : i === phraseIndex ? 'var(--crimson)' : 'rgba(139,26,26,0.2)',
+                  transition: 'all 0.3s',
+                }}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Target phrase panel */}
       <div className="cny-panel" style={{ padding: '1rem', marginBottom: '0.875rem' }}>
+        {allPhrases.length > 1 && (
+          <div style={{ fontSize: '0.62rem', fontWeight: 700, color: 'var(--crimson-mid)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.5rem', position: 'relative', zIndex: 1 }}>
+            Phrase {phraseIndex + 1} of {allPhrases.length}
+          </div>
+        )}
         <div style={{ textAlign: 'center', marginBottom: '0.875rem', position: 'relative', zIndex: 1 }}>
           <div
             className="chinese-char"
             style={{ fontSize: '2rem', fontWeight: 900, color: 'var(--crimson)', lineHeight: 1.2, marginBottom: '0.35rem' }}
           >
-            {cluster.phrase.chinese}
+            {currentPhrase.chinese}
           </div>
           <div style={{ fontSize: '0.85rem', color: 'var(--ink-mid)', fontFamily: 'monospace', marginBottom: '0.25rem' }}>
-            {cluster.phrase.pinyin}
+            {currentPhrase.pinyin}
           </div>
           <div style={{ fontSize: '0.95rem', fontWeight: 600, color: 'var(--ink)' }}>
-            {cluster.phrase.meaning}
+            {currentPhrase.meaning}
           </div>
         </div>
 
@@ -147,7 +184,7 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
             逐字 · Word by word
           </div>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-            {cluster.phrase.breakdown.map((part, i) => (
+            {currentPhrase.breakdown.map((part, i) => (
               <div
                 key={i}
                 style={{ border: '1px solid rgba(139,26,26,0.25)', borderRadius: '2px', padding: '0.25rem 0.4rem', textAlign: 'center', minWidth: '3rem', background: 'rgba(139,26,26,0.04)' }}
@@ -162,7 +199,7 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
 
         {/* Listen button */}
         <button
-          onClick={() => speak(cluster.phrase.chinese, lang)}
+          onClick={() => speak(currentPhrase.chinese, lang)}
           className="cny-pill"
           style={{ marginTop: '0.75rem', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', padding: '0.45rem', background: 'transparent', color: 'var(--crimson)', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', border: 'none', position: 'relative', zIndex: 1 }}
         >
@@ -170,17 +207,15 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
         </button>
       </div>
 
-      {/* Live recording panel — shown while holding */}
+      {/* Live recording panel */}
       {isListening && (
         <div
           className="cny-panel animate-fade-in"
           style={{ padding: '1rem', marginBottom: '0.875rem', textAlign: 'center', minHeight: '5rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
           {liveText ? (
-            <div>
-              <div className="chinese-char" style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--crimson)', lineHeight: 1.2 }}>
-                {liveText}
-              </div>
+            <div className="chinese-char" style={{ fontSize: '1.75rem', fontWeight: 900, color: 'var(--crimson)', lineHeight: 1.2 }}>
+              {liveText}
             </div>
           ) : (
             <div style={{ color: 'var(--ink-mid)', fontSize: '0.85rem' }}>
@@ -191,10 +226,10 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
         </div>
       )}
 
-      {/* Assessment result panel */}
+      {/* Assessment result */}
       {assessment && !isListening && (
         <div
-          className={`cny-panel animate-fade-in`}
+          className="cny-panel animate-fade-in"
           style={{
             padding: '1rem',
             marginBottom: '0.875rem',
@@ -202,7 +237,6 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
             borderColor: passed ? '#15803d' : 'var(--crimson)',
           }}
         >
-          {/* Pass / fail indicator */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.6rem', position: 'relative', zIndex: 1 }}>
             <span style={{ fontSize: '1.25rem' }}>{passed ? '✅' : '❌'}</span>
             <span style={{ fontSize: '0.75rem', fontWeight: 700, color: passed ? '#15803d' : 'var(--crimson)', letterSpacing: '0.05em' }}>
@@ -210,7 +244,6 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
             </span>
           </div>
 
-          {/* What they said — Chinese + English */}
           <div style={{ marginBottom: '0.6rem', position: 'relative', zIndex: 1 }}>
             <div style={{ fontSize: '0.65rem', fontWeight: 700, color: 'var(--ink-mid)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: '0.3rem' }}>
               你說了 · You said
@@ -225,7 +258,6 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
             )}
           </div>
 
-          {/* Feedback */}
           {assessment.correct && (
             <div style={{ fontSize: '0.8rem', color: passed ? '#15803d' : 'var(--ink)', marginBottom: '0.3rem', position: 'relative', zIndex: 1 }}>
               {assessment.correct}
@@ -242,10 +274,11 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
             </div>
           )}
 
-          {/* Auto-advance hint */}
           {passed && (
             <div style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: '#15803d', textAlign: 'center', position: 'relative', zIndex: 1 }}>
-              <span className="chinese-char">繼續下一步</span> · Moving on…
+              {!isLastPhrase
+                ? <><span className="chinese-char">下一句</span> · Next phrase…</>
+                : <><span className="chinese-char">繼續下一步</span> · Moving on…</>}
             </div>
           )}
         </div>
@@ -267,7 +300,6 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
 
       {/* Mic + instructions */}
       <div style={{ marginTop: 'auto', paddingBottom: 'max(1.5rem, env(safe-area-inset-bottom))', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.75rem' }}>
-        {/* Only show mic when not in a terminal state */}
         {!passed && !isLoading && (
           <>
             <MicButton
@@ -287,13 +319,15 @@ export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: Ph
           </>
         )}
 
-        {/* Force-advance after 3 failures */}
         {canForceAdvance && !isListening && (
           <button
-            onClick={onComplete}
+            onClick={() => {
+              if (isLastPhrase) onComplete()
+              else setPhraseIndex((i) => i + 1)
+            }}
             style={{ marginTop: '0.25rem', padding: '0.6rem 1.5rem', background: 'var(--crimson)', color: '#fff', fontWeight: 700, fontSize: '0.85rem', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
           >
-            <span className="chinese-char">繼續</span> · Continue anyway →
+            <span className="chinese-char">繼續</span> · {isLastPhrase ? 'Continue anyway →' : 'Skip to next →'}
           </button>
         )}
       </div>

@@ -274,6 +274,38 @@ function LevelGrid({ dialect, onSwitchDialect }: { dialect: Dialect; onSwitchDia
         })}
       </div>
 
+      {/* AI Tutor card */}
+      <div style={{ marginTop: '0.75rem', position: 'relative', zIndex: 1 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem' }}>
+          <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.15)' }} />
+          <div style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.3)', transform: 'rotate(45deg)' }} />
+          <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.15)' }} />
+        </div>
+        <Link
+          href={`/tutor?d=${dialect}`}
+          style={{ textDecoration: 'none', WebkitTapHighlightColor: 'transparent' }}
+        >
+          <div className="cny-panel" style={{ padding: '1rem 1.25rem', position: 'relative', overflow: 'hidden', cursor: 'pointer' }}>
+            <div className="cny-watermark" style={{ fontSize: '6rem', bottom: '-1rem', right: '0.5rem', opacity: 0.1 }} aria-hidden>話</div>
+            <div style={{ position: 'relative', zIndex: 1, display: 'flex', alignItems: 'center', gap: '1rem' }}>
+              <div style={{ fontSize: '2.25rem', lineHeight: 1 }}>🤖</div>
+              <div style={{ flex: 1 }}>
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem', marginBottom: '0.2rem' }}>
+                  <span style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--ink)' }}>AI Tutor</span>
+                  <span className="chinese-char" style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--crimson)' }}>自由對話</span>
+                </div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--ink-mid)' }}>
+                  Free conversation practice — pick any scenario
+                </div>
+                <div style={{ marginTop: '0.4rem', fontSize: '0.7rem', color: 'var(--crimson)', fontWeight: 700, letterSpacing: '0.05em' }}>
+                  開始對話 · Start talking →
+                </div>
+              </div>
+            </div>
+          </div>
+        </Link>
+      </div>
+
       {/* Footer */}
       <div style={{ textAlign: 'center', marginTop: '2rem', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', marginBottom: '0.4rem' }}>

@@ -52,6 +52,38 @@ export const units: Unit[] = [
             { chinese: '你', pinyin: 'nǐ', meaning: 'you' },
           ],
         },
+        phrases: [
+          {
+            chinese: '你好！谢谢你。',
+            pinyin: 'Nǐ hǎo! Xiè xie nǐ.',
+            meaning: 'Hello! Thank you.',
+            breakdown: [
+              { chinese: '你好', pinyin: 'nǐ hǎo', meaning: 'Hello' },
+              { chinese: '谢谢', pinyin: 'xiè xie', meaning: 'Thank you' },
+              { chinese: '你', pinyin: 'nǐ', meaning: 'you' },
+            ],
+          },
+          {
+            chinese: '谢谢你的帮助！',
+            pinyin: 'Xiè xie nǐ de bāngzhù!',
+            meaning: 'Thank you for your help!',
+            breakdown: [
+              { chinese: '谢谢', pinyin: 'xiè xie', meaning: 'Thank you' },
+              { chinese: '你的', pinyin: 'nǐ de', meaning: 'your' },
+              { chinese: '帮助', pinyin: 'bāngzhù', meaning: 'help' },
+            ],
+          },
+          {
+            chinese: '不客气！很高兴认识你。',
+            pinyin: 'Bú kèqi! Hěn gāoxìng rènshi nǐ.',
+            meaning: "You're welcome! Nice to meet you.",
+            breakdown: [
+              { chinese: '不客气', pinyin: 'bú kèqi', meaning: "You're welcome" },
+              { chinese: '很高兴', pinyin: 'hěn gāoxìng', meaning: 'very happy/pleased' },
+              { chinese: '认识你', pinyin: 'rènshi nǐ', meaning: 'to meet you' },
+            ],
+          },
+        ],
       },
       {
         id: 'basics-greetings-2',
@@ -664,6 +696,38 @@ export const units: Unit[] = [
             { chinese: '我要这个', pinyin: 'wǒ yào zhè gè', meaning: 'I want this one' },
           ],
         },
+        phrases: [
+          {
+            chinese: '请给我菜单。',
+            pinyin: 'Qǐng gěi wǒ càidān.',
+            meaning: 'Please give me the menu.',
+            breakdown: [
+              { chinese: '请', pinyin: 'qǐng', meaning: 'please' },
+              { chinese: '给我', pinyin: 'gěi wǒ', meaning: 'give me' },
+              { chinese: '菜单', pinyin: 'càidān', meaning: 'menu' },
+            ],
+          },
+          {
+            chinese: '这个好吃吗？',
+            pinyin: 'Zhège hǎo chī ma?',
+            meaning: 'Is this delicious?',
+            breakdown: [
+              { chinese: '这个', pinyin: 'zhège', meaning: 'this one' },
+              { chinese: '好吃', pinyin: 'hǎo chī', meaning: 'delicious' },
+              { chinese: '吗', pinyin: 'ma', meaning: 'question particle' },
+            ],
+          },
+          {
+            chinese: '我要这个，谢谢。',
+            pinyin: 'Wǒ yào zhè gè, xiè xie.',
+            meaning: 'I want this one, thank you.',
+            breakdown: [
+              { chinese: '我要', pinyin: 'wǒ yào', meaning: 'I want' },
+              { chinese: '这个', pinyin: 'zhè gè', meaning: 'this one' },
+              { chinese: '谢谢', pinyin: 'xiè xie', meaning: 'thank you' },
+            ],
+          },
+        ],
       },
       {
         id: 'travel-restaurant-2',
@@ -807,6 +871,38 @@ export const units: Unit[] = [
             { chinese: '在哪里', pinyin: 'zài nǎlǐ', meaning: 'where is it?' },
           ],
         },
+        phrases: [
+          {
+            chinese: '请问，地铁站在哪里？',
+            pinyin: 'Qǐngwèn, dìtiě zhàn zài nǎlǐ?',
+            meaning: 'Excuse me, where is the subway station?',
+            breakdown: [
+              { chinese: '请问', pinyin: 'qǐngwèn', meaning: 'excuse me' },
+              { chinese: '地铁站', pinyin: 'dìtiě zhàn', meaning: 'subway station' },
+              { chinese: '在哪里', pinyin: 'zài nǎlǐ', meaning: 'where is it?' },
+            ],
+          },
+          {
+            chinese: '往左走还是往右走？',
+            pinyin: 'Wǎng zuǒ zǒu háishi wǎng yòu zǒu?',
+            meaning: 'Turn left or turn right?',
+            breakdown: [
+              { chinese: '往左', pinyin: 'wǎng zuǒ', meaning: 'towards the left' },
+              { chinese: '还是', pinyin: 'háishi', meaning: 'or' },
+              { chinese: '往右', pinyin: 'wǎng yòu', meaning: 'towards the right' },
+            ],
+          },
+          {
+            chinese: '直走，然后右转。',
+            pinyin: 'Zhí zǒu, ránhòu yòu zhuǎn.',
+            meaning: 'Go straight, then turn right.',
+            breakdown: [
+              { chinese: '直走', pinyin: 'zhí zǒu', meaning: 'go straight' },
+              { chinese: '然后', pinyin: 'ránhòu', meaning: 'then' },
+              { chinese: '右转', pinyin: 'yòu zhuǎn', meaning: 'turn right' },
+            ],
+          },
+        ],
       },
       {
         id: 'travel-directions-2',

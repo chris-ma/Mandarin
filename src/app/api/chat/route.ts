@@ -89,7 +89,11 @@ ALWAYS respond with valid JSON only, no extra text:
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { history, userTranscript, clusterId, unitId, phase, dialect = 'putonghua', mode = 'conversation' } = body as {
+    const {
+      history, userTranscript, clusterId, unitId, phase,
+      dialect = 'putonghua', mode = 'conversation',
+      targetPhrase, targetPinyin, targetMeaning,
+    } = body as {
       history: ChatMessage[]
       userTranscript: string | null
       clusterId: string
@@ -97,6 +101,9 @@ export async function POST(req: NextRequest) {
       phase: 'start' | 'respond'
       dialect?: 'cantonese' | 'putonghua'
       mode?: 'phrase' | 'conversation'
+      targetPhrase?: string
+      targetPinyin?: string
+      targetMeaning?: string
     }
 
     const unit = getUnit(unitId)
@@ -106,8 +113,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Cluster not found' }, { status: 404 })
     }
 
+    const phraseText   = targetPhrase  ?? cluster.phrase.chinese
+    const phrasePinyin = targetPinyin  ?? cluster.phrase.pinyin
+    const phraseMeaning = targetMeaning ?? cluster.phrase.meaning
+
     const systemPrompt = mode === 'phrase'
-      ? buildPhrasePrompt(cluster.phrase.chinese, cluster.phrase.pinyin, cluster.phrase.meaning, dialect)
+      ? buildPhrasePrompt(phraseText, phrasePinyin, phraseMeaning, dialect)
       : buildConversationPrompt(cluster.scenarioDescription, cluster.conversationContext, dialect)
 
     const messages: { role: 'user' | 'assistant'; content: string }[] = []

@@ -28,6 +28,7 @@ export interface Cluster {
   title: string
   words: Word[]
   phrase: Phrase
+  phrases?: Phrase[]   // if set, PhrasePhase cycles through all of them
   conversationContext: string
   scenarioDescription: string
 }
