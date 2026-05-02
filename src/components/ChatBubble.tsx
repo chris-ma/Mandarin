@@ -6,9 +6,10 @@ import AssessmentCard from './AssessmentCard'
 interface ChatBubbleProps {
   message: ChatMessage
   onSpeak?: (text: string) => void
+  lang?: string
 }
 
-export default function ChatBubble({ message, onSpeak }: ChatBubbleProps) {
+export default function ChatBubble({ message, onSpeak, lang: _lang }: ChatBubbleProps) {
   const isAI = message.role === 'ai'
 
   if (message.isTyping) {
@@ -57,9 +58,22 @@ export default function ChatBubble({ message, onSpeak }: ChatBubbleProps) {
             {onSpeak && message.chinese && (
               <button
                 onClick={() => onSpeak(message.chinese!)}
-                className="mt-2 text-xs text-gray-400 hover:text-gray-600 transition-colors flex items-center gap-1"
+                style={{
+                  marginTop: '0.5rem',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '0.3rem',
+                  padding: '0.3rem 0.75rem',
+                  background: 'rgba(139,26,26,0.08)',
+                  border: '1px solid rgba(139,26,26,0.25)',
+                  borderRadius: '20px',
+                  color: 'var(--crimson)',
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                }}
               >
-                🔊 Listen
+                🔊 <span className="chinese-char">聆聽</span> · Play
               </button>
             )}
           </div>
@@ -74,9 +88,37 @@ export default function ChatBubble({ message, onSpeak }: ChatBubbleProps) {
       <div className="flex items-end gap-2">
         <div
           className="max-w-[80%] rounded-2xl rounded-br-sm px-4 py-3 text-white"
-          style={{ background: 'var(--red)' }}
+          style={{ background: 'var(--crimson)' }}
         >
-          <div className="text-sm font-medium">{message.transcript || '...'}</div>
+          <div className="chinese-char" style={{ fontSize: '1.1rem', fontWeight: 700, lineHeight: 1.3 }}>
+            {message.transcript || '...'}
+          </div>
+          {message.assessment?.spokenTranslation && (
+            <div style={{ fontSize: '0.72rem', opacity: 0.85, fontStyle: 'italic', marginTop: '0.2rem' }}>
+              &ldquo;{message.assessment.spokenTranslation}&rdquo;
+            </div>
+          )}
+          {onSpeak && message.transcript && (
+            <button
+              onClick={() => onSpeak(message.transcript!)}
+              style={{
+                marginTop: '0.4rem',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.25rem',
+                padding: '0.2rem 0.6rem',
+                background: 'rgba(255,255,255,0.2)',
+                border: '1px solid rgba(255,255,255,0.4)',
+                borderRadius: '20px',
+                color: '#fff',
+                fontSize: '0.7rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+              }}
+            >
+              🔊 Play back
+            </button>
+          )}
         </div>
         <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center flex-shrink-0 text-sm">
           👤

@@ -19,11 +19,12 @@ export default function ConversationPhase({ cluster, unitId, dialect, onComplete
   const [isLoading, setIsLoading] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
   const [startError, setStartError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const hasStarted = useRef(false)
 
   const lang = dialect === 'cantonese' ? 'zh-HK' : 'zh-CN'
-  const { transcript, isListening, isSupported, start, stop, reset } = useSpeechRecognition(lang)
+  const { transcript, interimTranscript, isListening, isSupported, start, stop, reset } = useSpeechRecognition(lang)
   const { speak } = useSpeechSynthesis()
 
   useEffect(() => {
@@ -57,7 +58,10 @@ export default function ConversationPhase({ cluster, unitId, dialect, onComplete
         body: JSON.stringify({ history: currentMessages, userTranscript, clusterId: cluster.id, unitId, dialect, phase, mode: 'conversation' }),
       })
 
-      if (!res.ok) throw new Error(`HTTP ${res.status}`)
+      if (!res.ok) {
+        const errBody = await res.json().catch(() => ({}))
+        throw new Error(errBody.error ?? `HTTP ${res.status}`)
+      }
 
       const data: TutorResponse = await res.json()
 
@@ -86,6 +90,8 @@ export default function ConversationPhase({ cluster, unitId, dialect, onComplete
       if (data.isComplete) setIsComplete(true)
     } catch (err) {
       console.error('[ConversationPhase]', err)
+      const msg = err instanceof Error ? err.message : String(err)
+      setErrorMessage(msg)
       setMessages((prev) => prev.filter((m) => !m.isTyping))
       if (phase === 'start') setStartError(true)
     } finally {
@@ -95,16 +101,17 @@ export default function ConversationPhase({ cluster, unitId, dialect, onComplete
 
   function startConversation() {
     setStartError(false)
+    setErrorMessage(null)
     callTutor([], null, 'start')
   }
 
-  function handleMicClick() {
-    if (isListening) {
-      stop()
-    } else {
-      reset()
-      start()
-    }
+  function handlePressStart() {
+    reset()
+    start()
+  }
+
+  function handlePressEnd() {
+    stop()
   }
 
   function handleUserSpoke(spokenText: string) {
@@ -177,9 +184,14 @@ export default function ConversationPhase({ cluster, unitId, dialect, onComplete
             <div className="chinese-char" style={{ fontSize: '1rem', color: 'var(--crimson)', marginBottom: '0.5rem' }}>
               連線失敗
             </div>
-            <div style={{ fontSize: '0.8rem', color: 'var(--ink-mid)', marginBottom: '1rem' }}>
-              Could not connect to AI tutor. Check your internet connection.
+            <div style={{ fontSize: '0.8rem', color: 'var(--ink-mid)', marginBottom: '0.5rem' }}>
+              Could not connect to AI tutor.
             </div>
+            {errorMessage && (
+              <div style={{ fontSize: '0.72rem', color: 'var(--crimson-mid)', background: 'rgba(139,26,26,0.07)', border: '1px solid rgba(139,26,26,0.2)', borderRadius: '4px', padding: '0.4rem 0.75rem', marginBottom: '1rem', wordBreak: 'break-word' }}>
+                {errorMessage}
+              </div>
+            )}
             <button
               onClick={startConversation}
               style={{ padding: '0.6rem 1.5rem', background: 'var(--crimson)', color: '#fff', fontWeight: 700, fontSize: '0.85rem', border: 'none', borderRadius: '4px', cursor: 'pointer' }}
@@ -190,7 +202,7 @@ export default function ConversationPhase({ cluster, unitId, dialect, onComplete
         )}
 
         {messages.map((msg, i) => (
-          <ChatBubble key={i} message={msg} onSpeak={(text) => speak(text, lang)} />
+          <ChatBubble key={i} message={msg} onSpeak={(text) => speak(text, lang)} lang={lang} />
         ))}
 
         {isComplete && (
@@ -233,43 +245,49 @@ export default function ConversationPhase({ cluster, unitId, dialect, onComplete
           </button>
         ) : (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+            {/* Live interim transcript while recording */}
             {isListening && (
-              <div style={{ fontSize: '0.78rem', color: 'var(--crimson-mid)' }} className="animate-pulse">
-                <span className="chinese-char">聆聽中</span> · Listening…
-              </div>
-            )}
-            {transcript && !isListening && (
               <div
                 className="chinese-char"
                 style={{
-                  fontSize: '0.85rem',
-                  color: 'var(--ink)',
+                  fontSize: interimTranscript ? '1.3rem' : '0.85rem',
+                  fontWeight: 700,
+                  color: interimTranscript ? 'var(--crimson)' : 'var(--ink-mid)',
                   background: 'rgba(139,26,26,0.06)',
                   border: '1px solid rgba(139,26,26,0.2)',
-                  borderRadius: '3px',
-                  padding: '0.3rem 0.75rem',
+                  borderRadius: '6px',
+                  padding: '0.4rem 0.9rem',
                   maxWidth: '100%',
-                  overflow: 'hidden',
-                  textOverflow: 'ellipsis',
-                  whiteSpace: 'nowrap',
+                  textAlign: 'center',
+                  minHeight: '2.5rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  transition: 'all 0.2s',
                 }}
               >
-                &ldquo;{transcript}&rdquo;
+                {interimTranscript || <span style={{ fontSize: '0.8rem' }}>說吧… Speak now…</span>}
               </div>
             )}
             <MicButton
               isListening={isListening}
               isSupported={isSupported}
-              onClick={handleMicClick}
+              onPressStart={handlePressStart}
+              onPressEnd={handlePressEnd}
               size="lg"
             />
-            <div style={{ fontSize: '0.72rem', color: 'var(--ink-mid)' }}>
+            <div style={{ fontSize: '0.8rem', fontWeight: 700, color: isListening ? 'var(--crimson)' : 'var(--ink-mid)', textAlign: 'center' }}>
               {isListening
-                ? <><span className="chinese-char">點擊停止</span> · Tap to stop</>
+                ? <><span className="chinese-char">放開即提交</span> · Release to send</>
                 : isLoading
                   ? <><span className="chinese-char">老師回覆中</span> · AI is responding…</>
-                  : <><span className="chinese-char">{dialect === 'cantonese' ? '點擊說廣東話' : '點擊說普通話'}</span> · Tap to speak</>}
+                  : <><span className="chinese-char">按住說話</span> · Hold &amp; speak</>}
             </div>
+            {!isListening && !isLoading && (
+              <div style={{ fontSize: '0.68rem', color: 'var(--ink-mid)', opacity: 0.7 }}>
+                {dialect === 'cantonese' ? '廣東話 Cantonese' : '普通話 Mandarin'}
+              </div>
+            )}
           </div>
         )}
       </div>

@@ -61,7 +61,7 @@ Your role: ${conversationContext}
 
 Rules:
 - Have a natural, realistic conversation — don't drill a specific phrase, just talk
-- Your dialogue turns should be IN ${languageName.toUpperCase()} with ${romanization} on the line below and English translation below that
+- Your dialogue turns should be IN ${languageName.toUpperCase()} with ${romanization} romanization on the line below (always use the "pinyin" JSON key for this, even for Cantonese/Jyutping) and English translation below that
 - When the learner speaks, assess their Chinese naturally (0-100 score) and gently correct any mistakes
 - Use the "sounds like English words" style for phonetic tips
 - Keep exchanges brief and natural — this is voice-first
@@ -72,7 +72,7 @@ ALWAYS respond with valid JSON only, no extra text:
 {
   "yourLine": {
     "chinese": "...",
-    "${romanization.toLowerCase()}": "...",
+    "pinyin": "...",
     "english": "..."
   },
   "assessment": {
@@ -87,6 +87,10 @@ ALWAYS respond with valid JSON only, no extra text:
 }
 
 export async function POST(req: NextRequest) {
+  if (!process.env.GOOGLE_API_KEY) {
+    return NextResponse.json({ error: 'GOOGLE_API_KEY is not configured on the server' }, { status: 500 })
+  }
+
   try {
     const body = await req.json()
     const {
@@ -179,6 +183,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(parsed)
   } catch (err) {
     console.error('[/api/chat]', err)
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+    const message = err instanceof Error ? err.message : String(err)
+    return NextResponse.json({ error: message }, { status: 500 })
   }
 }
