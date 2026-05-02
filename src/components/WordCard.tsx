@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { Word } from '@/lib/types'
+import { Word, Dialect } from '@/lib/types'
 import { useSpeechSynthesis } from '@/hooks/useSpeechSynthesis'
 import PhoneticGuide from './PhoneticGuide'
 
@@ -9,10 +9,12 @@ interface WordCardProps {
   word: Word
   index: number
   total: number
+  dialect: Dialect
 }
 
-export default function WordCard({ word, index, total }: WordCardProps) {
+export default function WordCard({ word, index, total, dialect }: WordCardProps) {
   const { speak, isSpeaking } = useSpeechSynthesis()
+  const lang = dialect === 'cantonese' ? 'zh-HK' : 'zh-CN'
 
   return (
     <div className="animate-fade-in" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -91,7 +93,7 @@ export default function WordCard({ word, index, total }: WordCardProps) {
 
       {/* Listen button */}
       <button
-        onClick={() => speak(word.character)}
+        onClick={() => speak(word.character, lang)}
         disabled={isSpeaking}
         className="cny-pill"
         style={{

@@ -5,6 +5,7 @@ export const units: Unit[] = [
   {
     id: 'basics-greetings',
     level: 'basics',
+    dialect: 'putonghua',
     title: 'Greetings',
     description: 'Say hello, thank you, and goodbye',
     imageQuery: 'people greeting china',
@@ -144,6 +145,7 @@ export const units: Unit[] = [
   {
     id: 'basics-introductions',
     level: 'basics',
+    dialect: 'putonghua',
     title: 'Introductions',
     description: 'Tell people your name and ask theirs',
     imageQuery: 'introduction meeting people',
@@ -284,6 +286,7 @@ export const units: Unit[] = [
   {
     id: 'basics-numbers',
     level: 'basics',
+    dialect: 'putonghua',
     title: 'Numbers & Time',
     description: 'Count, tell the time, and talk about days',
     imageQuery: 'numbers counting china',
@@ -470,6 +473,7 @@ export const units: Unit[] = [
   {
     id: 'basics-daily',
     level: 'basics',
+    dialect: 'putonghua',
     title: 'Daily Life',
     description: 'Food, places, and asking for help',
     imageQuery: 'everyday life china street',
@@ -612,6 +616,7 @@ export const units: Unit[] = [
   {
     id: 'travel-restaurant',
     level: 'travel',
+    dialect: 'putonghua',
     title: 'At a Restaurant',
     description: 'Order food, ask about dishes, and pay the bill',
     imageQuery: 'chinese restaurant food dining',
@@ -755,6 +760,7 @@ export const units: Unit[] = [
   {
     id: 'travel-directions',
     level: 'travel',
+    dialect: 'putonghua',
     title: 'Getting Around',
     description: 'Ask for directions and use transport',
     imageQuery: 'beijing street navigation china',
@@ -896,6 +902,7 @@ export const units: Unit[] = [
   {
     id: 'travel-shopping',
     level: 'travel',
+    dialect: 'putonghua',
     title: 'Shopping',
     description: 'Browse, ask prices, bargain, and buy',
     imageQuery: 'china market shopping street',
@@ -1038,6 +1045,7 @@ export const units: Unit[] = [
   {
     id: 'travel-hotel',
     level: 'travel',
+    dialect: 'putonghua',
     title: 'At the Hotel',
     description: 'Check in, make requests, and sort out your room',
     imageQuery: 'hotel lobby china luxury',
@@ -1136,6 +1144,7 @@ export const units: Unit[] = [
   {
     id: 'travel-sights',
     level: 'travel',
+    dialect: 'putonghua',
     title: 'Sightseeing',
     description: 'Visit attractions, take photos, and get recommendations',
     imageQuery: 'china tourist sightseeing attraction',
@@ -1235,6 +1244,7 @@ export const units: Unit[] = [
   {
     id: 'advanced-plans',
     level: 'advanced',
+    dialect: 'putonghua',
     title: 'Making Plans',
     description: 'Suggest activities and arrange meetings',
     imageQuery: 'friends planning coffee china',
@@ -1336,6 +1346,7 @@ export const units: Unit[] = [
   {
     id: 'advanced-feelings',
     level: 'advanced',
+    dialect: 'putonghua',
     title: 'Feelings & Opinions',
     description: 'Express how you feel and share what you think',
     imageQuery: 'emotions expression feelings',
@@ -1478,6 +1489,7 @@ export const units: Unit[] = [
   {
     id: 'advanced-work',
     level: 'advanced',
+    dialect: 'putonghua',
     title: 'Work & Study',
     description: 'Talk about your job, study Chinese, and handle digital life',
     imageQuery: 'office work business china professional',
@@ -1619,6 +1631,7 @@ export const units: Unit[] = [
   {
     id: 'advanced-weather',
     level: 'advanced',
+    dialect: 'putonghua',
     title: 'Weather & Seasons',
     description: 'Talk about the weather and climate',
     imageQuery: 'weather seasons china nature',
@@ -1718,6 +1731,7 @@ export const units: Unit[] = [
   {
     id: 'advanced-health',
     level: 'advanced',
+    dialect: 'putonghua',
     title: 'Health & Wellbeing',
     description: 'Describe symptoms and find a pharmacy',
     imageQuery: 'health medical pharmacy china',
@@ -1811,10 +1825,938 @@ export const units: Unit[] = [
       },
     ],
   },
+
+  // ─── CANTONESE ────────────────────────────────────────────────────────────
+  {
+    id: 'cant-basics-greetings',
+    level: 'basics',
+    dialect: 'cantonese',
+    title: 'Greetings',
+    description: 'Say hello, thank you, and goodbye in Cantonese',
+    imageQuery: 'hong kong street people greeting',
+    clusters: [
+      {
+        id: 'cant-greetings-1',
+        title: 'Hello & Thank You',
+        scenarioDescription: 'A shopkeeper greets you as you enter their store in Hong Kong',
+        conversationContext:
+          'You are a friendly shopkeeper in Hong Kong. The learner is a visitor entering your shop. Speak ONLY in Cantonese. Greet them warmly and thank them for visiting.',
+        words: [
+          {
+            character: '你好',
+            pinyin: 'nei5 hou2',
+            meaning: 'Hello',
+            phoneticGuide: 'nay HO',
+            toneNote: '"nei" rising (tone 5), "hou" rising (tone 2)',
+            imageQuery: 'friendly greeting handshake',
+          },
+          {
+            character: '唔該',
+            pinyin: 'm4 goi1',
+            meaning: 'Thank you (for service)',
+            phoneticGuide: 'mm GOI',
+            toneNote: '"m" mid-level (tone 4), "goi" high-level (tone 1)',
+            imageQuery: 'gratitude thank you gesture',
+          },
+          {
+            character: '唔使客氣',
+            pinyin: 'm4 sai2 haak3 hei3',
+            meaning: "You're welcome",
+            phoneticGuide: 'mm SIGH haak HAY',
+            toneNote: '"m" mid, "sai" rising, "haak" mid-low, "hei" mid-low',
+            imageQuery: 'welcoming smile',
+          },
+        ],
+        phrase: {
+          chinese: '你好！唔該晒。',
+          pinyin: 'Nei5 hou2! M4 goi1 saai3.',
+          meaning: 'Hello! Thank you so much.',
+          breakdown: [
+            { chinese: '你好', pinyin: 'nei5 hou2', meaning: 'Hello' },
+            { chinese: '唔該', pinyin: 'm4 goi1', meaning: 'Thank you' },
+            { chinese: '晒', pinyin: 'saai3', meaning: 'very much (intensifier)' },
+          ],
+        },
+      },
+      {
+        id: 'cant-greetings-2',
+        title: 'Goodbye & Sorry',
+        scenarioDescription: 'You accidentally bump into someone on a busy Hong Kong street',
+        conversationContext:
+          'You are a passerby on a busy street in Hong Kong. The learner accidentally bumps into you. Speak ONLY in Cantonese. React naturally, accept the apology, and say goodbye.',
+        words: [
+          {
+            character: '再見',
+            pinyin: 'zoi3 gin3',
+            meaning: 'Goodbye',
+            phoneticGuide: 'joy GEEN',
+            toneNote: '"zoi" mid-low (tone 3), "gin" mid-low (tone 3)',
+            imageQuery: 'waving goodbye',
+          },
+          {
+            character: '對唔住',
+            pinyin: 'deoi3 m4 zyu6',
+            meaning: 'Sorry',
+            phoneticGuide: 'duh-ee mm JEW',
+            toneNote: '"deoi" mid-low, "m" mid, "zyu" low (tone 6)',
+            imageQuery: 'apology sorry expression',
+          },
+          {
+            character: '冇問題',
+            pinyin: 'mou5 man6 tai4',
+            meaning: 'No problem',
+            phoneticGuide: 'moh MUN tie',
+            toneNote: '"mou" low-rising, "man" low, "tai" low-rising',
+            imageQuery: 'reassuring gesture ok',
+          },
+        ],
+        phrase: {
+          chinese: '對唔住！冇問題，再見。',
+          pinyin: 'Deoi3 m4 zyu6! Mou5 man6 tai4, zoi3 gin3.',
+          meaning: 'Sorry! No problem, goodbye.',
+          breakdown: [
+            { chinese: '對唔住', pinyin: 'deoi3 m4 zyu6', meaning: 'Sorry' },
+            { chinese: '冇問題', pinyin: 'mou5 man6 tai4', meaning: 'No problem' },
+            { chinese: '再見', pinyin: 'zoi3 gin3', meaning: 'Goodbye' },
+          ],
+        },
+      },
+      {
+        id: 'cant-greetings-3',
+        title: 'Morning & How Are You',
+        scenarioDescription: 'You see a neighbour on the way to work in the morning',
+        conversationContext:
+          'You are a friendly neighbour in a Hong Kong residential block. The learner passes you in the morning. Speak ONLY in Cantonese. Exchange greetings and ask how they are.',
+        words: [
+          {
+            character: '早晨',
+            pinyin: 'zou2 san4',
+            meaning: 'Good morning',
+            phoneticGuide: 'jo SAN',
+            toneNote: '"zou" rising (tone 2), "san" low-rising (tone 4)',
+            imageQuery: 'morning sunrise hong kong',
+          },
+          {
+            character: '晚安',
+            pinyin: 'maan5 on1',
+            meaning: 'Good night',
+            phoneticGuide: 'maan ON',
+            toneNote: '"maan" low-rising (tone 5), "on" high-level (tone 1)',
+            imageQuery: 'evening city lights night',
+          },
+          {
+            character: '點呀',
+            pinyin: 'dim2 aa3',
+            meaning: 'How are you? / How is it going?',
+            phoneticGuide: 'DIM ah',
+            toneNote: '"dim" rising (tone 2), "aa" mid-low (tone 3)',
+            imageQuery: 'casual conversation friends',
+          },
+        ],
+        phrase: {
+          chinese: '早晨！今日點呀？',
+          pinyin: 'Zou2 san4! Gam1 jat6 dim2 aa3?',
+          meaning: 'Good morning! How are things today?',
+          breakdown: [
+            { chinese: '早晨', pinyin: 'zou2 san4', meaning: 'Good morning' },
+            { chinese: '今日', pinyin: 'gam1 jat6', meaning: 'today' },
+            { chinese: '點呀', pinyin: 'dim2 aa3', meaning: 'how is it going?' },
+          ],
+        },
+      },
+    ],
+  },
+
+  {
+    id: 'cant-basics-introductions',
+    level: 'basics',
+    dialect: 'cantonese',
+    title: 'Introductions',
+    description: 'Introduce yourself and find out about others',
+    imageQuery: 'hong kong people meeting introduction',
+    clusters: [
+      {
+        id: 'cant-intro-1',
+        title: 'What Is Your Name?',
+        scenarioDescription: 'You are meeting someone new at a social event in Hong Kong',
+        conversationContext:
+          'You are at a social event in Hong Kong. The learner is a new acquaintance. Speak ONLY in Cantonese. Introduce yourself and ask for their name.',
+        words: [
+          {
+            character: '我叫',
+            pinyin: 'ngo5 giu3',
+            meaning: 'My name is',
+            phoneticGuide: 'ngor GEW',
+            toneNote: '"ngo" low-rising (tone 5), "giu" mid-low (tone 3)',
+            imageQuery: 'pointing to self introduction',
+          },
+          {
+            character: '你叫咩名',
+            pinyin: 'nei5 giu3 me1 meng2',
+            meaning: 'What is your name?',
+            phoneticGuide: 'nay GEW meh MENG',
+            toneNote: '"nei" rising, "giu" mid-low, "me" high, "meng" rising',
+            imageQuery: 'asking question curious',
+          },
+          {
+            character: '好高興識你',
+            pinyin: 'hou2 gou1 hing3 sik1 nei5',
+            meaning: 'Nice to meet you',
+            phoneticGuide: 'HO go HING sik NAY',
+            toneNote: '"hou" rising, "gou" high, "hing" mid-low, "sik" high, "nei" rising',
+            imageQuery: 'nice to meet you handshake smile',
+          },
+        ],
+        phrase: {
+          chinese: '你好！我叫___。你叫咩名？',
+          pinyin: 'Nei5 hou2! Ngo5 giu3 ___. Nei5 giu3 me1 meng2?',
+          meaning: 'Hello! My name is ___. What is your name?',
+          breakdown: [
+            { chinese: '你好', pinyin: 'nei5 hou2', meaning: 'Hello' },
+            { chinese: '我叫', pinyin: 'ngo5 giu3', meaning: 'My name is' },
+            { chinese: '你叫咩名', pinyin: 'nei5 giu3 me1 meng2', meaning: 'What is your name?' },
+          ],
+        },
+      },
+      {
+        id: 'cant-intro-2',
+        title: 'Where Are You From?',
+        scenarioDescription: 'A new acquaintance asks about your nationality',
+        conversationContext:
+          'You are a curious local at a café in Hong Kong. The learner is a foreigner. Speak ONLY in Cantonese. Ask where they are from and share your own background.',
+        words: [
+          {
+            character: '你係邊度人',
+            pinyin: 'nei5 hai6 bin1 dou6 jan4',
+            meaning: 'Where are you from?',
+            phoneticGuide: 'nay HAI bin DOH yan',
+            toneNote: '"hai" low, "bin" high, "dou" low, "jan" low-rising',
+            imageQuery: 'globe world map travel',
+          },
+          {
+            character: '英國',
+            pinyin: 'Jing1 gwok3',
+            meaning: 'United Kingdom',
+            phoneticGuide: 'ying GWOK',
+            toneNote: '"jing" high-level (tone 1), "gwok" mid-low (tone 3)',
+            imageQuery: 'london england uk flag',
+          },
+          {
+            character: '美國',
+            pinyin: 'Mei5 gwok3',
+            meaning: 'United States',
+            phoneticGuide: 'may GWOK',
+            toneNote: '"mei" low-rising (tone 5), "gwok" mid-low (tone 3)',
+            imageQuery: 'new york usa america',
+          },
+        ],
+        phrase: {
+          chinese: '你係邊度人？我係英國人。',
+          pinyin: 'Nei5 hai6 bin1 dou6 jan4? Ngo5 hai6 Jing1 gwok3 jan4.',
+          meaning: "Where are you from? I'm from the UK.",
+          breakdown: [
+            { chinese: '你係邊度人', pinyin: 'nei5 hai6 bin1 dou6 jan4', meaning: 'Where are you from?' },
+            { chinese: '我係', pinyin: 'ngo5 hai6', meaning: 'I am' },
+            { chinese: '英國人', pinyin: 'Jing1 gwok3 jan4', meaning: 'British person' },
+          ],
+        },
+      },
+      {
+        id: 'cant-intro-3',
+        title: 'Age & Occupation',
+        scenarioDescription: 'Getting to know a new friend at a language exchange in Hong Kong',
+        conversationContext:
+          'You are a Hong Kong local at a language exchange meetup. Speak ONLY in Cantonese. Ask the learner their age and what they do for work, and share your own.',
+        words: [
+          {
+            character: '你幾多歲',
+            pinyin: 'nei5 gei2 do1 seoi3',
+            meaning: 'How old are you?',
+            phoneticGuide: 'nay gay DOH sway',
+            toneNote: '"gei" rising, "do" high, "seoi" mid-low',
+            imageQuery: 'birthday candles age celebration',
+          },
+          {
+            character: '歲',
+            pinyin: 'seoi3',
+            meaning: 'Years old',
+            phoneticGuide: 'sway',
+            toneNote: 'mid-low (tone 3)',
+            imageQuery: 'number age years',
+          },
+          {
+            character: '做咩工',
+            pinyin: 'zou6 me1 gung1',
+            meaning: 'What work do you do?',
+            phoneticGuide: 'jo meh GOONG',
+            toneNote: '"zou" low, "me" high, "gung" high',
+            imageQuery: 'office work professional',
+          },
+        ],
+        phrase: {
+          chinese: '你幾多歲？你做咩工？',
+          pinyin: 'Nei5 gei2 do1 seoi3? Nei5 zou6 me1 gung1?',
+          meaning: 'How old are you? What do you do for work?',
+          breakdown: [
+            { chinese: '你幾多歲', pinyin: 'nei5 gei2 do1 seoi3', meaning: 'How old are you?' },
+            { chinese: '你做咩工', pinyin: 'nei5 zou6 me1 gung1', meaning: 'What work do you do?' },
+          ],
+        },
+      },
+    ],
+  },
+
+  {
+    id: 'cant-basics-numbers',
+    level: 'basics',
+    dialect: 'cantonese',
+    title: 'Numbers & Time',
+    description: 'Count and ask how much in Cantonese',
+    imageQuery: 'hong kong market numbers counting',
+    clusters: [
+      {
+        id: 'cant-numbers-1',
+        title: 'One to Five',
+        scenarioDescription: 'Ordering yum cha dim sum and saying how many you want',
+        conversationContext:
+          'You are a dim sum server at a traditional yum cha restaurant in Hong Kong. Speak ONLY in Cantonese. Ask the learner how many of each dish they want.',
+        words: [
+          {
+            character: '一二三四五',
+            pinyin: 'jat1 ji6 saam1 sei3 ng5',
+            meaning: 'One two three four five',
+            phoneticGuide: 'yat yee SAHM say NG',
+            toneNote: '"jat" high, "ji" low, "saam" high, "sei" mid-low, "ng" low-rising',
+            imageQuery: 'counting fingers hand',
+          },
+          {
+            character: '一',
+            pinyin: 'jat1',
+            meaning: 'One',
+            phoneticGuide: 'yat',
+            toneNote: 'high-level (tone 1) — short and crisp',
+            imageQuery: 'number one single',
+          },
+          {
+            character: '兩',
+            pinyin: 'loeng5',
+            meaning: 'Two (for counting things)',
+            phoneticGuide: 'LEUNG',
+            toneNote: 'low-rising (tone 5)',
+            imageQuery: 'two items pair',
+          },
+        ],
+        phrase: {
+          chinese: '我要三個，唔該。',
+          pinyin: 'Ngo5 jiu3 saam1 go3, m4 goi1.',
+          meaning: 'I want three, thank you.',
+          breakdown: [
+            { chinese: '我要', pinyin: 'ngo5 jiu3', meaning: 'I want' },
+            { chinese: '三個', pinyin: 'saam1 go3', meaning: 'three (items)' },
+            { chinese: '唔該', pinyin: 'm4 goi1', meaning: 'thank you' },
+          ],
+        },
+      },
+      {
+        id: 'cant-numbers-2',
+        title: 'Six to Ten',
+        scenarioDescription: 'Buying fruit at a wet market in Hong Kong',
+        conversationContext:
+          'You are a market vendor at a Hong Kong wet market. Speak ONLY in Cantonese. Practice numbers 6-10 with the learner as they buy fruit from your stall.',
+        words: [
+          {
+            character: '六',
+            pinyin: 'luk6',
+            meaning: 'Six',
+            phoneticGuide: 'look',
+            toneNote: 'low (tone 6)',
+            imageQuery: 'six fruit market',
+          },
+          {
+            character: '七',
+            pinyin: 'cat1',
+            meaning: 'Seven',
+            phoneticGuide: 'chat',
+            toneNote: 'high-level (tone 1)',
+            imageQuery: 'seven items',
+          },
+          {
+            character: '十',
+            pinyin: 'sap6',
+            meaning: 'Ten',
+            phoneticGuide: 'sap',
+            toneNote: 'low (tone 6)',
+            imageQuery: 'ten complete set',
+          },
+        ],
+        phrase: {
+          chinese: '我要八個蘋果，幾多錢？',
+          pinyin: 'Ngo5 jiu3 baat3 go3 ping4 gwo2, gei2 do1 cin2?',
+          meaning: 'I want eight apples, how much?',
+          breakdown: [
+            { chinese: '我要', pinyin: 'ngo5 jiu3', meaning: 'I want' },
+            { chinese: '八個', pinyin: 'baat3 go3', meaning: 'eight (items)' },
+            { chinese: '蘋果', pinyin: 'ping4 gwo2', meaning: 'apples' },
+            { chinese: '幾多錢', pinyin: 'gei2 do1 cin2', meaning: 'how much?' },
+          ],
+        },
+      },
+    ],
+  },
+
+  {
+    id: 'cant-basics-daily',
+    level: 'basics',
+    dialect: 'cantonese',
+    title: 'Daily Life',
+    description: 'Food, finding places, and asking for help',
+    imageQuery: 'hong kong daily life street',
+    clusters: [
+      {
+        id: 'cant-daily-1',
+        title: 'Food & Drink',
+        scenarioDescription: 'You are a guest at a Hong Kong home and feel hungry',
+        conversationContext:
+          'You are a Hong Kong host welcoming a visitor. Speak ONLY in Cantonese. Offer them food and drink and make them comfortable.',
+        words: [
+          {
+            character: '食',
+            pinyin: 'sik6',
+            meaning: 'Eat',
+            phoneticGuide: 'sik',
+            toneNote: 'low (tone 6)',
+            imageQuery: 'eating food hong kong',
+          },
+          {
+            character: '飲',
+            pinyin: 'jam2',
+            meaning: 'Drink',
+            phoneticGuide: 'yum',
+            toneNote: 'rising (tone 2)',
+            imageQuery: 'drinking tea cup',
+          },
+          {
+            character: '水',
+            pinyin: 'seoi2',
+            meaning: 'Water',
+            phoneticGuide: 'sway',
+            toneNote: 'rising (tone 2)',
+            imageQuery: 'glass of water clear',
+          },
+        ],
+        phrase: {
+          chinese: '我口渴，你有冇水？',
+          pinyin: 'Ngo5 hau2 hot3, nei5 jau5 mou5 seoi2?',
+          meaning: "I'm thirsty, do you have water?",
+          breakdown: [
+            { chinese: '我口渴', pinyin: 'ngo5 hau2 hot3', meaning: 'I am thirsty' },
+            { chinese: '你有冇', pinyin: 'nei5 jau5 mou5', meaning: 'do you have' },
+            { chinese: '水', pinyin: 'seoi2', meaning: 'water' },
+          ],
+        },
+      },
+      {
+        id: 'cant-daily-2',
+        title: 'Finding Places',
+        scenarioDescription: 'You need to find a supermarket in a Hong Kong neighbourhood',
+        conversationContext:
+          'You are a friendly local in Hong Kong. A visitor is asking where to find common places nearby. Speak ONLY in Cantonese. Help them with simple directions.',
+        words: [
+          {
+            character: '銀行',
+            pinyin: 'ngan4 hong4',
+            meaning: 'Bank',
+            phoneticGuide: 'ngan HONG',
+            toneNote: '"ngan" low-rising (tone 4), "hong" low-rising (tone 4)',
+            imageQuery: 'bank building financial',
+          },
+          {
+            character: '超市',
+            pinyin: 'ciu1 si5',
+            meaning: 'Supermarket',
+            phoneticGuide: 'CHEW see',
+            toneNote: '"ciu" high-level (tone 1), "si" low-rising (tone 5)',
+            imageQuery: 'supermarket grocery store aisle',
+          },
+          {
+            character: '附近',
+            pinyin: 'fu6 gan6',
+            meaning: 'Nearby',
+            phoneticGuide: 'foo GAN',
+            toneNote: '"fu" low (tone 6), "gan" low (tone 6)',
+            imageQuery: 'map nearby location',
+          },
+        ],
+        phrase: {
+          chinese: '唔該，附近有冇超市？',
+          pinyin: 'M4 goi1, fu6 gan6 jau5 mou5 ciu1 si5?',
+          meaning: 'Excuse me, is there a supermarket nearby?',
+          breakdown: [
+            { chinese: '唔該', pinyin: 'm4 goi1', meaning: 'excuse me / thank you' },
+            { chinese: '附近', pinyin: 'fu6 gan6', meaning: 'nearby' },
+            { chinese: '有冇', pinyin: 'jau5 mou5', meaning: 'is there / do you have' },
+            { chinese: '超市', pinyin: 'ciu1 si5', meaning: 'supermarket' },
+          ],
+        },
+      },
+    ],
+  },
+
+  // ─── CANTONESE TRAVEL ─────────────────────────────────────────────────────
+  {
+    id: 'cant-travel-restaurant',
+    level: 'travel',
+    dialect: 'cantonese',
+    title: 'At a Restaurant',
+    description: 'Order food and pay the bill in Cantonese',
+    imageQuery: 'hong kong restaurant dim sum',
+    clusters: [
+      {
+        id: 'cant-restaurant-1',
+        title: 'Ordering Food',
+        scenarioDescription: 'You sit down at a cha chaan teng and want to order',
+        conversationContext:
+          'You are a server at a traditional Hong Kong cha chaan teng. Speak ONLY in Cantonese. Welcome the learner, offer a menu, take their order.',
+        words: [
+          {
+            character: '餐牌',
+            pinyin: 'caan1 paai2',
+            meaning: 'Menu',
+            phoneticGuide: 'CHAN pye',
+            toneNote: '"caan" high-level (tone 1), "paai" rising (tone 2)',
+            imageQuery: 'restaurant menu hong kong',
+          },
+          {
+            character: '好食',
+            pinyin: 'hou2 sik6',
+            meaning: 'Delicious',
+            phoneticGuide: 'HO sik',
+            toneNote: '"hou" rising (tone 2), "sik" low (tone 6)',
+            imageQuery: 'delicious food eating',
+          },
+          {
+            character: '我要呢個',
+            pinyin: 'ngo5 jiu3 ni1 go3',
+            meaning: 'I want this one',
+            phoneticGuide: 'ngor YEW nee GOH',
+            toneNote: '"ngo" low-rising, "jiu" mid-low, "ni" high, "go" mid-low',
+            imageQuery: 'pointing at menu ordering',
+          },
+        ],
+        phrase: {
+          chinese: '請俾我餐牌。我要呢個，唔該。',
+          pinyin: 'Cing2 bei2 ngo5 caan1 paai2. Ngo5 jiu3 ni1 go3, m4 goi1.',
+          meaning: 'Please give me the menu. I want this one, thank you.',
+          breakdown: [
+            { chinese: '請俾我', pinyin: 'cing2 bei2 ngo5', meaning: 'please give me' },
+            { chinese: '餐牌', pinyin: 'caan1 paai2', meaning: 'menu' },
+            { chinese: '我要呢個', pinyin: 'ngo5 jiu3 ni1 go3', meaning: 'I want this one' },
+            { chinese: '唔該', pinyin: 'm4 goi1', meaning: 'thank you' },
+          ],
+        },
+      },
+      {
+        id: 'cant-restaurant-2',
+        title: 'Paying the Bill',
+        scenarioDescription: 'You have finished your meal and want to pay',
+        conversationContext:
+          'You are a server at a Hong Kong restaurant. The learner wants to pay. Speak ONLY in Cantonese. Help them ask for the bill and discuss payment options.',
+        words: [
+          {
+            character: '幾多錢',
+            pinyin: 'gei2 do1 cin2',
+            meaning: 'How much?',
+            phoneticGuide: 'gay DOH chin',
+            toneNote: '"gei" rising, "do" high, "cin" rising',
+            imageQuery: 'paying money bill',
+          },
+          {
+            character: '埋單',
+            pinyin: 'maai4 daan1',
+            meaning: 'The bill please',
+            phoneticGuide: 'my DAAN',
+            toneNote: '"maai" low-rising (tone 4), "daan" high-level (tone 1)',
+            imageQuery: 'restaurant bill receipt',
+          },
+          {
+            character: '八達通',
+            pinyin: 'baat3 daat6 tung1',
+            meaning: 'Octopus card (contactless payment)',
+            phoneticGuide: 'baat DAAT toong',
+            toneNote: '"baat" mid-low, "daat" low, "tung" high',
+            imageQuery: 'octopus card hong kong payment',
+          },
+        ],
+        phrase: {
+          chinese: '埋單！幾多錢？可以用八達通嗎？',
+          pinyin: 'Maai4 daan1! Gei2 do1 cin2? Ho2 ji5 jung6 baat3 daat6 tung1 maa3?',
+          meaning: 'Bill please! How much? Can I pay with Octopus?',
+          breakdown: [
+            { chinese: '埋單', pinyin: 'maai4 daan1', meaning: 'bill please' },
+            { chinese: '幾多錢', pinyin: 'gei2 do1 cin2', meaning: 'how much?' },
+            { chinese: '可以用', pinyin: 'ho2 ji5 jung6', meaning: 'can I use' },
+            { chinese: '八達通', pinyin: 'baat3 daat6 tung1', meaning: 'Octopus card' },
+          ],
+        },
+      },
+    ],
+  },
+
+  {
+    id: 'cant-travel-directions',
+    level: 'travel',
+    dialect: 'cantonese',
+    title: 'Getting Around',
+    description: 'Navigate Hong Kong by MTR and taxi',
+    imageQuery: 'hong kong mtr subway street',
+    clusters: [
+      {
+        id: 'cant-directions-1',
+        title: 'Basic Directions',
+        scenarioDescription: 'You are lost and need to find the MTR station',
+        conversationContext:
+          'You are a helpful local on a busy Hong Kong street. The learner is looking for the MTR. Speak ONLY in Cantonese. Give simple directions.',
+        words: [
+          {
+            character: '左',
+            pinyin: 'zo2',
+            meaning: 'Left',
+            phoneticGuide: 'jo',
+            toneNote: 'rising (tone 2)',
+            imageQuery: 'direction left arrow',
+          },
+          {
+            character: '右',
+            pinyin: 'jau6',
+            meaning: 'Right',
+            phoneticGuide: 'yow',
+            toneNote: 'low (tone 6)',
+            imageQuery: 'direction right arrow',
+          },
+          {
+            character: '地鐵站',
+            pinyin: 'dei6 tit3 zaam6',
+            meaning: 'MTR station',
+            phoneticGuide: 'day TIT jaam',
+            toneNote: '"dei" low, "tit" mid-low, "zaam" low',
+            imageQuery: 'hong kong mtr station',
+          },
+        ],
+        phrase: {
+          chinese: '唔該，地鐵站喺邊度？',
+          pinyin: 'M4 goi1, dei6 tit3 zaam6 hai2 bin1 dou6?',
+          meaning: 'Excuse me, where is the MTR station?',
+          breakdown: [
+            { chinese: '唔該', pinyin: 'm4 goi1', meaning: 'excuse me' },
+            { chinese: '地鐵站', pinyin: 'dei6 tit3 zaam6', meaning: 'MTR station' },
+            { chinese: '喺邊度', pinyin: 'hai2 bin1 dou6', meaning: 'where is it?' },
+          ],
+        },
+      },
+      {
+        id: 'cant-directions-2',
+        title: 'Taking a Taxi',
+        scenarioDescription: 'You hail a red taxi and need to tell the driver where to go',
+        conversationContext:
+          'You are a taxi driver in Hong Kong. The learner has just got in and wants to go to Causeway Bay. Speak ONLY in Cantonese. Ask where they are going and make friendly chat.',
+        words: [
+          {
+            character: '的士',
+            pinyin: 'dik1 si2',
+            meaning: 'Taxi',
+            phoneticGuide: 'DIK see',
+            toneNote: '"dik" high-level (tone 1), "si" rising (tone 2)',
+            imageQuery: 'hong kong red taxi',
+          },
+          {
+            character: '去',
+            pinyin: 'heoi3',
+            meaning: 'Go to',
+            phoneticGuide: 'hoy',
+            toneNote: 'mid-low (tone 3)',
+            imageQuery: 'direction destination arrow',
+          },
+          {
+            character: '幾遠',
+            pinyin: 'gei2 jyun5',
+            meaning: 'How far?',
+            phoneticGuide: 'gay YUEN',
+            toneNote: '"gei" rising, "jyun" low-rising',
+            imageQuery: 'distance road journey',
+          },
+        ],
+        phrase: {
+          chinese: '我去銅鑼灣，大概幾遠？',
+          pinyin: 'Ngo5 heoi3 Tung4 lo4 waan1, daai6 koi3 gei2 jyun5?',
+          meaning: 'I want to go to Causeway Bay, about how far?',
+          breakdown: [
+            { chinese: '我去', pinyin: 'ngo5 heoi3', meaning: 'I want to go to' },
+            { chinese: '銅鑼灣', pinyin: 'Tung4 lo4 waan1', meaning: 'Causeway Bay' },
+            { chinese: '大概幾遠', pinyin: 'daai6 koi3 gei2 jyun5', meaning: 'about how far?' },
+          ],
+        },
+      },
+    ],
+  },
+
+  {
+    id: 'cant-travel-shopping',
+    level: 'travel',
+    dialect: 'cantonese',
+    title: 'Shopping',
+    description: 'Bargain and buy in Cantonese',
+    imageQuery: 'hong kong shopping mong kok market',
+    clusters: [
+      {
+        id: 'cant-shopping-1',
+        title: 'Asking Prices & Bargaining',
+        scenarioDescription: 'You are at a stall in Mong Kok looking at souvenirs',
+        conversationContext:
+          'You are a market vendor in Hong Kong. The learner wants to buy something but thinks it is too expensive. Speak ONLY in Cantonese. Help them practise bargaining.',
+        words: [
+          {
+            character: '貴',
+            pinyin: 'gwai3',
+            meaning: 'Expensive',
+            phoneticGuide: 'gwai',
+            toneNote: 'mid-low (tone 3)',
+            imageQuery: 'expensive luxury price tag',
+          },
+          {
+            character: '平',
+            pinyin: 'peng4',
+            meaning: 'Cheap / affordable',
+            phoneticGuide: 'peng',
+            toneNote: 'low-rising (tone 4)',
+            imageQuery: 'cheap bargain sale market',
+          },
+          {
+            character: '平啲得唔得',
+            pinyin: 'peng4 di1 dak1 m4 dak1',
+            meaning: 'Can it be cheaper?',
+            phoneticGuide: 'PENG dee dak mm dak',
+            toneNote: '"peng" low-rising, "di" high, "dak" high',
+            imageQuery: 'bargaining negotiating market',
+          },
+        ],
+        phrase: {
+          chinese: '呢個幾多錢？太貴喇！平啲得唔得？',
+          pinyin: 'Ni1 go3 gei2 do1 cin2? Taai3 gwai3 laa3! Peng4 di1 dak1 m4 dak1?',
+          meaning: 'How much is this? Too expensive! Can you lower the price?',
+          breakdown: [
+            { chinese: '呢個', pinyin: 'ni1 go3', meaning: 'this one' },
+            { chinese: '幾多錢', pinyin: 'gei2 do1 cin2', meaning: 'how much?' },
+            { chinese: '太貴喇', pinyin: 'taai3 gwai3 laa3', meaning: 'too expensive!' },
+            { chinese: '平啲得唔得', pinyin: 'peng4 di1 dak1 m4 dak1', meaning: 'can it be cheaper?' },
+          ],
+        },
+      },
+      {
+        id: 'cant-shopping-2',
+        title: 'Clothes & Sizes',
+        scenarioDescription: 'You want to try on a jacket in a Hong Kong clothing shop',
+        conversationContext:
+          'You are a shop assistant in a Hong Kong clothing store. The learner wants to try something on. Speak ONLY in Cantonese. Help them find the right size.',
+        words: [
+          {
+            character: '大碼',
+            pinyin: 'daai6 maa5',
+            meaning: 'Large size',
+            phoneticGuide: 'DIE maa',
+            toneNote: '"daai" low (tone 6), "maa" low-rising (tone 5)',
+            imageQuery: 'large size clothing label',
+          },
+          {
+            character: '細碼',
+            pinyin: 'sai3 maa5',
+            meaning: 'Small size',
+            phoneticGuide: 'SIGH maa',
+            toneNote: '"sai" mid-low (tone 3), "maa" low-rising (tone 5)',
+            imageQuery: 'small size clothing tag',
+          },
+          {
+            character: '試身',
+            pinyin: 'si3 san1',
+            meaning: 'Try on',
+            phoneticGuide: 'see SAHN',
+            toneNote: '"si" mid-low (tone 3), "san" high-level (tone 1)',
+            imageQuery: 'fitting room try on clothes',
+          },
+        ],
+        phrase: {
+          chinese: '我可唔可以試身？有冇大碼㗎？',
+          pinyin: 'Ngo5 ho2 m4 ho2 ji5 si3 san1? Jau5 mou5 daai6 maa5 gaa3?',
+          meaning: 'Can I try it on? Do you have a large?',
+          breakdown: [
+            { chinese: '我可唔可以', pinyin: 'ngo5 ho2 m4 ho2 ji5', meaning: 'can I' },
+            { chinese: '試身', pinyin: 'si3 san1', meaning: 'try on' },
+            { chinese: '有冇', pinyin: 'jau5 mou5', meaning: 'do you have' },
+            { chinese: '大碼', pinyin: 'daai6 maa5', meaning: 'a large one' },
+          ],
+        },
+      },
+    ],
+  },
+
+  // ─── CANTONESE ADVANCED ───────────────────────────────────────────────────
+  {
+    id: 'cant-advanced-plans',
+    level: 'advanced',
+    dialect: 'cantonese',
+    title: 'Making Plans',
+    description: 'Suggest activities and make arrangements',
+    imageQuery: 'friends planning hong kong cafe',
+    clusters: [
+      {
+        id: 'cant-plans-1',
+        title: 'Are You Free?',
+        scenarioDescription: 'You want to invite a friend out in Hong Kong',
+        conversationContext:
+          'You are a friend of the learner in Hong Kong. Speak ONLY in Cantonese. They want to make plans. Ask about their schedule and suggest going out together.',
+        words: [
+          {
+            character: '聽日',
+            pinyin: 'ting1 jat6',
+            meaning: 'Tomorrow',
+            phoneticGuide: 'ting YAT',
+            toneNote: '"ting" high-level (tone 1), "jat" low (tone 6)',
+            imageQuery: 'tomorrow calendar planning',
+          },
+          {
+            character: '得唔得閒',
+            pinyin: 'dak1 m4 dak1 haan4',
+            meaning: 'Are you free?',
+            phoneticGuide: 'dak mm dak HAAN',
+            toneNote: '"dak" high, "m" mid, "haan" low-rising',
+            imageQuery: 'calendar free time availability',
+          },
+          {
+            character: '一齊',
+            pinyin: 'jat1 cai4',
+            meaning: 'Together',
+            phoneticGuide: 'yat CHAI',
+            toneNote: '"jat" high-level (tone 1), "cai" low-rising (tone 4)',
+            imageQuery: 'friends together group',
+          },
+        ],
+        phrase: {
+          chinese: '你聽日得唔得閒？我哋一齊去食飯啦！',
+          pinyin: 'Nei5 ting1 jat6 dak1 m4 dak1 haan4? Ngo5 dei6 jat1 cai4 heoi3 sik6 faahn6 laa1!',
+          meaning: "Are you free tomorrow? Let's go eat together!",
+          breakdown: [
+            { chinese: '你聽日', pinyin: 'nei5 ting1 jat6', meaning: 'you tomorrow' },
+            { chinese: '得唔得閒', pinyin: 'dak1 m4 dak1 haan4', meaning: 'are you free?' },
+            { chinese: '我哋', pinyin: 'ngo5 dei6', meaning: 'we / us' },
+            { chinese: '一齊', pinyin: 'jat1 cai4', meaning: 'together' },
+            { chinese: '去食飯', pinyin: 'heoi3 sik6 faahn6', meaning: 'go eat' },
+          ],
+        },
+      },
+    ],
+  },
+
+  {
+    id: 'cant-advanced-feelings',
+    level: 'advanced',
+    dialect: 'cantonese',
+    title: 'Feelings & Opinions',
+    description: 'Express emotions and share what you think',
+    imageQuery: 'emotions feelings expression',
+    clusters: [
+      {
+        id: 'cant-feelings-1',
+        title: 'How Do You Feel?',
+        scenarioDescription: 'A friend is checking in on you after a long day',
+        conversationContext:
+          'You are a caring friend checking in on the learner after a long day in Hong Kong. Speak ONLY in Cantonese. Ask how they feel and share your own feelings.',
+        words: [
+          {
+            character: '我覺得',
+            pinyin: 'ngo5 gok3 dak1',
+            meaning: 'I feel / I think',
+            phoneticGuide: 'ngor GOK dak',
+            toneNote: '"ngo" low-rising, "gok" mid-low, "dak" high',
+            imageQuery: 'thinking feeling reflection',
+          },
+          {
+            character: '攰',
+            pinyin: 'gui6',
+            meaning: 'Tired',
+            phoneticGuide: 'gwee',
+            toneNote: 'low (tone 6)',
+            imageQuery: 'tired exhausted person',
+          },
+          {
+            character: '開心',
+            pinyin: 'hoi1 sam1',
+            meaning: 'Happy',
+            phoneticGuide: 'hoy SAHM',
+            toneNote: '"hoi" high-level (tone 1), "sam" high-level (tone 1)',
+            imageQuery: 'happy smiling person',
+          },
+        ],
+        phrase: {
+          chinese: '我今日好攰，但係好開心。',
+          pinyin: 'Ngo5 gam1 jat6 hou2 gui6, daan6 hai6 hou2 hoi1 sam1.',
+          meaning: 'I am very tired today, but very happy.',
+          breakdown: [
+            { chinese: '我今日', pinyin: 'ngo5 gam1 jat6', meaning: 'I today' },
+            { chinese: '好攰', pinyin: 'hou2 gui6', meaning: 'very tired' },
+            { chinese: '但係', pinyin: 'daan6 hai6', meaning: 'but' },
+            { chinese: '好開心', pinyin: 'hou2 hoi1 sam1', meaning: 'very happy' },
+          ],
+        },
+      },
+      {
+        id: 'cant-feelings-2',
+        title: 'Likes & Dislikes',
+        scenarioDescription: 'Chatting with a friend about hobbies and interests',
+        conversationContext:
+          'You are a Hong Kong friend getting to know the learner. Speak ONLY in Cantonese. Ask what they like and share your own interests.',
+        words: [
+          {
+            character: '鍾意',
+            pinyin: 'zung1 ji3',
+            meaning: 'Like / love',
+            phoneticGuide: 'ZOONG yee',
+            toneNote: '"zung" high-level (tone 1), "ji" mid-low (tone 3)',
+            imageQuery: 'like heart love favourite',
+          },
+          {
+            character: '唔鍾意',
+            pinyin: 'm4 zung1 ji3',
+            meaning: "Don't like",
+            phoneticGuide: 'mm ZOONG yee',
+            toneNote: '"m" mid, "zung" high, "ji" mid-low',
+            imageQuery: 'dislike thumbs down',
+          },
+          {
+            character: '有趣',
+            pinyin: 'jau5 ceoi3',
+            meaning: 'Interesting',
+            phoneticGuide: 'yow TSOY',
+            toneNote: '"jau" low-rising (tone 5), "ceoi" mid-low (tone 3)',
+            imageQuery: 'interesting curious discovery',
+          },
+        ],
+        phrase: {
+          chinese: '你鍾意咩？我好鍾意香港文化，好有趣。',
+          pinyin: 'Nei5 zung1 ji3 me1? Ngo5 hou2 zung1 ji3 Hoeng1 gong2 man4 faa3, hou2 jau5 ceoi3.',
+          meaning: "What do you like? I really like Hong Kong culture, it's very interesting.",
+          breakdown: [
+            { chinese: '你鍾意咩', pinyin: 'nei5 zung1 ji3 me1', meaning: 'what do you like?' },
+            { chinese: '我好鍾意', pinyin: 'ngo5 hou2 zung1 ji3', meaning: 'I really like' },
+            { chinese: '香港文化', pinyin: 'Hoeng1 gong2 man4 faa3', meaning: 'Hong Kong culture' },
+            { chinese: '好有趣', pinyin: 'hou2 jau5 ceoi3', meaning: 'very interesting' },
+          ],
+        },
+      },
+    ],
+  },
 ]
 
-export function getUnitsByLevel(level: string): Unit[] {
-  return units.filter((u) => u.level === level)
+export function getUnitsByLevel(level: string, dialect: import('./types').Dialect = 'putonghua'): Unit[] {
+  return units.filter((u) => u.level === level && u.dialect === dialect)
 }
 
 export function getUnit(unitId: string): Unit | undefined {

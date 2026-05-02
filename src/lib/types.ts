@@ -1,8 +1,9 @@
 export type Level = 'basics' | 'travel' | 'advanced'
+export type Dialect = 'cantonese' | 'putonghua'
 
 export interface Word {
   character: string
-  pinyin: string
+  pinyin: string   // holds Jyutping for Cantonese units
   meaning: string
   phoneticGuide: string
   toneNote: string
@@ -34,6 +35,7 @@ export interface Cluster {
 export interface Unit {
   id: string
   level: Level
+  dialect: Dialect
   title: string
   description: string
   imageQuery: string
@@ -45,7 +47,7 @@ export interface Assessment {
   correct: string
   correction?: string
   phoneticTip?: string
-  spokenTranslation?: string  // English meaning of what the learner actually said
+  spokenTranslation?: string
 }
 
 export interface ChatMessage {

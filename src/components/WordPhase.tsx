@@ -1,15 +1,16 @@
 'use client'
 
 import { useState } from 'react'
-import { Word } from '@/lib/types'
+import { Word, Dialect } from '@/lib/types'
 import WordCard from './WordCard'
 
 interface WordPhaseProps {
   words: Word[]
+  dialect: Dialect
   onComplete: () => void
 }
 
-export default function WordPhase({ words, onComplete }: WordPhaseProps) {
+export default function WordPhase({ words, dialect, onComplete }: WordPhaseProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const isLast = currentIndex === words.length - 1
@@ -45,6 +46,7 @@ export default function WordPhase({ words, onComplete }: WordPhaseProps) {
           word={words[currentIndex]}
           index={currentIndex}
           total={words.length}
+          dialect={dialect}
         />
       </div>
 

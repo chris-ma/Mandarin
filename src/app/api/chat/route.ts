@@ -8,20 +8,28 @@ function buildSystemPrompt(
   conversationContext: string,
   targetPhrase: string,
   targetPinyin: string,
-  targetMeaning: string
+  targetMeaning: string,
+  dialect: 'cantonese' | 'putonghua'
 ): string {
-  return `You are a warm, encouraging Mandarin tutor running a live conversation practice session.
+  const isCant = dialect === 'cantonese'
+  const romanization = isCant ? 'Jyutping' : 'Pinyin'
+  const languageName = isCant ? 'Cantonese (廣東話)' : 'Mandarin'
+  const tutorIntro = isCant
+    ? 'You are a warm, encouraging Cantonese tutor running a live conversation practice session. Speak and respond in Cantonese (廣東話), not Mandarin.'
+    : 'You are a warm, encouraging Mandarin tutor running a live conversation practice session.'
+
+  return `${tutorIntro}
 
 Scenario: ${scenarioDescription}
 Your role: ${conversationContext}
 
 The learner is practicing this phrase:
 Chinese: ${targetPhrase}
-Pinyin: ${targetPinyin}
+${romanization}: ${targetPinyin}
 Meaning: ${targetMeaning}
 
 Rules:
-- Your dialogue turns should be IN MANDARIN with pinyin on the line below and English translation below that
+- Your dialogue turns should be IN ${languageName.toUpperCase()} with ${romanization} on the line below and English translation below that
 - When given the learner's transcribed speech, assess how close it was to the target phrase (0-100 score)
 - Celebrate what they got right, gently correct mistakes
 - Use the "sounds like English words" style for phonetic tips (e.g. "think 'knee HOW' for 你好")
@@ -33,7 +41,7 @@ ALWAYS respond with valid JSON only, no extra text:
 {
   "yourLine": {
     "chinese": "...",
-    "pinyin": "...",
+    "${romanization.toLowerCase()}": "...",
     "english": "..."
   },
   "assessment": {
@@ -50,12 +58,13 @@ ALWAYS respond with valid JSON only, no extra text:
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { history, userTranscript, clusterId, unitId, phase } = body as {
+    const { history, userTranscript, clusterId, unitId, phase, dialect = 'putonghua' } = body as {
       history: ChatMessage[]
       userTranscript: string | null
       clusterId: string
       unitId: string
       phase: 'start' | 'respond'
+      dialect?: 'cantonese' | 'putonghua'
     }
 
     const unit = getUnit(unitId)
@@ -70,7 +79,8 @@ export async function POST(req: NextRequest) {
       cluster.conversationContext,
       cluster.phrase.chinese,
       cluster.phrase.pinyin,
-      cluster.phrase.meaning
+      cluster.phrase.meaning,
+      dialect
     )
 
     const messages: { role: 'user' | 'assistant'; content: string }[] = []
@@ -78,7 +88,9 @@ export async function POST(req: NextRequest) {
     if (phase === 'start') {
       messages.push({
         role: 'user',
-        content: 'Please start the conversation. Set the scene briefly and say your first line in Mandarin.',
+        content: dialect === 'cantonese'
+          ? 'Please start the conversation. Set the scene briefly and say your first line in Cantonese.'
+          : 'Please start the conversation. Set the scene briefly and say your first line in Mandarin.',
       })
     } else {
       // Build history as alternating user/assistant messages

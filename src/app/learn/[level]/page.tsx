@@ -1,7 +1,9 @@
+'use client'
+
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
+import { useParams, useSearchParams, notFound } from 'next/navigation'
 import { getUnitsByLevel } from '@/lib/curriculum'
-import { Level } from '@/lib/types'
+import { Level, Dialect } from '@/lib/types'
 
 const levelMeta: Record<Level, { zh: string; en: string; watermark: string }> = {
   basics:   { zh: '基礎', en: 'Basics',   watermark: '好' },
@@ -11,12 +13,16 @@ const levelMeta: Record<Level, { zh: string; en: string; watermark: string }> = 
 
 const chineseNumerals = ['一', '二', '三', '四', '五', '六', '七', '八', '九', '十']
 
-export default async function LevelPage({ params }: { params: Promise<{ level: string }> }) {
-  const { level } = await params
+export default function LevelPage() {
+  const params = useParams()
+  const searchParams = useSearchParams()
+  const level = params.level as string
+  const dialect = (searchParams.get('d') ?? 'putonghua') as Dialect
+
   const validLevels: Level[] = ['basics', 'travel', 'advanced']
   if (!validLevels.includes(level as Level)) notFound()
 
-  const units = getUnitsByLevel(level)
+  const units = getUnitsByLevel(level, dialect)
   const meta = levelMeta[level as Level]
 
   return (
@@ -43,7 +49,7 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
       <div style={{ paddingTop: '2.5rem', paddingBottom: '1.5rem', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.5rem' }}>
           <Link
-            href="/"
+            href={`/?d=${dialect}`}
             style={{
               width: '2.25rem',
               height: '2.25rem',
@@ -64,10 +70,7 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
           </Link>
           <div>
             <div style={{ display: 'flex', alignItems: 'baseline', gap: '0.5rem' }}>
-              <span
-                className="chinese-char"
-                style={{ fontSize: '1.75rem', fontWeight: 900, color: '#FFFFFF', lineHeight: 1 }}
-              >
+              <span className="chinese-char" style={{ fontSize: '1.75rem', fontWeight: 900, color: '#FFFFFF', lineHeight: 1 }}>
                 {meta.zh}
               </span>
               <span style={{ fontSize: '0.7rem', fontWeight: 700, color: 'rgba(255,255,255,0.7)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
@@ -80,7 +83,6 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
           </div>
         </div>
 
-        {/* Divider */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginTop: '0.75rem' }}>
           <div style={{ width: '1.5rem', height: '1px', background: 'rgba(255,255,255,0.3)' }} />
           <div style={{ width: '4px', height: '4px', background: 'rgba(255,255,255,0.4)', transform: 'rotate(45deg)' }} />
@@ -93,24 +95,15 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
         {units.map((unit, index) => (
           <Link
             key={unit.id}
-            href={`/learn/${level}/${unit.id}`}
+            href={`/learn/${level}/${unit.id}?d=${dialect}`}
             style={{ textDecoration: 'none', WebkitTapHighlightColor: 'transparent' }}
           >
-            <div
-              className="cny-panel"
-              style={{ padding: '1rem 1.1rem', overflow: 'hidden', position: 'relative', cursor: 'pointer' }}
-            >
-              {/* Unit numeral watermark */}
-              <div
-                className="cny-watermark"
-                style={{ fontSize: '5rem', bottom: '-0.75rem', right: '0.75rem', opacity: 0.1 }}
-                aria-hidden
-              >
+            <div className="cny-panel" style={{ padding: '1rem 1.1rem', overflow: 'hidden', position: 'relative', cursor: 'pointer' }}>
+              <div className="cny-watermark" style={{ fontSize: '5rem', bottom: '-0.75rem', right: '0.75rem', opacity: 0.1 }} aria-hidden>
                 {chineseNumerals[index] ?? index + 1}
               </div>
 
               <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.875rem', position: 'relative', zIndex: 1 }}>
-                {/* Number badge */}
                 <div
                   className="chinese-char"
                   style={{
@@ -141,10 +134,7 @@ export default async function LevelPage({ params }: { params: Promise<{ level: s
                   <div style={{ marginTop: '0.5rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <div style={{ display: 'flex', gap: '3px' }}>
                       {unit.clusters.map((cluster) => (
-                        <div
-                          key={cluster.id}
-                          style={{ width: '6px', height: '6px', borderRadius: '1px', background: 'rgba(139,26,26,0.25)', transform: 'rotate(45deg)' }}
-                        />
+                        <div key={cluster.id} style={{ width: '6px', height: '6px', borderRadius: '1px', background: 'rgba(139,26,26,0.25)', transform: 'rotate(45deg)' }} />
                       ))}
                     </div>
                     <span style={{ fontSize: '0.68rem', color: 'var(--crimson-mid)', fontWeight: 600, letterSpacing: '0.05em' }}>

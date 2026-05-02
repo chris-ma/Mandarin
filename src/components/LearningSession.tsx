@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Unit } from '@/lib/types'
+import { Unit, Dialect } from '@/lib/types'
 import { markClusterComplete } from '@/lib/progress'
 import WordPhase from './WordPhase'
 import PhrasePhase from './PhrasePhase'
@@ -14,9 +14,10 @@ type Phase = 'words' | 'phrase' | 'conversation' | 'complete'
 
 interface LearningSessionProps {
   unit: Unit
+  dialect: Dialect
 }
 
-export default function LearningSession({ unit }: LearningSessionProps) {
+export default function LearningSession({ unit, dialect }: LearningSessionProps) {
   const router = useRouter()
   const [clusterIndex, setClusterIndex] = useState(0)
   const [phase, setPhase] = useState<Phase>('words')
@@ -27,14 +28,16 @@ export default function LearningSession({ unit }: LearningSessionProps) {
   const totalPhases = unit.clusters.length * 3
   const currentPhaseNum = clusterIndex * 3 + (['words', 'phrase', 'conversation', 'complete'].indexOf(phase))
 
+  const backHref = `/learn/${unit.level}?d=${dialect}`
+
   function handleWordsDone()        { setPhase('phrase') }
   function handlePhraseDone()       { setPhase('conversation') }
   function handleConversationDone() { markClusterComplete(unit.id, cluster.id); setPhase('complete') }
   function handleNextCluster() {
-    if (isLastCluster) router.push(`/learn/${unit.level}`)
+    if (isLastCluster) router.push(backHref)
     else { setClusterIndex((i) => i + 1); setPhase('words') }
   }
-  function handleBack() { router.push(`/learn/${unit.level}`) }
+  function handleBack() { router.push(backHref) }
 
   const phaseLabels: Record<Phase, { zh: string; en: string }> = {
     words:        { zh: '字詞', en: 'Words' },
@@ -59,7 +62,7 @@ export default function LearningSession({ unit }: LearningSessionProps) {
         }}
       >
         <Link
-          href={`/learn/${unit.level}`}
+          href={backHref}
           style={{
             width: '2rem',
             height: '2rem',
@@ -101,26 +104,17 @@ export default function LearningSession({ unit }: LearningSessionProps) {
                 transition: 'all 0.3s',
                 width: i === currentPhaseNum ? '14px' : '5px',
                 background: i <= currentPhaseNum ? 'var(--crimson)' : 'rgba(139,26,26,0.18)',
-                transform: 'rotate(0deg)',
               }}
             />
           ))}
         </div>
       </div>
 
-      {/* Phase content — cream background for readability */}
-      <div
-        style={{
-          flex: 1,
-          display: 'flex',
-          flexDirection: 'column',
-          backgroundColor: 'var(--cream)',
-          overflowY: 'auto',
-        }}
-      >
-        {phase === 'words'        && <WordPhase words={cluster.words} onComplete={handleWordsDone} />}
-        {phase === 'phrase'       && <PhrasePhase cluster={cluster} unitId={unit.id} onComplete={handlePhraseDone} />}
-        {phase === 'conversation' && <ConversationPhase cluster={cluster} unitId={unit.id} onComplete={handleConversationDone} />}
+      {/* Phase content */}
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', backgroundColor: 'var(--cream)', overflowY: 'auto' }}>
+        {phase === 'words'        && <WordPhase words={cluster.words} dialect={dialect} onComplete={handleWordsDone} />}
+        {phase === 'phrase'       && <PhrasePhase cluster={cluster} unitId={unit.id} dialect={dialect} onComplete={handlePhraseDone} />}
+        {phase === 'conversation' && <ConversationPhase cluster={cluster} unitId={unit.id} dialect={dialect} onComplete={handleConversationDone} />}
         {phase === 'complete'     && <ClusterComplete cluster={cluster} isLastCluster={isLastCluster} onNext={handleNextCluster} onBack={handleBack} />}
       </div>
     </div>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { ChatMessage, Cluster, TutorResponse } from '@/lib/types'
+import { ChatMessage, Cluster, TutorResponse, Dialect } from '@/lib/types'
 import ChatBubble from './ChatBubble'
 import MicButton from './MicButton'
 import { useSpeechRecognition } from '@/hooks/useSpeechRecognition'
@@ -10,10 +10,11 @@ import { useSpeechSynthesis } from '@/hooks/useSpeechSynthesis'
 interface ConversationPhaseProps {
   cluster: Cluster
   unitId: string
+  dialect: Dialect
   onComplete: () => void
 }
 
-export default function ConversationPhase({ cluster, unitId, onComplete }: ConversationPhaseProps) {
+export default function ConversationPhase({ cluster, unitId, dialect, onComplete }: ConversationPhaseProps) {
   const [messages, setMessages] = useState<ChatMessage[]>([])
   const [isLoading, setIsLoading] = useState(false)
   const [isComplete, setIsComplete] = useState(false)
@@ -21,7 +22,8 @@ export default function ConversationPhase({ cluster, unitId, onComplete }: Conve
   const scrollRef = useRef<HTMLDivElement>(null)
   const hasStarted = useRef(false)
 
-  const { transcript, isListening, isSupported, start, stop, reset } = useSpeechRecognition('zh-CN')
+  const lang = dialect === 'cantonese' ? 'zh-HK' : 'zh-CN'
+  const { transcript, isListening, isSupported, start, stop, reset } = useSpeechRecognition(lang)
   const { speak } = useSpeechSynthesis()
 
   useEffect(() => {
@@ -52,7 +54,7 @@ export default function ConversationPhase({ cluster, unitId, onComplete }: Conve
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ history: currentMessages, userTranscript, clusterId: cluster.id, unitId, phase }),
+        body: JSON.stringify({ history: currentMessages, userTranscript, clusterId: cluster.id, unitId, dialect, phase }),
       })
 
       if (!res.ok) throw new Error(`HTTP ${res.status}`)
@@ -80,7 +82,7 @@ export default function ConversationPhase({ cluster, unitId, onComplete }: Conve
         return result
       })
 
-      if (data.yourLine.chinese) speak(data.yourLine.chinese)
+      if (data.yourLine.chinese) speak(data.yourLine.chinese, lang)
       if (data.isComplete) setIsComplete(true)
     } catch (err) {
       console.error('[ConversationPhase]', err)
@@ -204,7 +206,7 @@ export default function ConversationPhase({ cluster, unitId, onComplete }: Conve
         )}
 
         {messages.map((msg, i) => (
-          <ChatBubble key={i} message={msg} onSpeak={(text) => speak(text)} />
+          <ChatBubble key={i} message={msg} onSpeak={(text) => speak(text, lang)} />
         ))}
 
         {isComplete && (
@@ -282,7 +284,7 @@ export default function ConversationPhase({ cluster, unitId, onComplete }: Conve
                 ? <><span className="chinese-char">點擊停止</span> · Tap to stop</>
                 : isLoading
                   ? <><span className="chinese-char">老師回覆中</span> · AI is responding…</>
-                  : <><span className="chinese-char">點擊說普通話</span> · Tap to speak in Mandarin</>}
+                  : <><span className="chinese-char">{dialect === 'cantonese' ? '點擊說廣東話' : '點擊說普通話'}</span> · Tap to speak</>}
             </div>
           </div>
         )}

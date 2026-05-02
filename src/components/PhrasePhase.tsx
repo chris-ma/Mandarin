@@ -1,26 +1,27 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { Cluster } from '@/lib/types'
+import { Cluster, Dialect, Assessment } from '@/lib/types'
 import { useSpeechRecognition } from '@/hooks/useSpeechRecognition'
 import { useSpeechSynthesis } from '@/hooks/useSpeechSynthesis'
 import MicButton from './MicButton'
-import { Assessment } from '@/lib/types'
 
 interface PhrasePhaseProps {
   cluster: Cluster
   unitId: string
+  dialect: Dialect
   onComplete: () => void
 }
 
-export default function PhrasePhase({ cluster, unitId, onComplete }: PhrasePhaseProps) {
+export default function PhrasePhase({ cluster, unitId, dialect, onComplete }: PhrasePhaseProps) {
   const [assessment, setAssessment] = useState<Assessment | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [attempts, setAttempts] = useState(0)
   const [nothingHeard, setNothingHeard] = useState(false)
 
+  const lang = dialect === 'cantonese' ? 'zh-HK' : 'zh-CN'
   const { transcript, interimTranscript, isListening, isSupported, start, stop, reset } =
-    useSpeechRecognition('zh-CN')
+    useSpeechRecognition(lang)
   const { speak } = useSpeechSynthesis()
 
   // Auto-submit once a final transcript lands (triggered by releasing the button)
@@ -52,6 +53,7 @@ export default function PhrasePhase({ cluster, unitId, onComplete }: PhrasePhase
           userTranscript: spokenText,
           clusterId: cluster.id,
           unitId,
+          dialect,
           phase: 'respond',
         }),
       })
@@ -159,7 +161,7 @@ export default function PhrasePhase({ cluster, unitId, onComplete }: PhrasePhase
 
         {/* Listen button */}
         <button
-          onClick={() => speak(cluster.phrase.chinese)}
+          onClick={() => speak(cluster.phrase.chinese, lang)}
           className="cny-pill"
           style={{ marginTop: '0.75rem', width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.4rem', padding: '0.45rem', background: 'transparent', color: 'var(--crimson)', fontSize: '0.78rem', fontWeight: 700, cursor: 'pointer', border: 'none', position: 'relative', zIndex: 1 }}
         >
