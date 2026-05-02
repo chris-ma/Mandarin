@@ -3472,6 +3472,390 @@ export const units: Unit[] = [
       },
     ],
   },
+
+  // ─── CANTONESE: 5 NEW UNITS ───────────────────────────────────────────────
+  {
+    id: 'cant-basics-transport',
+    level: 'basics',
+    dialect: 'cantonese',
+    title: 'Getting Around HK',
+    description: 'MTR, minibus, tram and Star Ferry',
+    imageQuery: 'hong kong MTR subway station',
+    clusters: [
+      {
+        id: 'cant-transport-1',
+        title: 'Taking the MTR',
+        scenarioDescription: 'Navigating the MTR in Hong Kong',
+        conversationContext: 'You are a friendly local at an MTR station. The learner needs to get to a famous destination. Help them figure out which line to take and where to change.',
+        words: [
+          { character: '地鐵', pinyin: 'dei6 tit3', meaning: 'MTR / subway', phoneticGuide: 'day TIT', toneNote: 'low, mid-falling', imageQuery: 'hong kong mtr train station' },
+          { character: '月台', pinyin: 'jyut6 toi4', meaning: 'Platform', phoneticGuide: 'yuet TOY', toneNote: 'low, rising', imageQuery: 'train platform metro' },
+          { character: '落車', pinyin: 'lok6 ce1', meaning: 'Get off (transport)', phoneticGuide: 'lok CHE', toneNote: 'low, flat', imageQuery: 'getting off train exit' },
+        ],
+        phrase: {
+          chinese: '去旺角要喺邊站落車？',
+          pinyin: 'heoi3 wong6 gok3 jiu3 hai2 bin1 zaam6 lok6 ce1?',
+          meaning: 'Which station do I get off for Mong Kok?',
+          breakdown: [
+            { chinese: '去旺角', pinyin: 'heoi3 wong6 gok3', meaning: 'to go to Mong Kok' },
+            { chinese: '喺邊站', pinyin: 'hai2 bin1 zaam6', meaning: 'at which station' },
+            { chinese: '落車', pinyin: 'lok6 ce1', meaning: 'get off' },
+          ],
+        },
+        phrases: [
+          {
+            chinese: '去旺角要喺邊站落車？',
+            pinyin: 'heoi3 wong6 gok3 jiu3 hai2 bin1 zaam6 lok6 ce1?',
+            meaning: 'Which station do I get off for Mong Kok?',
+            breakdown: [
+              { chinese: '去旺角', pinyin: 'heoi3 wong6 gok3', meaning: 'to Mong Kok' },
+              { chinese: '喺邊站落車', pinyin: 'hai2 bin1 zaam6 lok6 ce1', meaning: 'get off at which station' },
+            ],
+          },
+          {
+            chinese: '要唔要轉線？',
+            pinyin: 'jiu3 m4 jiu3 zyun2 sin3?',
+            meaning: 'Do I need to change lines?',
+            breakdown: [
+              { chinese: '要唔要', pinyin: 'jiu3 m4 jiu3', meaning: 'do I need to' },
+              { chinese: '轉線', pinyin: 'zyun2 sin3', meaning: 'change lines' },
+            ],
+          },
+          {
+            chinese: '下一站係中環。',
+            pinyin: 'haa6 jat1 zaam6 hai6 zung1 waan4.',
+            meaning: 'The next station is Central.',
+            breakdown: [
+              { chinese: '下一站', pinyin: 'haa6 jat1 zaam6', meaning: 'next station' },
+              { chinese: '係中環', pinyin: 'hai6 zung1 waan4', meaning: 'is Central' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'cant-transport-2',
+        title: 'Minibus & Tram',
+        scenarioDescription: 'Catching a green minibus or hopping on the tram',
+        conversationContext: 'You are a minibus driver in Hong Kong. The learner wants to know if your bus goes to a specific destination and how much the fare is.',
+        words: [
+          { character: '小巴', pinyin: 'siu2 baa1', meaning: 'Minibus', phoneticGuide: 'siu BAH', toneNote: 'low-rising, flat', imageQuery: 'hong kong green minibus' },
+          { character: '叮叮', pinyin: 'ding1 ding1', meaning: 'Tram (ding ding)', phoneticGuide: 'ding ding', toneNote: 'flat, flat', imageQuery: 'hong kong tram ding ding' },
+          { character: '車費', pinyin: 'ce1 fai3', meaning: 'Fare', phoneticGuide: 'che FAI', toneNote: 'flat, mid-falling', imageQuery: 'bus fare payment coins' },
+        ],
+        phrase: {
+          chinese: '呢架小巴去銅鑼灣嗎？車費係幾多？',
+          pinyin: 'ni1 gaa3 siu2 baa1 heoi3 tung4 lo4 waan1 maa3? ce1 fai3 hai6 gei2 do1?',
+          meaning: 'Does this minibus go to Causeway Bay? How much is the fare?',
+          breakdown: [
+            { chinese: '呢架小巴', pinyin: 'ni1 gaa3 siu2 baa1', meaning: 'this minibus' },
+            { chinese: '去銅鑼灣', pinyin: 'heoi3 tung4 lo4 waan1', meaning: 'go to Causeway Bay' },
+            { chinese: '車費幾多', pinyin: 'ce1 fai3 gei2 do1', meaning: 'how much is the fare' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'cant-travel-streetfood',
+    level: 'travel',
+    dialect: 'cantonese',
+    title: 'Street Food & Snacks',
+    description: 'Dai pai dong, fish balls and HK snacks',
+    imageQuery: 'hong kong street food dai pai dong night',
+    clusters: [
+      {
+        id: 'cant-streetfood-1',
+        title: 'Dai Pai Dong',
+        scenarioDescription: 'Ordering at a Hong Kong open-air dai pai dong (street stall)',
+        conversationContext: 'You are a loud, friendly cook at a busy Hong Kong dai pai dong. The learner wants to order. Be lively and suggest popular dishes.',
+        words: [
+          { character: '大牌檔', pinyin: 'daai6 paai4 dong3', meaning: 'Dai pai dong (street stall)', phoneticGuide: 'dai pie DONG', toneNote: 'low, rising, mid-falling', imageQuery: 'hong kong dai pai dong street food stall' },
+          { character: '炒麵', pinyin: 'caau2 min6', meaning: 'Fried noodles', phoneticGuide: 'chow MIN', toneNote: 'low-rising, low', imageQuery: 'fried noodles wok hong kong' },
+          { character: '加辣', pinyin: 'gaa1 laat6', meaning: 'Add chilli / make it spicy', phoneticGuide: 'gah LAHT', toneNote: 'flat, low', imageQuery: 'chilli spicy sauce noodles' },
+        ],
+        phrase: {
+          chinese: '一碟炒麵，唔好加辣，多謝！',
+          pinyin: 'jat1 dip6 caau2 min6, m4 hou2 gaa1 laat6, do1 ze6!',
+          meaning: 'One plate of fried noodles, no chilli, thank you!',
+          breakdown: [
+            { chinese: '一碟炒麵', pinyin: 'jat1 dip6 caau2 min6', meaning: 'one plate of fried noodles' },
+            { chinese: '唔好加辣', pinyin: 'm4 hou2 gaa1 laat6', meaning: 'no chilli please' },
+            { chinese: '多謝', pinyin: 'do1 ze6', meaning: 'thank you' },
+          ],
+        },
+        phrases: [
+          {
+            chinese: '一碟炒麵，唔好加辣，多謝！',
+            pinyin: 'jat1 dip6 caau2 min6, m4 hou2 gaa1 laat6, do1 ze6!',
+            meaning: 'One plate of fried noodles, no chilli, thank you!',
+            breakdown: [
+              { chinese: '一碟炒麵', pinyin: 'jat1 dip6 caau2 min6', meaning: 'one plate of fried noodles' },
+              { chinese: '唔好加辣', pinyin: 'm4 hou2 gaa1 laat6', meaning: 'no chilli' },
+            ],
+          },
+          {
+            chinese: '今日有冇推介？',
+            pinyin: 'gam1 jat6 jau5 mou5 teoi1 gaai3?',
+            meaning: "What's the recommendation today?",
+            breakdown: [
+              { chinese: '今日', pinyin: 'gam1 jat6', meaning: 'today' },
+              { chinese: '有冇推介', pinyin: 'jau5 mou5 teoi1 gaai3', meaning: 'any recommendations' },
+            ],
+          },
+          {
+            chinese: '打包定係堂食？',
+            pinyin: 'daa2 baau1 ding6 hai6 tong4 sik6?',
+            meaning: 'Takeaway or eat in?',
+            breakdown: [
+              { chinese: '打包', pinyin: 'daa2 baau1', meaning: 'takeaway' },
+              { chinese: '定係', pinyin: 'ding6 hai6', meaning: 'or' },
+              { chinese: '堂食', pinyin: 'tong4 sik6', meaning: 'eat in' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'cant-streetfood-2',
+        title: 'HK Snacks',
+        scenarioDescription: 'Buying classic Hong Kong street snacks',
+        conversationContext: 'You run a classic Hong Kong snack stall selling egg waffles, fish balls and curry squid. The learner wants to try everything. Be enthusiastic about your food.',
+        words: [
+          { character: '雞蛋仔', pinyin: 'gai1 daan6 zai2', meaning: 'Egg waffle', phoneticGuide: 'gai DAN jai', toneNote: 'flat, low, low-rising', imageQuery: 'hong kong egg waffle bubble waffle' },
+          { character: '魚蛋', pinyin: 'jyu4 daan6', meaning: 'Fish ball', phoneticGuide: 'yew DAN', toneNote: 'rising, low', imageQuery: 'hong kong fish balls street food skewer' },
+          { character: '咖喱', pinyin: 'gaa3 lei1', meaning: 'Curry', phoneticGuide: 'gah LAY', toneNote: 'mid-falling, flat', imageQuery: 'curry sauce dipping squid' },
+        ],
+        phrase: {
+          chinese: '我要一串魚蛋，加咖喱汁，幾多錢？',
+          pinyin: 'ngo5 jiu3 jat1 cyn3 jyu4 daan6, gaa1 gaa3 lei1 zap1, gei2 do1 cin2?',
+          meaning: 'I want one skewer of fish balls with curry sauce, how much?',
+          breakdown: [
+            { chinese: '一串魚蛋', pinyin: 'jat1 cyn3 jyu4 daan6', meaning: 'one skewer of fish balls' },
+            { chinese: '加咖喱汁', pinyin: 'gaa1 gaa3 lei1 zap1', meaning: 'add curry sauce' },
+            { chinese: '幾多錢', pinyin: 'gei2 do1 cin2', meaning: 'how much' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'cant-advanced-social',
+    level: 'advanced',
+    dialect: 'cantonese',
+    title: 'Going Out',
+    description: 'Karaoke, bars and a night out in HK',
+    imageQuery: 'hong kong nightlife karaoke bar',
+    clusters: [
+      {
+        id: 'cant-social-1',
+        title: 'Planning a Night Out',
+        scenarioDescription: 'Texting a friend to plan a night out in Lan Kwai Fong',
+        conversationContext: 'You are a fun-loving Hong Kong friend. You and the learner are planning where to go tonight. Suggest karaoke or LKF and make arrangements.',
+        words: [
+          { character: '唱K', pinyin: 'coeng3 kei1', meaning: 'Karaoke', phoneticGuide: 'cheung KAY', toneNote: 'mid-falling, flat', imageQuery: 'karaoke hong kong singing friends' },
+          { character: '幾點', pinyin: 'gei2 dim2', meaning: 'What time', phoneticGuide: 'gay DIM', toneNote: 'low-rising, low-rising', imageQuery: 'clock time meeting friends' },
+          { character: '集合', pinyin: 'zaap6 hap6', meaning: 'Meet up / gather', phoneticGuide: 'jaap HUP', toneNote: 'low, low', imageQuery: 'friends meeting gathering city' },
+        ],
+        phrase: {
+          chinese: '今晚去唱K定係去蘭桂坊？幾點集合？',
+          pinyin: 'gam1 maan5 heoi3 coeng3 kei1 ding6 hai6 heoi3 laan4 gwai3 fong1? gei2 dim2 zaap6 hap6?',
+          meaning: 'Tonight karaoke or Lan Kwai Fong? What time shall we meet?',
+          breakdown: [
+            { chinese: '今晚', pinyin: 'gam1 maan5', meaning: 'tonight' },
+            { chinese: '唱K', pinyin: 'coeng3 kei1', meaning: 'karaoke' },
+            { chinese: '蘭桂坊', pinyin: 'laan4 gwai3 fong1', meaning: 'Lan Kwai Fong' },
+            { chinese: '幾點集合', pinyin: 'gei2 dim2 zaap6 hap6', meaning: 'what time to meet' },
+          ],
+        },
+        phrases: [
+          {
+            chinese: '今晚去唱K定係去蘭桂坊？',
+            pinyin: 'gam1 maan5 heoi3 coeng3 kei1 ding6 hai6 heoi3 laan4 gwai3 fong1?',
+            meaning: 'Tonight karaoke or Lan Kwai Fong?',
+            breakdown: [
+              { chinese: '今晚', pinyin: 'gam1 maan5', meaning: 'tonight' },
+              { chinese: '唱K', pinyin: 'coeng3 kei1', meaning: 'karaoke' },
+              { chinese: '定係', pinyin: 'ding6 hai6', meaning: 'or' },
+              { chinese: '蘭桂坊', pinyin: 'laan4 gwai3 fong1', meaning: 'Lan Kwai Fong' },
+            ],
+          },
+          {
+            chinese: '幾點集合？喺邊度見？',
+            pinyin: 'gei2 dim2 zaap6 hap6? hai2 bin1 dou6 gin3?',
+            meaning: 'What time shall we meet? Where to meet?',
+            breakdown: [
+              { chinese: '幾點集合', pinyin: 'gei2 dim2 zaap6 hap6', meaning: 'what time to meet' },
+              { chinese: '喺邊度見', pinyin: 'hai2 bin1 dou6 gin3', meaning: 'where to meet' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'cant-social-2',
+        title: 'At the Bar',
+        scenarioDescription: 'Ordering drinks at a bar in Hong Kong',
+        conversationContext: 'You are a bartender in a popular Hong Kong bar. The learner wants to order drinks for their group. Be friendly, ask what they want, and tell them the price.',
+        words: [
+          { character: '生啤', pinyin: 'saang1 be1', meaning: 'Draft beer', phoneticGuide: 'saang BAY', toneNote: 'flat, flat', imageQuery: 'draft beer pub bar glasses' },
+          { character: '乾杯', pinyin: 'gon1 bui1', meaning: 'Cheers / bottoms up', phoneticGuide: 'gon BUI', toneNote: 'flat, flat', imageQuery: 'cheers clinking glasses friends' },
+          { character: '埋單', pinyin: 'maai4 daan1', meaning: 'Pay the bill', phoneticGuide: 'my DAHN', toneNote: 'rising, flat', imageQuery: 'paying bar bill receipt' },
+        ],
+        phrase: {
+          chinese: '三杯生啤，幾多錢？乾杯！',
+          pinyin: 'saam1 bui1 saang1 be1, gei2 do1 cin2? gon1 bui1!',
+          meaning: 'Three draft beers, how much? Cheers!',
+          breakdown: [
+            { chinese: '三杯生啤', pinyin: 'saam1 bui1 saang1 be1', meaning: 'three draft beers' },
+            { chinese: '幾多錢', pinyin: 'gei2 do1 cin2', meaning: 'how much' },
+            { chinese: '乾杯', pinyin: 'gon1 bui1', meaning: 'cheers' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'cant-advanced-festivals',
+    level: 'advanced',
+    dialect: 'cantonese',
+    title: 'Festivals & Traditions',
+    description: 'Lunar New Year, Mid-Autumn and HK customs',
+    imageQuery: 'hong kong lunar new year fireworks lantern',
+    clusters: [
+      {
+        id: 'cant-festivals-1',
+        title: 'Lunar New Year',
+        scenarioDescription: 'Celebrating Chinese New Year with a Hong Kong family',
+        conversationContext: 'You are a Cantonese family member welcoming the learner to a Lunar New Year gathering. Teach them the greetings, explain the traditions and share food.',
+        words: [
+          { character: '恭喜發財', pinyin: 'gung1 hei2 faat3 coi4', meaning: 'Wishing you prosperity (CNY greeting)', phoneticGuide: 'gong HEY faat CHOY', toneNote: 'flat, low-rising, mid-falling, rising', imageQuery: 'chinese new year red envelope gong hei fat choy' },
+          { character: '利是', pinyin: 'lai6 si6', meaning: 'Red envelope / lucky money', phoneticGuide: 'lai SEE', toneNote: 'low, low', imageQuery: 'red envelope hong kong lai see new year' },
+          { character: '年糕', pinyin: 'nin4 gou1', meaning: 'New year cake (nian gao)', phoneticGuide: 'nin GOH', toneNote: 'rising, flat', imageQuery: 'nian gao new year cake sticky rice' },
+        ],
+        phrase: {
+          chinese: '恭喜發財！新年快樂！多謝利是！',
+          pinyin: 'gung1 hei2 faat3 coi4! san1 nin4 faai3 lok6! do1 ze6 lai6 si6!',
+          meaning: 'Wishing you prosperity! Happy New Year! Thank you for the red envelope!',
+          breakdown: [
+            { chinese: '恭喜發財', pinyin: 'gung1 hei2 faat3 coi4', meaning: 'wishing you prosperity' },
+            { chinese: '新年快樂', pinyin: 'san1 nin4 faai3 lok6', meaning: 'Happy New Year' },
+            { chinese: '多謝利是', pinyin: 'do1 ze6 lai6 si6', meaning: 'thank you for the red envelope' },
+          ],
+        },
+        phrases: [
+          {
+            chinese: '恭喜發財！新年快樂！',
+            pinyin: 'gung1 hei2 faat3 coi4! san1 nin4 faai3 lok6!',
+            meaning: 'Wishing you prosperity! Happy New Year!',
+            breakdown: [
+              { chinese: '恭喜發財', pinyin: 'gung1 hei2 faat3 coi4', meaning: 'wishing you prosperity' },
+              { chinese: '新年快樂', pinyin: 'san1 nin4 faai3 lok6', meaning: 'Happy New Year' },
+            ],
+          },
+          {
+            chinese: '多謝利是，身體健康！',
+            pinyin: 'do1 ze6 lai6 si6, san1 tai2 gin6 hong1!',
+            meaning: 'Thank you for the red envelope, wishing you good health!',
+            breakdown: [
+              { chinese: '多謝利是', pinyin: 'do1 ze6 lai6 si6', meaning: 'thank you for the red envelope' },
+              { chinese: '身體健康', pinyin: 'san1 tai2 gin6 hong1', meaning: 'good health' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'cant-festivals-2',
+        title: 'Mid-Autumn Festival',
+        scenarioDescription: 'Celebrating Mid-Autumn Festival with mooncakes and lanterns',
+        conversationContext: 'You are a Hong Kong friend sharing mooncakes with the learner during Mid-Autumn Festival. Ask if they have tried different mooncake flavours and explain the tradition.',
+        words: [
+          { character: '中秋節', pinyin: 'zung1 cau1 zit3', meaning: 'Mid-Autumn Festival', phoneticGuide: 'joong CHAO jit', toneNote: 'flat, flat, mid-falling', imageQuery: 'mid autumn festival mooncake lantern' },
+          { character: '月餅', pinyin: 'jyut6 beng2', meaning: 'Mooncake', phoneticGuide: 'yuet BENG', toneNote: 'low, low-rising', imageQuery: 'mooncake chinese mid autumn festival' },
+          { character: '燈籠', pinyin: 'dang1 lung4', meaning: 'Lantern', phoneticGuide: 'dang LONG', toneNote: 'flat, rising', imageQuery: 'hong kong lantern mid autumn festival night' },
+        ],
+        phrase: {
+          chinese: '中秋節快樂！你試過蓮蓉月餅未？',
+          pinyin: 'zung1 cau1 zit3 faai3 lok6! nei5 si3 gwo3 lin4 jung4 jyut6 beng2 mei6?',
+          meaning: 'Happy Mid-Autumn Festival! Have you tried lotus paste mooncake?',
+          breakdown: [
+            { chinese: '中秋節快樂', pinyin: 'zung1 cau1 zit3 faai3 lok6', meaning: 'Happy Mid-Autumn Festival' },
+            { chinese: '試過', pinyin: 'si3 gwo3', meaning: 'have tried' },
+            { chinese: '蓮蓉月餅', pinyin: 'lin4 jung4 jyut6 beng2', meaning: 'lotus paste mooncake' },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    id: 'cant-advanced-compliments',
+    level: 'advanced',
+    dialect: 'cantonese',
+    title: 'Compliments & Banter',
+    description: 'HK-style compliments, jokes and friendly teasing',
+    imageQuery: 'hong kong friends laughing conversation',
+    clusters: [
+      {
+        id: 'cant-compliments-1',
+        title: 'Giving Compliments',
+        scenarioDescription: 'Complimenting a friend on their cooking or new haircut',
+        conversationContext: 'You are a friendly Hong Kong local who the learner has just complimented. React modestly but warmly, and return the compliment. Use casual Cantonese.',
+        words: [
+          { character: '靚', pinyin: 'leng3', meaning: 'Beautiful / great / nice', phoneticGuide: 'leng', toneNote: 'mid-falling', imageQuery: 'beautiful nice looking compliment' },
+          { character: '叻', pinyin: 'lek1', meaning: 'Clever / skilled / impressive', phoneticGuide: 'lek', toneNote: 'flat', imageQuery: 'clever impressive skilled person' },
+          { character: '過獎', pinyin: 'gwo3 zoeng2', meaning: "You flatter me (modest response to compliments)", phoneticGuide: 'gwaw JEUNG', toneNote: 'mid-falling, low-rising', imageQuery: 'modest humble gesture compliment' },
+        ],
+        phrase: {
+          chinese: '你煮嘅嘢好靚，真係好叻！',
+          pinyin: 'nei5 zyu2 ge3 je5 hou2 leng3, zan1 hai6 hou2 lek1!',
+          meaning: "The food you cooked looks great, you're really talented!",
+          breakdown: [
+            { chinese: '你煮嘅嘢', pinyin: 'nei5 zyu2 ge3 je5', meaning: 'the food you cooked' },
+            { chinese: '好靚', pinyin: 'hou2 leng3', meaning: 'very nice/beautiful' },
+            { chinese: '真係好叻', pinyin: 'zan1 hai6 hou2 lek1', meaning: "you're really talented" },
+          ],
+        },
+        phrases: [
+          {
+            chinese: '你煮嘅嘢好靚，真係好叻！',
+            pinyin: 'nei5 zyu2 ge3 je5 hou2 leng3, zan1 hai6 hou2 lek1!',
+            meaning: "The food you cooked looks amazing, you're really talented!",
+            breakdown: [
+              { chinese: '好靚', pinyin: 'hou2 leng3', meaning: 'looks great' },
+              { chinese: '好叻', pinyin: 'hou2 lek1', meaning: 'very talented' },
+            ],
+          },
+          {
+            chinese: '過獎喇，係你教得好！',
+            pinyin: 'gwo3 zoeng2 laa3, hai6 nei5 gaau3 dak1 hou2!',
+            meaning: "You flatter me, it's because you taught me well!",
+            breakdown: [
+              { chinese: '過獎', pinyin: 'gwo3 zoeng2', meaning: 'you flatter me' },
+              { chinese: '教得好', pinyin: 'gaau3 dak1 hou2', meaning: 'taught well' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'cant-compliments-2',
+        title: 'Casual Banter',
+        scenarioDescription: 'Light-hearted banter with a Cantonese-speaking friend',
+        conversationContext: 'You are a close Hong Kong friend bantering with the learner. Use casual, warm Cantonese slang. Joke around, but stay encouraging about their language learning.',
+        words: [
+          { character: '串', pinyin: 'cyun3', meaning: 'Cheeky / snarky (affectionate)', phoneticGuide: 'chyun', toneNote: 'mid-falling', imageQuery: 'cheeky grinning friends joking' },
+          { character: '識講', pinyin: 'sik1 gong2', meaning: 'Know how to speak / can say', phoneticGuide: 'sik GONG', toneNote: 'flat, low-rising', imageQuery: 'speaking talking language practice' },
+          { character: '唔錯', pinyin: 'm4 co3', meaning: 'Not bad / pretty good', phoneticGuide: 'mm CHAW', toneNote: 'mid, mid-falling', imageQuery: 'thumbs up not bad good job' },
+        ],
+        phrase: {
+          chinese: '你廣東話講得唔錯喎，識講幾句！',
+          pinyin: 'nei5 gwong2 dung1 waa2 gong2 dak1 m4 co3 wo3, sik1 gong2 gei2 geoi3!',
+          meaning: 'Your Cantonese is pretty good, you can say a few sentences!',
+          breakdown: [
+            { chinese: '廣東話', pinyin: 'gwong2 dung1 waa2', meaning: 'Cantonese' },
+            { chinese: '講得唔錯', pinyin: 'gong2 dak1 m4 co3', meaning: 'speaks it pretty well' },
+            { chinese: '識講幾句', pinyin: 'sik1 gong2 gei2 geoi3', meaning: 'can say a few sentences' },
+          ],
+        },
+      },
+    ],
+  },
 ]
 
 export function getUnitsByLevel(level: string, dialect: import('./types').Dialect = 'putonghua'): Unit[] {
