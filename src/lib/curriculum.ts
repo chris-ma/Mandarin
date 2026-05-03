@@ -3856,6 +3856,294 @@ export const units: Unit[] = [
       },
     ],
   },
+
+  // ─── PUTONGHUA: SLANG ────────────────────────────────────────────────────
+  {
+    id: 'advanced-slang',
+    level: 'advanced',
+    dialect: 'putonghua',
+    title: 'Slang & Street Talk',
+    description: 'Sound natural with everyday Chinese slang',
+    imageQuery: 'young people china street laughing',
+    clusters: [
+      {
+        id: 'advanced-slang-1',
+        title: 'Internet & Youth Slang',
+        scenarioDescription: 'Hanging out with young locals who use casual internet slang',
+        conversationContext:
+          'You are a young Chinese friend chatting casually. Use popular internet slang naturally — things like 666, 牛, 厉害 — and react excitedly when the learner uses slang correctly.',
+        words: [
+          {
+            character: '牛',
+            pinyin: 'niú',
+            meaning: 'Cool / impressive (lit. cow)',
+            phoneticGuide: 'nyoh',
+            toneNote: '"niu" rises (2nd tone) — say it with rising surprise',
+            imageQuery: 'impressed reaction wow face',
+          },
+          {
+            character: '666',
+            pinyin: 'liù liù liù',
+            meaning: 'Awesome / smooth (internet slang)',
+            phoneticGuide: 'lyoh lyoh lyoh',
+            toneNote: 'all falling (4th tone) — "6" sounds like 溜 (skilled)',
+            imageQuery: 'victory celebration fist pump',
+          },
+          {
+            character: '厉害',
+            pinyin: 'lìhài',
+            meaning: 'Impressive / fierce / amazing',
+            phoneticGuide: 'lee HYE',
+            toneNote: 'both syllables fall (4th, 4th)',
+            imageQuery: 'admiration thumbs up',
+          },
+        ],
+        phrase: {
+          chinese: '你真的太厉害了，牛！666！',
+          pinyin: 'Nǐ zhēn de tài lìhài le, niú! Liù liù liù!',
+          meaning: "You're really amazing, wow! Awesome!",
+          breakdown: [
+            { chinese: '真的', pinyin: 'zhēn de', meaning: 'really' },
+            { chinese: '太…了', pinyin: 'tài…le', meaning: 'so/too…' },
+            { chinese: '厉害', pinyin: 'lìhài', meaning: 'impressive' },
+            { chinese: '牛', pinyin: 'niú', meaning: 'cool' },
+          ],
+        },
+      },
+      {
+        id: 'advanced-slang-2',
+        title: 'Casual Everyday Expressions',
+        scenarioDescription: 'Making decisions with friends using super casual Mandarin',
+        conversationContext:
+          'You are a laid-back Chinese friend deciding where to eat with the learner. Use casual expressions: 随便, 算了, 加油, 无所谓. Keep the chat relaxed and fun.',
+        words: [
+          {
+            character: '加油',
+            pinyin: 'jiā yóu',
+            meaning: 'Go for it! / Keep going! (lit. add fuel)',
+            phoneticGuide: 'jya YOH',
+            toneNote: '"jia" is flat (1st), "you" rises (2nd)',
+            imageQuery: 'cheering support team motivation',
+          },
+          {
+            character: '随便',
+            pinyin: 'suíbiàn',
+            meaning: 'Whatever / up to you',
+            phoneticGuide: 'sway BYEN',
+            toneNote: '"sui" rises (2nd), "bian" falls (4th)',
+            imageQuery: 'casual shrug decision',
+          },
+          {
+            character: '算了',
+            pinyin: 'suàn le',
+            meaning: 'Forget it / never mind',
+            phoneticGuide: 'swahn luh',
+            toneNote: '"suan" falls (4th), "le" is neutral',
+            imageQuery: 'letting go moving on',
+          },
+        ],
+        phrase: {
+          chinese: '随便啊，算了，你来决定，加油！',
+          pinyin: 'Suíbiàn a, suàn le, nǐ lái juédìng, jiā yóu!',
+          meaning: "Whatever, forget it, you decide, go for it!",
+          breakdown: [
+            { chinese: '随便', pinyin: 'suíbiàn', meaning: 'whatever' },
+            { chinese: '算了', pinyin: 'suàn le', meaning: 'forget it' },
+            { chinese: '你来决定', pinyin: 'nǐ lái juédìng', meaning: 'you decide' },
+            { chinese: '加油', pinyin: 'jiā yóu', meaning: 'go for it' },
+          ],
+        },
+      },
+      {
+        id: 'advanced-slang-3',
+        title: 'Reactions & Exclamations',
+        scenarioDescription: 'Reacting to surprising news like a local',
+        conversationContext:
+          'You are telling the learner surprising news and reacting to their responses. Use expressive slang: 哇塞, 真的假的, 不是吧, 绝了. Be animated and casual.',
+        words: [
+          {
+            character: '哇塞',
+            pinyin: 'wā sài',
+            meaning: 'Whoa! / Oh wow! (strong surprise)',
+            phoneticGuide: 'wah SYE',
+            toneNote: '"wa" is flat (1st), "sai" falls (4th)',
+            imageQuery: 'surprise shock reaction',
+          },
+          {
+            character: '绝了',
+            pinyin: 'jué le',
+            meaning: 'Incredible / out of this world',
+            phoneticGuide: 'jweh luh',
+            toneNote: '"jue" rises-falls (2nd), "le" is neutral',
+            imageQuery: 'mind blown amazed expression',
+          },
+          {
+            character: '真的假的',
+            pinyin: 'zhēn de jiǎ de',
+            meaning: 'No way, really?! (lit. real or fake)',
+            phoneticGuide: 'jun duh jya duh',
+            toneNote: 'flat-flat-falling-rising-flat — say it fast',
+            imageQuery: 'disbelief questioning face',
+          },
+        ],
+        phrase: {
+          chinese: '哇塞，真的假的？这也太绝了！',
+          pinyin: 'Wā sài, zhēn de jiǎ de? Zhè yě tài jué le!',
+          meaning: "Whoa, no way?! That's truly incredible!",
+          breakdown: [
+            { chinese: '哇塞', pinyin: 'wā sài', meaning: 'whoa!' },
+            { chinese: '真的假的', pinyin: 'zhēn de jiǎ de', meaning: 'no way, really?' },
+            { chinese: '太绝了', pinyin: 'tài jué le', meaning: 'too incredible' },
+          ],
+        },
+      },
+    ],
+  },
+
+  // ─── CANTONESE: SLANG ────────────────────────────────────────────────────
+  {
+    id: 'cant-advanced-slang',
+    level: 'advanced',
+    dialect: 'cantonese',
+    title: '潮語 Slang & Street Talk',
+    description: 'Sound like a real Hong Konger with local slang',
+    imageQuery: 'hong kong youth street fashion mong kok',
+    clusters: [
+      {
+        id: 'cant-slang-1',
+        title: 'Essential HK Slang',
+        scenarioDescription: 'Hanging out with young Hong Kongers at a cha chaan teng',
+        conversationContext:
+          'You are a young Hong Konger at a cha chaan teng with the learner. Use classic HK slang naturally — 勁, 靚, 好嘢, 冇問題 — and react warmly when they try.',
+        words: [
+          {
+            character: '勁',
+            pinyin: 'ging6',
+            meaning: 'Awesome / intense / powerful',
+            phoneticGuide: 'ging (like "ring" with a G)',
+            toneNote: 'low falling tone (6th) — drop your voice',
+            imageQuery: 'hong kong youth excited fist pump',
+          },
+          {
+            character: '靚',
+            pinyin: 'leng3',
+            meaning: 'Pretty / handsome / nice-looking',
+            phoneticGuide: 'leng (rhymes with "ring")',
+            toneNote: 'mid level tone (3rd) — keep it flat',
+            imageQuery: 'stylish fashion hong kong street',
+          },
+          {
+            character: '好嘢',
+            pinyin: 'hou2 ye5',
+            meaning: 'Great stuff! / Awesome!',
+            phoneticGuide: 'how YEH',
+            toneNote: '"hou" rises (2nd), "ye" low rising (5th)',
+            imageQuery: 'thumbs up celebration',
+          },
+        ],
+        phrase: {
+          chinese: '你件衫好靚喎！真係勁，好嘢！',
+          pinyin: 'nei5 gin6 saam1 hou2 leng3 wo3! zan1 hai6 ging6, hou2 ye5!',
+          meaning: 'Your shirt looks great! Really awesome, nice one!',
+          breakdown: [
+            { chinese: '件衫', pinyin: 'gin6 saam1', meaning: 'clothing/shirt' },
+            { chinese: '好靚', pinyin: 'hou2 leng3', meaning: 'very pretty' },
+            { chinese: '真係', pinyin: 'zan1 hai6', meaning: 'really is' },
+            { chinese: '勁', pinyin: 'ging6', meaning: 'awesome' },
+            { chinese: '好嘢', pinyin: 'hou2 ye5', meaning: 'great stuff' },
+          ],
+        },
+      },
+      {
+        id: 'cant-slang-2',
+        title: 'Reactions & Comebacks',
+        scenarioDescription: 'Casual banter and reactions with local friends',
+        conversationContext:
+          'You are a witty Hong Konger friend having casual banter. React to the learner using HK slang like 係喎, 唔係掛, 算數, 抵死. Keep it light, funny, and natural.',
+        words: [
+          {
+            character: '係喎',
+            pinyin: 'hai6 wo3',
+            meaning: 'Oh yeah! / That\'s right! (realising something)',
+            phoneticGuide: 'hai WO',
+            toneNote: '"hai" low falling (6th), "wo" low level (1st)',
+            imageQuery: 'realisation aha moment',
+          },
+          {
+            character: '算數',
+            pinyin: 'syun3 sou3',
+            meaning: 'Forget it / never mind / call it done',
+            phoneticGuide: 'syne SO',
+            toneNote: '"syun" mid falling (3rd), "sou" mid falling (3rd)',
+            imageQuery: 'letting go shrug',
+          },
+          {
+            character: '抵死',
+            pinyin: 'dai2 sei2',
+            meaning: 'Hilarious / you\'re killing me (endearing)',
+            phoneticGuide: 'die SAY',
+            toneNote: 'both low rising (2nd) — said with a laugh',
+            imageQuery: 'laughing funny reaction hong kong',
+          },
+        ],
+        phrase: {
+          chinese: '係喎！抵死㗎你，算數啦，下次啦！',
+          pinyin: 'hai6 wo3! dai2 sei2 gaa3 nei5, syun3 sou3 laa1, haa6 ci3 laa1!',
+          meaning: "Oh right! You're so funny, forget it, next time!",
+          breakdown: [
+            { chinese: '係喎', pinyin: 'hai6 wo3', meaning: 'oh yeah/right' },
+            { chinese: '抵死', pinyin: 'dai2 sei2', meaning: 'hilarious' },
+            { chinese: '算數', pinyin: 'syun3 sou3', meaning: 'forget it' },
+            { chinese: '下次', pinyin: 'haa6 ci3', meaning: 'next time' },
+          ],
+        },
+      },
+      {
+        id: 'cant-slang-3',
+        title: 'Internet & Modern HK Slang',
+        scenarioDescription: 'Texting-style chat about everyday life with a local',
+        conversationContext:
+          'You are a young Hong Konger using modern internet and street slang. Mix in terms like 廢 (useless/pathetic), 撚 (intensifier, mild), 打卡 (check in for the \'gram), 爆 (explosive/viral). Keep it fun.',
+        words: [
+          {
+            character: '打卡',
+            pinyin: 'daa2 kaa1',
+            meaning: 'Check in / take a photo for social media',
+            phoneticGuide: 'daa KAA',
+            toneNote: '"daa" low rising (2nd), "kaa" high level (1st)',
+            imageQuery: 'selfie instagram hong kong food',
+          },
+          {
+            character: '爆',
+            pinyin: 'baau3',
+            meaning: 'Viral / exploding with hype / insane',
+            phoneticGuide: 'baaow (like "bow" with a B)',
+            toneNote: 'mid falling (3rd) — short and punchy',
+            imageQuery: 'viral social media trending',
+          },
+          {
+            character: '廢',
+            pinyin: 'fai3',
+            meaning: 'Useless / pathetic / done for (self-deprecating)',
+            phoneticGuide: 'fye (rhymes with "fly")',
+            toneNote: 'mid falling (3rd) — often said about oneself with a laugh',
+            imageQuery: 'exhausted defeated funny face',
+          },
+        ],
+        phrase: {
+          chinese: '呢間餐廳爆紅㗎，快啲去打卡！我好廢，唔識路。',
+          pinyin: 'ni1 gaan1 caan1 teng1 baau3 hung4 gaa3, faai3 di1 heoi3 daa2 kaa1! ngo5 hou2 fai3, m4 sik1 lou6.',
+          meaning: "This restaurant went viral, let's go take pics! I'm hopeless, I don't know the way.",
+          breakdown: [
+            { chinese: '爆紅', pinyin: 'baau3 hung4', meaning: 'went viral' },
+            { chinese: '打卡', pinyin: 'daa2 kaa1', meaning: 'check in / photo op' },
+            { chinese: '好廢', pinyin: 'hou2 fai3', meaning: 'so useless (self-deprecating)' },
+            { chinese: '唔識路', pinyin: 'm4 sik1 lou6', meaning: "don't know the way" },
+          ],
+        },
+      },
+    ],
+  },
 ]
 
 export function getUnitsByLevel(level: string, dialect: import('./types').Dialect = 'putonghua'): Unit[] {
