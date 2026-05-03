@@ -499,6 +499,73 @@ export const units: Unit[] = [
           ],
         },
       },
+      {
+        id: 'basics-numbers-5',
+        title: 'Hundreds & Thousands',
+        scenarioDescription: 'You are shopping for electronics and the prices are in the hundreds',
+        conversationContext:
+          'You are a shop assistant at an electronics store in Beijing. The learner is asking about prices. Help them practise saying and understanding numbers in the hundreds and thousands.',
+        words: [
+          {
+            character: '百',
+            pinyin: 'bǎi',
+            meaning: 'Hundred (100)',
+            phoneticGuide: 'bye',
+            toneNote: 'falls then rises (3rd tone)',
+            imageQuery: 'one hundred yuan rmb cash',
+          },
+          {
+            character: '千',
+            pinyin: 'qiān',
+            meaning: 'Thousand (1,000)',
+            phoneticGuide: 'chyen',
+            toneNote: 'flat high tone (1st)',
+            imageQuery: 'one thousand money counting',
+          },
+          {
+            character: '万',
+            pinyin: 'wàn',
+            meaning: 'Ten thousand (10,000) — key unit in Chinese',
+            phoneticGuide: 'wahn',
+            toneNote: 'falls sharply (4th tone)',
+            imageQuery: 'large number counting calculator',
+          },
+        ],
+        phrase: {
+          chinese: '这个多少钱？两百五十块。',
+          pinyin: 'Zhège duōshao qián? Liǎng bǎi wǔshí kuài.',
+          meaning: 'How much is this? Two hundred and fifty yuan.',
+          breakdown: [
+            { chinese: '多少钱', pinyin: 'duōshao qián', meaning: 'how much?' },
+            { chinese: '两百', pinyin: 'liǎng bǎi', meaning: 'two hundred' },
+            { chinese: '五十', pinyin: 'wǔshí', meaning: 'fifty' },
+            { chinese: '块', pinyin: 'kuài', meaning: 'yuan (informal)' },
+          ],
+        },
+        phrases: [
+          {
+            chinese: '这个多少钱？两百五十块。',
+            pinyin: 'Zhège duōshao qián? Liǎng bǎi wǔshí kuài.',
+            meaning: 'How much is this? Two hundred and fifty yuan.',
+            breakdown: [
+              { chinese: '多少钱', pinyin: 'duōshao qián', meaning: 'how much?' },
+              { chinese: '两百', pinyin: 'liǎng bǎi', meaning: 'two hundred' },
+              { chinese: '五十', pinyin: 'wǔshí', meaning: 'fifty' },
+              { chinese: '块', pinyin: 'kuài', meaning: 'yuan (informal)' },
+            ],
+          },
+          {
+            chinese: '一共一千两百块。',
+            pinyin: 'Yīgòng yī qiān liǎng bǎi kuài.',
+            meaning: 'The total is one thousand two hundred yuan.',
+            breakdown: [
+              { chinese: '一共', pinyin: 'yīgòng', meaning: 'in total' },
+              { chinese: '一千', pinyin: 'yī qiān', meaning: 'one thousand' },
+              { chinese: '两百', pinyin: 'liǎng bǎi', meaning: 'two hundred' },
+            ],
+          },
+        ],
+      },
     ],
   },
 
@@ -2296,6 +2363,74 @@ export const units: Unit[] = [
             { chinese: '幾多錢', pinyin: 'gei2 do1 cin2', meaning: 'how much?' },
           ],
         },
+      },
+      {
+        id: 'cant-numbers-3',
+        title: 'Hundreds & Thousands',
+        scenarioDescription: 'Shopping in Mong Kok where prices are in the hundreds',
+        conversationContext:
+          'You are a shop assistant in a Mong Kok electronics stall. Speak ONLY in Cantonese. Help the learner understand prices in the hundreds and thousands.',
+        words: [
+          {
+            character: '百',
+            pinyin: 'baak3',
+            meaning: 'Hundred (100)',
+            phoneticGuide: 'baak (like "bark")',
+            toneNote: 'mid-level falling (tone 3)',
+            imageQuery: 'hundred hong kong dollar bill',
+          },
+          {
+            character: '千',
+            pinyin: 'cin1',
+            meaning: 'Thousand (1,000)',
+            phoneticGuide: 'chin',
+            toneNote: 'high-level (tone 1)',
+            imageQuery: 'thousand counting money hk',
+          },
+          {
+            character: '萬',
+            pinyin: 'maan6',
+            meaning: 'Ten thousand (10,000)',
+            phoneticGuide: 'maan (like "man" long)',
+            toneNote: 'low (tone 6) — very common unit in HK prices',
+            imageQuery: 'large price tag luxury hong kong',
+          },
+        ],
+        phrase: {
+          chinese: '呢個幾多錢？兩百五十蚊。',
+          pinyin: 'Ni1 go3 gei2 do1 cin2? Loeng5 baak3 ng5 sap6 man1.',
+          meaning: 'How much is this one? Two hundred and fifty dollars.',
+          breakdown: [
+            { chinese: '幾多錢', pinyin: 'gei2 do1 cin2', meaning: 'how much?' },
+            { chinese: '兩百', pinyin: 'loeng5 baak3', meaning: 'two hundred' },
+            { chinese: '五十', pinyin: 'ng5 sap6', meaning: 'fifty' },
+            { chinese: '蚊', pinyin: 'man1', meaning: 'dollar (informal HK)' },
+          ],
+        },
+        phrases: [
+          {
+            chinese: '呢個幾多錢？兩百五十蚊。',
+            pinyin: 'Ni1 go3 gei2 do1 cin2? Loeng5 baak3 ng5 sap6 man1.',
+            meaning: 'How much is this one? Two hundred and fifty dollars.',
+            breakdown: [
+              { chinese: '幾多錢', pinyin: 'gei2 do1 cin2', meaning: 'how much?' },
+              { chinese: '兩百', pinyin: 'loeng5 baak3', meaning: 'two hundred' },
+              { chinese: '五十', pinyin: 'ng5 sap6', meaning: 'fifty' },
+              { chinese: '蚊', pinyin: 'man1', meaning: 'dollar (informal HK)' },
+            ],
+          },
+          {
+            chinese: '一共係一千零五蚊。',
+            pinyin: 'Jat1 gung6 hai6 jat1 cin1 ling4 ng5 man1.',
+            meaning: 'The total is one thousand and five dollars.',
+            breakdown: [
+              { chinese: '一共', pinyin: 'jat1 gung6', meaning: 'in total' },
+              { chinese: '一千', pinyin: 'jat1 cin1', meaning: 'one thousand' },
+              { chinese: '零五', pinyin: 'ling4 ng5', meaning: 'and five' },
+              { chinese: '蚊', pinyin: 'man1', meaning: 'dollar (informal HK)' },
+            ],
+          },
+        ],
       },
     ],
   },
