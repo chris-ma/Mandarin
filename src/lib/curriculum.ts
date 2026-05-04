@@ -1403,6 +1403,211 @@ export const units: Unit[] = [
     ],
   },
 
+  {
+    id: 'travel-questions',
+    level: 'travel',
+    dialect: 'putonghua',
+    title: 'Essential Travel Questions',
+    description: 'The questions every traveller needs — what, where, can I?',
+    imageQuery: 'traveller asking directions china tourist',
+    clusters: [
+      {
+        id: 'travel-q-1',
+        title: 'Curiosity & Asking About Things',
+        scenarioDescription: 'Exploring a market and asking curious questions about everything',
+        conversationContext:
+          'You are a friendly local at a busy Beijing market. The learner is a curious tourist asking about items and food around them. Answer naturally and encourage them to try things.',
+        words: [
+          {
+            character: '那是什么？',
+            pinyin: 'Nà shì shénme?',
+            meaning: 'What is that?',
+            phoneticGuide: 'nah shrr SHEN-muh',
+            toneNote: '"na" falls, "shi" neutral, "shen" flat, "me" neutral',
+            imageQuery: 'curious tourist pointing market',
+          },
+          {
+            character: '这个叫什么？',
+            pinyin: 'Zhège jiào shénme?',
+            meaning: 'What is this called?',
+            phoneticGuide: 'juh-guh JYOW SHEN-muh',
+            toneNote: '"jiao" falls (4th) — asking for the name',
+            imageQuery: 'pointing at food asking name',
+          },
+          {
+            character: '我可以试试吗？',
+            pinyin: 'Wǒ kěyǐ shì shi ma?',
+            meaning: 'Can I try (it)?',
+            phoneticGuide: 'waw kuh-YEE shrr-shrr mah',
+            toneNote: '"ke" and "yi" both fall-rise (3rd), "shi" is 4th then neutral',
+            imageQuery: 'tasting food trying on clothes',
+          },
+        ],
+        phrase: {
+          chinese: '那是什么？这个叫什么？我可以试试吗？',
+          pinyin: 'Nà shì shénme? Zhège jiào shénme? Wǒ kěyǐ shì shi ma?',
+          meaning: 'What is that? What is this called? Can I try it?',
+          breakdown: [
+            { chinese: '那是', pinyin: 'nà shì', meaning: 'that is' },
+            { chinese: '这个叫', pinyin: 'zhège jiào', meaning: 'this is called' },
+            { chinese: '什么', pinyin: 'shénme', meaning: 'what' },
+            { chinese: '可以…吗', pinyin: 'kěyǐ…ma', meaning: 'can I…?' },
+          ],
+        },
+        phrases: [
+          {
+            chinese: '那是什么？这个叫什么？我可以试试吗？',
+            pinyin: 'Nà shì shénme? Zhège jiào shénme? Wǒ kěyǐ shì shi ma?',
+            meaning: 'What is that? What is this called? Can I try it?',
+            breakdown: [
+              { chinese: '那是', pinyin: 'nà shì', meaning: 'that is' },
+              { chinese: '什么', pinyin: 'shénme', meaning: 'what' },
+              { chinese: '可以…吗', pinyin: 'kěyǐ…ma', meaning: 'can I…?' },
+            ],
+          },
+          {
+            chinese: '我可以尝一下吗？',
+            pinyin: 'Wǒ kěyǐ cháng yīxià ma?',
+            meaning: 'Can I have a taste?',
+            breakdown: [
+              { chinese: '可以', pinyin: 'kěyǐ', meaning: 'can/may' },
+              { chinese: '尝一下', pinyin: 'cháng yīxià', meaning: 'taste a bit' },
+            ],
+          },
+          {
+            chinese: '可以帮我拍照吗？',
+            pinyin: 'Kěyǐ bāng wǒ pāi zhào ma?',
+            meaning: 'Can you take a photo for me?',
+            breakdown: [
+              { chinese: '可以', pinyin: 'kěyǐ', meaning: 'can/may' },
+              { chinese: '帮我', pinyin: 'bāng wǒ', meaning: 'help me' },
+              { chinese: '拍照', pinyin: 'pāi zhào', meaning: 'take a photo' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'travel-q-2',
+        title: 'Getting Help & Finding Things',
+        scenarioDescription: 'You are lost and need to find the bathroom and a taxi',
+        conversationContext:
+          'You are a helpful local on the street. The learner is a tourist who is slightly lost and needs help finding things. Be patient and point them in the right direction.',
+        words: [
+          {
+            character: '在哪里？',
+            pinyin: 'Zài nǎlǐ?',
+            meaning: 'Where is it?',
+            phoneticGuide: 'dzai NAH-lee',
+            toneNote: '"zai" falls (4th), "na" falls-rises (3rd), "li" falls-rises',
+            imageQuery: 'lost tourist asking directions map',
+          },
+          {
+            character: '厕所',
+            pinyin: 'cèsuǒ',
+            meaning: 'Toilet / bathroom',
+            phoneticGuide: 'tsuh SWAW',
+            toneNote: '"ce" falls (4th), "suo" falls-rises (3rd)',
+            imageQuery: 'bathroom toilet sign',
+          },
+          {
+            character: '可以帮我吗？',
+            pinyin: 'Kěyǐ bāng wǒ ma?',
+            meaning: 'Can you help me?',
+            phoneticGuide: 'kuh-YEE bahng waw mah',
+            toneNote: '"ke-yi" both fall-rise, "bang" flat (1st)',
+            imageQuery: 'asking for help tourist',
+          },
+        ],
+        phrase: {
+          chinese: '不好意思，厕所在哪里？可以帮我吗？',
+          pinyin: 'Bù hǎo yìsi, cèsuǒ zài nǎlǐ? Kěyǐ bāng wǒ ma?',
+          meaning: "Excuse me, where's the toilet? Can you help me?",
+          breakdown: [
+            { chinese: '不好意思', pinyin: 'bù hǎo yìsi', meaning: 'excuse me (polite)' },
+            { chinese: '厕所', pinyin: 'cèsuǒ', meaning: 'toilet' },
+            { chinese: '在哪里', pinyin: 'zài nǎlǐ', meaning: 'where is it?' },
+            { chinese: '可以帮我吗', pinyin: 'kěyǐ bāng wǒ ma', meaning: 'can you help me?' },
+          ],
+        },
+        phrases: [
+          {
+            chinese: '不好意思，厕所在哪里？',
+            pinyin: 'Bù hǎo yìsi, cèsuǒ zài nǎlǐ?',
+            meaning: "Excuse me, where's the toilet?",
+            breakdown: [
+              { chinese: '不好意思', pinyin: 'bù hǎo yìsi', meaning: 'excuse me' },
+              { chinese: '厕所', pinyin: 'cèsuǒ', meaning: 'toilet' },
+              { chinese: '在哪里', pinyin: 'zài nǎlǐ', meaning: 'where?' },
+            ],
+          },
+          {
+            chinese: '我迷路了，可以帮我吗？',
+            pinyin: 'Wǒ mílù le, kěyǐ bāng wǒ ma?',
+            meaning: "I'm lost, can you help me?",
+            breakdown: [
+              { chinese: '我迷路了', pinyin: 'wǒ mílù le', meaning: "I'm lost" },
+              { chinese: '可以帮我吗', pinyin: 'kěyǐ bāng wǒ ma', meaning: 'can you help me?' },
+            ],
+          },
+          {
+            chinese: '请问，附近有地铁站吗？',
+            pinyin: 'Qǐngwèn, fùjìn yǒu dìtiě zhàn ma?',
+            meaning: 'Excuse me, is there a metro station nearby?',
+            breakdown: [
+              { chinese: '请问', pinyin: 'qǐngwèn', meaning: 'excuse me / may I ask' },
+              { chinese: '附近', pinyin: 'fùjìn', meaning: 'nearby' },
+              { chinese: '地铁站', pinyin: 'dìtiě zhàn', meaning: 'metro station' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'travel-q-3',
+        title: 'Bargaining & Shopping Questions',
+        scenarioDescription: 'Haggling at a market for the best price',
+        conversationContext:
+          'You are a vendor at a tourist market in Shanghai. The learner is trying to bargain with you. React naturally — give a bit of discount but not too much, and be friendly.',
+        words: [
+          {
+            character: '可以便宜一点吗？',
+            pinyin: 'Kěyǐ piányí yīdiǎn ma?',
+            meaning: 'Can it be a little cheaper?',
+            phoneticGuide: 'kuh-YEE pyen-EE ee-DYEN mah',
+            toneNote: '"pian" rises (2nd), "yi" rises (2nd), "yi-dian" means "a little"',
+            imageQuery: 'bargaining market negotiation price',
+          },
+          {
+            character: '太贵了',
+            pinyin: 'Tài guì le',
+            meaning: "That's too expensive",
+            phoneticGuide: 'tie GWAY luh',
+            toneNote: '"tai" falls (4th), "gui" falls (4th)',
+            imageQuery: 'expensive price shock reaction',
+          },
+          {
+            character: '有没有…？',
+            pinyin: 'Yǒu méiyǒu…?',
+            meaning: 'Do you have…?',
+            phoneticGuide: 'yo may-YO',
+            toneNote: 'both "you" fall-rise (3rd), "mei" rises (2nd)',
+            imageQuery: 'asking for item in shop',
+          },
+        ],
+        phrase: {
+          chinese: '太贵了！可以便宜一点吗？有没有小一点的？',
+          pinyin: 'Tài guì le! Kěyǐ piányí yīdiǎn ma? Yǒu méiyǒu xiǎo yīdiǎn de?',
+          meaning: "That's too expensive! Can it be cheaper? Do you have a smaller one?",
+          breakdown: [
+            { chinese: '太贵了', pinyin: 'tài guì le', meaning: 'too expensive' },
+            { chinese: '便宜一点', pinyin: 'piányí yīdiǎn', meaning: 'a bit cheaper' },
+            { chinese: '有没有', pinyin: 'yǒu méiyǒu', meaning: 'do you have' },
+            { chinese: '小一点的', pinyin: 'xiǎo yīdiǎn de', meaning: 'a smaller one' },
+          ],
+        },
+      },
+    ],
+  },
+
   // ─── ADVANCED ─────────────────────────────────────────────────────────────
   {
     id: 'advanced-plans',
@@ -3402,6 +3607,209 @@ export const units: Unit[] = [
       },
     ],
   },
+
+  {
+    id: 'cant-travel-questions',
+    level: 'travel',
+    dialect: 'cantonese',
+    title: '旅行必問 Essential Travel Questions',
+    description: 'The questions every visitor to HK needs — what, where, can I?',
+    imageQuery: 'hong kong tourist asking street mtr',
+    clusters: [
+      {
+        id: 'cant-travel-q-1',
+        title: 'Curiosity & Asking About Things',
+        scenarioDescription: 'Wandering through a HK wet market asking about unfamiliar food',
+        conversationContext:
+          'You are a friendly stall owner at a Hong Kong wet market. The learner is a curious tourist pointing at food they have never seen. Respond in Cantonese and encourage them to taste things.',
+        words: [
+          {
+            character: '嗰係咩？',
+            pinyin: 'go2 hai6 me1?',
+            meaning: 'What is that?',
+            phoneticGuide: 'go HIGH meh',
+            toneNote: '"go" low-rising, "hai" low-falling, "me" high-rising — drops then asks',
+            imageQuery: 'curious tourist pointing wet market hong kong',
+          },
+          {
+            character: '呢個叫咩名？',
+            pinyin: 'ni1 go3 giu3 me1 meng2?',
+            meaning: 'What is this called?',
+            phoneticGuide: 'nee go GYOH meh MENG',
+            toneNote: '"giu" mid-falling (3rd), "meng" low-rising (2nd)',
+            imageQuery: 'pointing at food asking name market',
+          },
+          {
+            character: '我可以試下嗎？',
+            pinyin: 'ngo5 ho2 ji5 si3 haa5 maa3?',
+            meaning: 'Can I try it?',
+            phoneticGuide: 'ngo ho-YEE see-HAA maa',
+            toneNote: '"si" mid-falling (3rd), "haa" low-rising — short and casual',
+            imageQuery: 'tasting food trying street food hk',
+          },
+        ],
+        phrase: {
+          chinese: '嗰係咩？呢個叫咩名？我可以試下嗎？',
+          pinyin: 'go2 hai6 me1? ni1 go3 giu3 me1 meng2? ngo5 ho2 ji5 si3 haa5 maa3?',
+          meaning: 'What is that? What is this called? Can I try it?',
+          breakdown: [
+            { chinese: '嗰係咩', pinyin: 'go2 hai6 me1', meaning: 'what is that' },
+            { chinese: '叫咩名', pinyin: 'giu3 me1 meng2', meaning: 'called what name' },
+            { chinese: '可以試下', pinyin: 'ho2 ji5 si3 haa5', meaning: 'can try a bit' },
+          ],
+        },
+        phrases: [
+          {
+            chinese: '嗰係咩？呢個叫咩名？',
+            pinyin: 'go2 hai6 me1? ni1 go3 giu3 me1 meng2?',
+            meaning: 'What is that? What is this called?',
+            breakdown: [
+              { chinese: '嗰係咩', pinyin: 'go2 hai6 me1', meaning: 'what is that' },
+              { chinese: '叫咩名', pinyin: 'giu3 me1 meng2', meaning: 'called what name' },
+            ],
+          },
+          {
+            chinese: '我可以試味嗎？',
+            pinyin: 'ngo5 ho2 ji5 si3 mei6 maa3?',
+            meaning: 'Can I taste it?',
+            breakdown: [
+              { chinese: '可以', pinyin: 'ho2 ji5', meaning: 'can/may' },
+              { chinese: '試味', pinyin: 'si3 mei6', meaning: 'taste/try the flavour' },
+            ],
+          },
+          {
+            chinese: '可以幫我影張相嗎？',
+            pinyin: 'ho2 ji5 bong1 ngo5 jeng2 zoeng1 soeng2 maa3?',
+            meaning: 'Can you take a photo for me?',
+            breakdown: [
+              { chinese: '可以', pinyin: 'ho2 ji5', meaning: 'can/may' },
+              { chinese: '幫我', pinyin: 'bong1 ngo5', meaning: 'help me' },
+              { chinese: '影張相', pinyin: 'jeng2 zoeng1 soeng2', meaning: 'take a photo' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'cant-travel-q-2',
+        title: 'Getting Help & Finding Things',
+        scenarioDescription: 'Lost in Mong Kok trying to find the MTR and a toilet',
+        conversationContext:
+          'You are a local Hong Konger on the street. The learner is lost and asking for help. Speak Cantonese and point them kindly in the right direction.',
+        words: [
+          {
+            character: '喺邊度？',
+            pinyin: 'hai2 bin1 dou6?',
+            meaning: 'Where is it?',
+            phoneticGuide: 'hai BIN doh',
+            toneNote: '"hai" low-rising, "bin" flat, "dou" low — short punchy question',
+            imageQuery: 'lost tourist asking directions hong kong',
+          },
+          {
+            character: '廁所',
+            pinyin: 'ci3 so2',
+            meaning: 'Toilet / bathroom',
+            phoneticGuide: 'chee SOH',
+            toneNote: '"ci" mid-falling (3rd), "so" low-rising (2nd)',
+            imageQuery: 'bathroom toilet sign hong kong',
+          },
+          {
+            character: '可以幫我嗎？',
+            pinyin: 'ho2 ji5 bong1 ngo5 maa3?',
+            meaning: 'Can you help me?',
+            phoneticGuide: 'ho-YEE bong NGO maa',
+            toneNote: '"bong" flat (1st) — direct and polite',
+            imageQuery: 'asking for help tourist hong kong street',
+          },
+        ],
+        phrase: {
+          chinese: '唔該，廁所喺邊度？我唔識路，可以幫我嗎？',
+          pinyin: 'm4 goi1, ci3 so2 hai2 bin1 dou6? ngo5 m4 sik1 lou6, ho2 ji5 bong1 ngo5 maa3?',
+          meaning: "Excuse me, where's the toilet? I don't know the way, can you help?",
+          breakdown: [
+            { chinese: '唔該', pinyin: 'm4 goi1', meaning: 'excuse me / thank you' },
+            { chinese: '廁所喺邊度', pinyin: 'ci3 so2 hai2 bin1 dou6', meaning: 'where is the toilet' },
+            { chinese: '唔識路', pinyin: 'm4 sik1 lou6', meaning: "don't know the way" },
+            { chinese: '可以幫我嗎', pinyin: 'ho2 ji5 bong1 ngo5 maa3', meaning: 'can you help me?' },
+          ],
+        },
+        phrases: [
+          {
+            chinese: '唔該，廁所喺邊度？',
+            pinyin: 'm4 goi1, ci3 so2 hai2 bin1 dou6?',
+            meaning: "Excuse me, where's the toilet?",
+            breakdown: [
+              { chinese: '唔該', pinyin: 'm4 goi1', meaning: 'excuse me' },
+              { chinese: '廁所', pinyin: 'ci3 so2', meaning: 'toilet' },
+              { chinese: '喺邊度', pinyin: 'hai2 bin1 dou6', meaning: 'where is it' },
+            ],
+          },
+          {
+            chinese: '我唔識路，可以幫我嗎？',
+            pinyin: 'ngo5 m4 sik1 lou6, ho2 ji5 bong1 ngo5 maa3?',
+            meaning: "I don't know the way, can you help me?",
+            breakdown: [
+              { chinese: '唔識路', pinyin: 'm4 sik1 lou6', meaning: "don't know the way" },
+              { chinese: '可以幫我嗎', pinyin: 'ho2 ji5 bong1 ngo5 maa3', meaning: 'can you help?' },
+            ],
+          },
+          {
+            chinese: '請問，附近有冇地鐵站？',
+            pinyin: 'cing2 man6, fu6 gan6 jau5 mou5 dei6 tit3 zaam6?',
+            meaning: 'Excuse me, is there an MTR station nearby?',
+            breakdown: [
+              { chinese: '請問', pinyin: 'cing2 man6', meaning: 'excuse me / may I ask' },
+              { chinese: '附近', pinyin: 'fu6 gan6', meaning: 'nearby' },
+              { chinese: '地鐵站', pinyin: 'dei6 tit3 zaam6', meaning: 'MTR station' },
+            ],
+          },
+        ],
+      },
+      {
+        id: 'cant-travel-q-3',
+        title: 'Bargaining & Shopping Questions',
+        scenarioDescription: 'Haggling at Ladies Market in Mong Kok',
+        conversationContext:
+          'You are a stall vendor at Ladies Market in Mong Kok. The learner is trying to bargain. Play along — offer a small discount but not too much. Speak in Cantonese and be fun about it.',
+        words: [
+          {
+            character: '可以平啲嗎？',
+            pinyin: 'ho2 ji5 peng4 di1 maa3?',
+            meaning: 'Can it be a bit cheaper?',
+            phoneticGuide: 'ho-YEE peng-DEE maa',
+            toneNote: '"peng" low-rising (4th) — "peng" means cheap in Cantonese',
+            imageQuery: 'bargaining ladies market mong kok hong kong',
+          },
+          {
+            character: '太貴喇',
+            pinyin: 'taai3 gwai3 laa3',
+            meaning: "That's too expensive",
+            phoneticGuide: 'tie GWAI laa',
+            toneNote: '"taai" mid-falling, "gwai" mid-falling, "laa" is a soft particle',
+            imageQuery: 'expensive price shocked reaction hong kong',
+          },
+          {
+            character: '有冇…？',
+            pinyin: 'jau5 mou5…?',
+            meaning: 'Do you have…?',
+            phoneticGuide: 'yow MOH',
+            toneNote: '"jau" low-rising (5th), "mou" low-rising (5th)',
+            imageQuery: 'asking for item shop hong kong',
+          },
+        ],
+        phrase: {
+          chinese: '太貴喇！可以平啲嗎？有冇細啲嘅？',
+          pinyin: 'taai3 gwai3 laa3! ho2 ji5 peng4 di1 maa3? jau5 mou5 sai3 di1 ge3?',
+          meaning: "That's too expensive! Can it be cheaper? Do you have a smaller one?",
+          breakdown: [
+            { chinese: '太貴喇', pinyin: 'taai3 gwai3 laa3', meaning: 'too expensive' },
+            { chinese: '可以平啲嗎', pinyin: 'ho2 ji5 peng4 di1 maa3', meaning: 'can it be cheaper?' },
+            { chinese: '有冇細啲嘅', pinyin: 'jau5 mou5 sai3 di1 ge3', meaning: 'do you have a smaller one?' },
+          ],
+        },
+      },
+    ],
+  },
+
   {
     id: 'cant-advanced-work',
     level: 'advanced',
